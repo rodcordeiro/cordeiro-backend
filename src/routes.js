@@ -1,17 +1,14 @@
 const express = require('express');
 const routes = express.Router();
 
+const InfoController = require('./controllers/InfoController');
+
 routes.get('/', (req, res) => {
-    const body = req.body;
     return res.json({
       'Message': 'Working'
     });
-  });
+});
 
-routes.get('/info', (req, res) => {
-    return res.json({
-        'Name': 'Rodrigo Cordeiro',
-    });
-})
+routes.get('/contact', InfoController.index);
 
 module.exports = routes;
