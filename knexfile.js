@@ -4,12 +4,22 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection:'process.env.DATABASE_URL',
+    connection: 'postgres://ybjcwusmyqtdcw:ae58fd014a82f7f6a04699c0f1f9a5a76d1bf961d2cad33be21a4a9738f106fb@ec2-52-6-143-153.compute-1.amazonaws.com:5432/dao504m8mr8965',
     migrations: {
-      directory: 'src/database/migrations'
+      directory: './src/database/migrations'
     },
     seeds: {
-      directory: 'src/database/seeds'
+      directory: './src/database/seeds/dev'
+    },
+    useNullAsDefault: true
+  },
+  test: {
+    client: 'sqlite3',
+    connection: {
+      filename: './src/database/test.sqlite'
+    },
+    migrations:{
+      directory: './src/database/migrations'
     },
     useNullAsDefault: true
   },
@@ -31,14 +41,14 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
-    connection:'process.env.DATABASE_URL',
-    migrations: {
-      directory: 'src/database/migrations'
+    client: 'sqlite3',
+    connection: {
+      filename: './src/database/db.sqlite'
     },
-    seeds: {
-      directory: 'src/database/seeds'
+    migrations:{
+      directory: './src/database/migrations'
     },
     useNullAsDefault: true
   }
+
 };
