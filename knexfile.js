@@ -41,14 +41,15 @@ module.exports = {
   },
 
   production: {
-    client: 'sqlite3',
-    connection: {
-      filename: './src/database/db.sqlite'
-    },
-    migrations:{
+    client: 'pg',
+    connection: 'postgres://ybjcwusmyqtdcw:ae58fd014a82f7f6a04699c0f1f9a5a76d1bf961d2cad33be21a4a9738f106fb@ec2-52-6-143-153.compute-1.amazonaws.com:5432/dao504m8mr8965',
+    migrations: {
       directory: './src/database/migrations'
     },
+    seeds: {
+      directory: './src/database/seeds/dev'
+    },
     useNullAsDefault: true
-  }
+  },
 
 };
