@@ -1,6 +1,6 @@
 module.exports = {
     index (req, res) {
-        return res.json({
+        return res.json([{
             id:1,
             title:"Aurebesh Translator",
             description: "Um transcritor para Aurebesh, um sistema de escrita do universo Star Wars.",
@@ -31,6 +31,6 @@ module.exports = {
             link:"https://rodcordeiro.github.io/Projects/Rock&Burguer/index.html",
             github:"https://github.com/rodcordeiro/Projects/Rock&Burguer/",
             img:"https://rodcordeiro.github.io/Projects/Rock&Burguer/images/logo_oficial-u970.png"
-        })
+        }])
     }
 }
