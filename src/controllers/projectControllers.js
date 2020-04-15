@@ -4,9 +4,9 @@ module.exports = {
             id:1,
             title:"Aurebesh Translator",
             description: "Um transcritor para Aurebesh, um sistema de escrita do universo Star Wars.",
-            link:"https://rodcordeiro.github.io/Projects/Aurebesh/",
-            github:"https://github.com/rodcordeiro/Projects/Aurebesh/",
-            img:"https://rodcordeiro.github.io/Projects/Aurebesh/Arquivos/SithEmblemTOR.png"
+            link:"https://rodcordeiro.github.io/Aurebesh-Translator/",
+            github:"https://github.com/rodcordeiro/Aurebesh-Translator",
+            img:"https://rodcordeiro.github.io/Aurebesh-Translator/Arquivos/SithEmblemTOR.png"
         },
         {
             id:2,
