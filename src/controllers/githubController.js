@@ -1,69 +1,47 @@
-const api = require ('../Services/axios');
+const unirest = require('unirest');
 const discord = require('../Services/discord');
 
 module.exports={
     async createRepo(req,res){
-        var gitConfig = {
-            headers: {'Authorization':'token ae67855cdb4b88783423ad3c4366fe88721aea86'}
-          };
-        await api.post("https://api.github.com/user/repos",req.body,gitConfig)
-        .then(async function (response) {
-            await discord.sendMessage({
-                "content":`${response.data}`,
-                "username":"Lord Darth Vader",
-                "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
-            });
+        unirest
+        .post('https://api.github.com/user/repos')
+        .headers({
+            "content-type": "application/json",
+            "authorization": "token ae67855cdb4b88783423ad3c4366fe88721aea86",
+            "user-agent":"RodCordeiro"
+          })
+        .type('json')
+        .send(req.body)
+        .then((response) => {
 
-            return res.status(response.status).json(response.data
-            )
+        var message = `**Repository:** ${response.body.name},\n**Description:** ${req.body.description},\n**ssh_url:** ${response.body.ssh_url},\n**clone_url:** ${response.body.clone_url},\n**svn_url:** ${response.body.svn_url}`
+            
+        if (response.statusCode ==201){
+            discord.sendMessage(message)
+        }
+        return res.status(response.statusCode).json(response.body)
         })
-        .catch(function (error) {
-            return res.status(response.status).json({
-                status: error
-        })
-        })
-    }
+    },
+    async deleteRepo(req,res){
+        var user = req.params.user;
+        var repo = req.params.repo;
+
+        unirest
+        .delete(`https://api.github.com/repos/${user}/${repo}`)
+        .headers({
+            "content-type": "application/json",
+            "authorization": "token ae67855cdb4b88783423ad3c4366fe88721aea86",
+            "user-agent":"RodCordeiro"
+          })
+        .type('json')
+        .then((response) => {
+
+            var message = `Deleted repository ${repo}`
+                
+            if (response.statusCode ==204){
+                discord.sendMessage(message)
+            }
+            return res.status(response.statusCode).json(response.body)
+            })
+        }
 }
-
-// async createRepo(req,res){
-//     try{
-
-//         await api.post("https://api.github.com/user/repos",{
-//             "title": "Rock&Burguer",
-//             "description": "Portifólio de apresentação do TCC em Comunicação Visual",
-//             "private": false
-//         },{
-//             headers:{
-//                 'Authorization':'token ae67855cdb4b88783423ad3c4366fe88721aea86'
-//             }
-//         })
-//             .then(async function (response) {
-              
-//             await discord.sendMessage({
-//                 "content":`
-// **Repository:** ${response.body.name}
-// **Description:** ${response.body.description}
-// **ssh_url:** ${response.body.ssh_url},
-// **clone_url:** ${response.body.clone_url},
-// **link:** ${response.body.html_url}`,
-//                 "username":"Lord Darth Vader",
-//                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
-//             });
-//             return res.status(response.status).json({
-//                 status: "Repository TESTE created"
-//                 })
-//           })
-//           .catch(function (error) {
-//             return res.status(response.status).json({
-//                 status: error
-//             })
-//           });
-
-        
-       
-//     } catch(error){
-//         return res.status(400).json({
-//             status: error
-//         })
-//     }
-// }

@@ -3,8 +3,9 @@ const routes = express.Router();
 
 const projectController = require('./controllers/projectControllers');
 const githubController = require('./controllers/githubController');
-const api = require ('./Services/axios');
+
 const discord = require('./Services/discord');
+
 routes.get('/', function (req, res){
     return res.status(200).json({
         "Name": "CordeiroAPI",
@@ -12,13 +13,18 @@ routes.get('/', function (req, res){
       });
 })
 
+//Projetos
 routes.get('/projects', projectController.index);
 
+//Habitica
+routes.post('/habitica/webhook', discord.habiticaMessage)
 
-routes.post('/habitica', discord.habiticaMessage)
+//Discord
+routes.post('/discord', discord.helloMessage)
 
-routes.post('/discord', discord.sendMessage)
-
+//Github
 routes.post('/github/create',githubController.createRepo);
+routes.delete('/github/delete/:user/:repo',githubController.deleteRepo);
+
 
 module.exports = routes;
