@@ -20,6 +20,7 @@ routes.get('/projects', projectController.index);
 routes.post('/habitica/webhook', discord.habiticaMessage)
 
 //Discord
+routes.get('/discord', discord.helloMessage)
 routes.post('/discord', discord.helloMessage)
 
 //Github
