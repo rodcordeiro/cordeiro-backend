@@ -33,8 +33,8 @@ module.exports ={
       await unirest.post(discordURL + testes_do_cordeiro)
             .send({
                 "content": `**Task ${req.body.type}**
-                task: ${req.body.text},
-                description: ${req.body.notes},
+                task: ${req.body.task.text},
+                description: ${req.body.task.notes},
                 
     `,
                 "username":"Lord Darth Vader",
