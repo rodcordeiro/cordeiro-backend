@@ -32,10 +32,10 @@ module.exports ={
         console.log(req.body);
       await unirest.post(discordURL + testes_do_cordeiro)
             .send({
-                "content": `**Task Activity**
+                "content": `**Task ${req.body.type}**
                 task: ${req.body.text},
                 description: ${req.body.notes},
-                type: ${req.body.type}
+                
     `,
                 "username":"Lord Darth Vader",
                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
