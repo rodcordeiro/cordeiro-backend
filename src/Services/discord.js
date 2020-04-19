@@ -29,6 +29,7 @@ module.exports ={
         return true;
     },
     async habiticaMessage(req,res){
+        console.log(req.body);
       await unirest.post(discordURL + testes_do_cordeiro)
             .send({
                 "content": "Task activity",
@@ -36,6 +37,7 @@ module.exports ={
                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
             })
             .then(function (response) {
+                
                 return res.status(response.statusCode).json(response.body)
             });
         return true;
