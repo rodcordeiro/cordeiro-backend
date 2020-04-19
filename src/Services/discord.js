@@ -29,11 +29,7 @@ module.exports ={
         return true;
     },
     async habiticaMessage(req,res){
-        console.log(`
-            task: ${req.body.title},
-            description: ${req.body.notes},
-            completed: ${req.body.completed}
-`);
+        console.log(req.body);
       await unirest.post(discordURL + testes_do_cordeiro)
             .send({
                 "content": `
