@@ -12,9 +12,9 @@ module.exports = {
             id:2,
             title:"Daedric Translator",
             description: "Um transcritor para Daedric, o alfabeto de Elder Scroll.",
-            link:"https://rodcordeiro.github.io/Projects/Daedric/",
-            github:"https://github.com/rodcordeiro/Projects/Daedric/",
-            img:"https://rodcordeiro.github.io/Projects/Daedric/Arquivos/skyrim-icon-41570.png"
+            link:"https://rodcordeiro.github.io/Daedric-Translator/",
+            github:"https://github.com/rodcordeiro/Daedric-Translator",
+            img:"https://rodcordeiro.github.io/Daedric-Translator/Arquivos/skyrim-icon-41570.png"
         },
         {
             id:3,
