@@ -29,10 +29,18 @@ module.exports ={
         return true;
     },
     async habiticaMessage(req,res){
-        console.log(req.body);
+        console.log(`
+            task: ${req.body.title},
+            description: ${req.body.notes},
+            completed: ${req.body.completed}
+`);
       await unirest.post(discordURL + testes_do_cordeiro)
             .send({
-                "content": "Task activity",
+                "content": `
+                task: ${req.body.title},
+                description: ${req.body.notes},
+                completed: ${req.body.completed}
+    `,
                 "username":"Lord Darth Vader",
                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
             })
