@@ -1,13 +1,13 @@
 const unirest = require('unirest');
 const discord = require('../Services/discord');
-
+console.log(process.env.GITHUB)
 module.exports={
     async createRepo(req,res){
         unirest
         .post('https://api.github.com/user/repos')
         .headers({
             "content-type": "application/json",
-            "authorization": "token ae67855cdb4b88783423ad3c4366fe88721aea86",
+            "authorization": "token d927b1de9749775137a1efe41e76ac93c09afcb1",
             "user-agent":"RodCordeiro"
           })
         .type('json')
@@ -30,7 +30,7 @@ module.exports={
         .delete(`https://api.github.com/repos/${user}/${repo}`)
         .headers({
             "content-type": "application/json",
-            "authorization": "token ae67855cdb4b88783423ad3c4366fe88721aea86",
+            "authorization": "token d927b1de9749775137a1efe41e76ac93c09afcb1",
             "user-agent":"RodCordeiro"
           })
         .type('json')

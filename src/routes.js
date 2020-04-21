@@ -16,9 +16,6 @@ routes.get('/', function (req, res){
 //Projetos
 routes.get('/projects', projectController.index);
 
-//Habitica
-routes.post('/habitica/webhook', discord.habiticaMessage)
-
 //Discord
 routes.get('/discord', discord.helloMessage)
 routes.post('/discord', discord.helloMessage)
@@ -26,6 +23,13 @@ routes.post('/discord', discord.helloMessage)
 //Github
 routes.post('/github/create',githubController.createRepo);
 routes.delete('/github/delete/:user/:repo',githubController.deleteRepo);
+
+//Webhooks
+routes.post('/webhooks/habitica', discord.habiticaMessage)
+routes.post('/webhooks/devto', (req, res)=>{
+  discord.sendMessage('**Webhook do DevTo received!**')
+  console.log(req)
+})
 
 
 module.exports = routes;
