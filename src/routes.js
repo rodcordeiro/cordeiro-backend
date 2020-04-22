@@ -53,8 +53,7 @@ routes.post('/devpost', (req,res)=>{
     }
   })
    .then((response) =>{
-       if (response.error) throw new Error(response.error);
-       discord.sendMessage(response.body.url)
+       if (response.statusCode ===201) discord.sendMessage(response.body.url);
        return res.status(response.statusCode).json(response.body)
    });
 })
