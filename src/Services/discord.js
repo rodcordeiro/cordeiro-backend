@@ -16,8 +16,11 @@ module.exports ={
                 return res.status(response.statusCode).json(response.body)
             });
     },
-  async sendMessage(template){
-      await unirest.post(discordURL + testes_do_cordeiro)
+  async sendMessage(channel,template){
+        if (channel == 'testes_do_cordeiro') channel = testes_do_cordeiro;
+        if (channel == 'taverna_do_vader') channel = taverna_do_vader;
+      
+        await unirest.post(discordURL + channel)
             .send({
                 "content": `${template}`,
                 "username":"Lord Darth Vader",
