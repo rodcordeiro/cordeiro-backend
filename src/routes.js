@@ -39,7 +39,19 @@ routes.post('/devpost', (req,res)=>{
    "api-key": "KDLqvK3FqiU78P1sg22EuzNK"
    })
    .type("json")
-   .send(req.body)
+   .send({
+    "article": {
+      "title": "Webhook testing - 013",
+      "published": false,
+      "body_markdown": "Test of webhook ",
+      "tags": [
+        "api",
+        "todayilearned",
+        "showdev"
+      ],
+      "series": "Integrating API's"
+    }
+  })
    .then((response) =>{
        if (response.error) throw new Error(response.error);
        discord.sendMessage(response.body.url)
