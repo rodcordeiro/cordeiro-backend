@@ -39,19 +39,7 @@ routes.post('/devpost', (req,res)=>{
    "api-key": "KDLqvK3FqiU78P1sg22EuzNK"
    })
    .type("json")
-   .send({
-    "article": {
-      "title": "Webhook testing - 013",
-      "published": false,
-      "body_markdown": "Test of webhook ",
-      "tags": [
-        "api",
-        "todayilearned",
-        "showdev"
-      ],
-      "series": "Integrating API's"
-    }
-  })
+   .send(req.body)
    .then((response) =>{
        if (response.statusCode ===201) discord.sendMessage(response.body.url);
        return res.status(response.statusCode).json(response.body)
