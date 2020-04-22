@@ -36,7 +36,7 @@ routes.post('/devpost', (req,res)=>{
   unirest.post("https://dev.to/api/articles")
    .headers({
    "content-type": "application/json",
-   "api-key": "KDLqvK3FqiU78P1sg22EuzNK"
+   "api-key": req.headers.key
    })
    .type("json")
    .send(req.body)
