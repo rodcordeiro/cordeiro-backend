@@ -27,7 +27,7 @@ module.exports ={
                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
             })
             .then(function (response) {
-                console.log(response);
+                return res.status(response.statusCode).json(response.body)
             });
         return true;
     },

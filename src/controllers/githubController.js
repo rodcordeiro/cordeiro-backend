@@ -14,7 +14,7 @@ module.exports={
         .send(req.body)
         .then((response) => {
 
-        var message = `**Repository:** ${response.body.name},\n**Description:** ${req.body.description},\n**ssh_url:** ${response.body.ssh_url},\n**clone_url:** ${response.body.clone_url},\n**svn_url:** ${response.body.svn_url}`
+        var message = ` **Repository:** ${response.body.name},\n**Description:** ${req.body.description},\n**ssh_url:** ${response.body.ssh_url}\n**clone_url:** ${response.body.clone_url}\n**svn_url:** ${response.body.svn_url}`
             
         if (response.statusCode ==201){
             discord.sendMessage('testes_do_cordeiro',message)
