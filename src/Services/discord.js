@@ -2,8 +2,8 @@ const unirest = require('unirest');
 
 //PATHs
 const discordURL = 'https://discordapp.com/api/'
-const testes_do_cordeiro = 'webhooks/699699746855452673/DQMga4GEYErNQ2dYCEciHVhy8RjF7Ce3ODPRnWiBDO-HaNqlIiWw2asrePG62Qw-YXcw'
-const taverna_do_vader = 'webhooks/697454334455054357/2Of5GAKdFpm4yNLAQB8MUNZOS_aUtzdgUUuEozltUxxcn4W6vESiSwXofP7QEKa8e2_H';        
+const testes_do_cordeiro = process.env.WH_testes_do_cordeiro
+const taverna_do_vader = process.env.WH_taverna_do_vader;        
 module.exports ={
   async helloMessage(req,res){
     await unirest.post(discordURL + testes_do_cordeiro)

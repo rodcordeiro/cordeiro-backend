@@ -1,13 +1,13 @@
 const unirest = require('unirest');
 const discord = require('../Services/discord');
-console.log(process.env.GITHUB)
+
 module.exports={
     async createRepo(req,res){
         unirest
         .post('https://api.github.com/user/repos')
         .headers({
             "content-type": "application/json",
-            "authorization": "token d927b1de9749775137a1efe41e76ac93c09afcb1",
+            "authorization": process.env.GITHUB_TOKEN,
             "user-agent":"RodCordeiro"
           })
         .type('json')
@@ -17,7 +17,7 @@ module.exports={
         var message = `**Repository:** ${response.body.name},\n**Description:** ${req.body.description},\n**ssh_url:** ${response.body.ssh_url},\n**clone_url:** ${response.body.clone_url},\n**svn_url:** ${response.body.svn_url}`
             
         if (response.statusCode ==201){
-            discord.sendMessage(message)
+            discord.sendMessage('testes_do_cordeiro',message)
         }
         return res.status(response.statusCode).json(response.body)
         })
@@ -30,7 +30,7 @@ module.exports={
         .delete(`https://api.github.com/repos/${user}/${repo}`)
         .headers({
             "content-type": "application/json",
-            "authorization": "token d927b1de9749775137a1efe41e76ac93c09afcb1",
+            "authorization": process.env.GITHUB_TOKEN,
             "user-agent":"RodCordeiro"
           })
         .type('json')
@@ -39,7 +39,7 @@ module.exports={
             var message = `Deleted repository ${repo}`
                 
             if (response.statusCode ==204){
-                discord.sendMessage(message)
+                discord.sendMessage('testes_do_cordeiro',message)
             }
             return res.status(response.statusCode).json(response.body)
             })
