@@ -31,11 +31,23 @@ routes.post('/webhook/devto', (req, res)=>{
   console.log(req.body)
 })
 routes.post('/webhooks/trello', (req, res)=>{
-  console.log(req.body)
+  console.log({
+    method:"Post",
+    action:req.body.action.type,
+    card:req.body.action.data.card,
+    board:req.body.action.data.board,
+    list:req.body.action.data.list,
+  })
   return res.status(200).json({test:"Received"})
 })
 routes.head('/webhooks/trello', (req, res)=>{
-  console.log(req.body)
+  console.log({
+    method:"Head",
+    action:req.body.action.type,
+    card:req.body.action.data.card,
+    board:req.body.action.data.board,
+    list:req.body.action.data.list,
+  })
   return res.status(200).json({test:"Received"})
 })
 
