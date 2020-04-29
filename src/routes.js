@@ -25,11 +25,12 @@ routes.post('/github/create',githubController.createRepo);
 routes.delete('/github/delete/:user/:repo',githubController.deleteRepo);
 
 //Webhooks
-routes.post('/webhooks/habitica', (req,res)=>{
-  console.log(req.body.task.tags)
-})
+routes.post('/webhooks/habitica', discord.habiticaMessage)
 routes.post('/webhook/devto', (req, res)=>{
   discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**')
+  console.log(req.body)
+})
+routes.post('/webhooks/trello', (req, res)=>{
   console.log(req.body)
 })
 
