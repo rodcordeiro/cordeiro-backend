@@ -32,9 +32,12 @@ routes.post('/webhook/devto', (req, res)=>{
 })
 routes.post('/webhooks/trello', (req, res)=>{
   console.log(req.body)
+  return response.status(204)
 })
 routes.head('/webhooks/trello', (req, res)=>{
+  
   console.log(req.body)
+  return response.status(204)
 })
 
 //Dev.to
