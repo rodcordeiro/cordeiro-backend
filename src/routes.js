@@ -54,7 +54,3 @@ routes.post('/devpost', (req,res)=>{
 
 
 module.exports = routes;
-
-curl --request POST \
-  --url 'https://api.trello.com/1/webhooks/?callbackURL=http://cordeiro-backend.herokuapp.com/webhooks/trello&idModel=5abbe4b7ddc1b351ef961414&api=607488c51e587df0b240d2cc42d8567f&token=e9858ed631b81a0ac6dae24f1c415ae2b626b3d44c8eb4c398ed9b127206e6f1' \
-  --header 'Accept: application/json'
