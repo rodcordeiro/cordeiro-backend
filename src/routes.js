@@ -34,7 +34,7 @@ routes.post('/webhook/devto', (req, res)=>{
 routes.post('/webhooks/trello', trelloController.cardWebhook);
 
 routes.head('/webhooks/test', (req, res)=>{
-  console.log(req.body)
+  console.log(req)
   return res.status(200).json({test:"Received"})
 })
 routes.head('/webhooks/trello', (req, res)=>{
