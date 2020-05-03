@@ -4,7 +4,7 @@ const unirest = require('unirest');
 const discordURL = 'https://discordapp.com/api/'
 const testes_do_cordeiro = process.env.WH_testes_do_cordeiro
 const taverna_do_vader = process.env.WH_taverna_do_vader;
-const icnt = process.env.WH_WH_ICNT;
+const icnt = process.env.WH_ICNT;
 
 module.exports ={
   async helloMessage(req,res){

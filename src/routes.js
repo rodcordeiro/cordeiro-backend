@@ -32,9 +32,7 @@ routes.post('/webhook/devto', (req, res)=>{
   console.log(req.body)
 })
 routes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhooks notifications
-routes.head('/webhooks/trello', (req, res)=>{ //Receives webhook creation request
-  return res.status(200).json({test:"Received"})
-})
+routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook creation request
 
 //Dev.to
 routes.post('/devpost', (req,res)=>{
