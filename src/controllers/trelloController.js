@@ -13,7 +13,7 @@ module.exports = {
     async cardWebhook(req,res){
         if (req.body.action.type == "createCard"){
             const board = verifyBoard(req.body.action.data.board.id)
-            const message = `**New card on Todo:**\n > ${req.body.action.data.card.name}`
+            const message = `**New card on Todo:**\n> ${req.body.action.data.card.name}`
             await discord.sendMessage(board, message);
         }
         return res.status(200).json({
