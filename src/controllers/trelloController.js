@@ -11,7 +11,7 @@ function verifyBoard(boardId){
 
 module.exports = {
     cardWebhook(req,res){
-        if (req.body.action.type == "createCard"){
+        if (req.body.action.type && req.body.action.type == "createCard"){
             const board = verifyBoard(req.body.action.data.board.id)
             const message = `**New card on Todo:**\n > ${req.body.action.data.card.name}`
             discord.sendMessage(board, message);
@@ -19,5 +19,6 @@ module.exports = {
         return res.status(200).json({
             "status":"Received"
         })
+        
     }
 }
