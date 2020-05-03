@@ -31,20 +31,8 @@ routes.post('/webhook/devto', (req, res)=>{
   discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**')
   console.log(req.body)
 })
-routes.post('/webhooks/trello', trelloController.cardWebhook);
-
-routes.head('/webhooks/test', (req, res)=>{
-  console.log(req)
-  return res.status(200).json({test:"Received"})
-})
-routes.head('/webhooks/trello', (req, res)=>{
-  console.log({
-    method:"Head",
-    action:req.body.action.type,
-    card:req.body.action.data.card,
-    board:req.body.action.data.board,
-    list:req.body.action.data.list,
-  })
+routes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhooks notifications
+routes.head('/webhooks/trello', (req, res)=>{ //Receives webhook creation request
   return res.status(200).json({test:"Received"})
 })
 
