@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const projectController = require('./controllers/projectControllers');
 const githubController = require('./controllers/githubController');
+const trelloController = require('./controllers/trelloController');
 
 const discord = require('./Services/discord');
 const unirest = require('unirest');
@@ -30,16 +31,7 @@ routes.post('/webhook/devto', (req, res)=>{
   discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**')
   console.log(req.body)
 })
-routes.post('/webhooks/trello', (req, res)=>{
-  console.log({
-    method:"Post",
-    action:req.body.action.type,
-    card:req.body.action.data.card,
-    board:req.body.action.data.board,
-    list:req.body.action.data.list,
-  })
-  return res.status(200).json({test:"Received"})
-})
+routes.post('/webhooks/trello', trelloController.cardWebhook);
 routes.head('/webhooks/trello', (req, res)=>{
   console.log({
     method:"Head",

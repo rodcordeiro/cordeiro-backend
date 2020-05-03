@@ -3,7 +3,9 @@ const unirest = require('unirest');
 //PATHs
 const discordURL = 'https://discordapp.com/api/'
 const testes_do_cordeiro = process.env.WH_testes_do_cordeiro
-const taverna_do_vader = process.env.WH_taverna_do_vader;        
+const taverna_do_vader = process.env.WH_taverna_do_vader;
+const icnt = process.env.WH_WH_ICNT;
+
 module.exports ={
   async helloMessage(req,res){
     await unirest.post(discordURL + testes_do_cordeiro)
@@ -19,6 +21,7 @@ module.exports ={
   async sendMessage(channel,template){
         if (channel == 'testes_do_cordeiro') channel = testes_do_cordeiro;
         if (channel == 'taverna_do_vader') channel = taverna_do_vader;
+        if (channel == 'icnt') channel = icnt;
       
         await unirest.post(discordURL + channel)
             .send({
@@ -33,7 +36,7 @@ module.exports ={
     },
     async habiticaMessage(req,res){
         console.log(req.body);
-      await unirest.post(discordURL + testes_do_cordeiro)
+        await unirest.post(discordURL + testes_do_cordeiro)
             .send({
                 "content": `**Task ${req.body.type}**
                 task: ${req.body.task.text},
