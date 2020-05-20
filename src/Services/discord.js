@@ -30,7 +30,7 @@ module.exports ={
                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
             })
             .then(function (response) {
-                return res.status(response.statusCode).json(response.body)
+                return response.status(response.statusCode).json(response.body)
             });
         return true;
     },
