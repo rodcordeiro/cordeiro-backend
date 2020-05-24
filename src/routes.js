@@ -10,8 +10,8 @@ const unirest = require('unirest');
 routes.get('/', function (req, res){
     return res.status(200).json({
         "Name": "CordeiroAPI",
-        "Version": "1.5",
-        "releaseNote":"-Add /devpost endpoint to post on Dev.To;\n-Add webhook for RodrigoController board;\n-Add webhook for HeadQuarter Trello Board;"
+        "Version": "1.5.1",
+        "releaseNote":"Update trello Webhook controller"
       });
 })
 
