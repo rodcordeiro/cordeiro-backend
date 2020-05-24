@@ -7,6 +7,10 @@ function verifyBoard(boardId){
     if (boardId == "5e979a60c03d201feb94a375"){ //ICNT
         return "icnt"
     }
+    if (boardId == "5ecac296f3d3814256115e33"){ //ToDo
+        return "todo"
+    }
+    return "testes_do_cordeiro";
 }
 
 module.exports = {
@@ -21,7 +25,7 @@ module.exports = {
             "status":"Received",
             "action":req.body.action.type
         })
-        
+
     },
     async newWebhook(req, res){
         return res.status(200).json({test:"Webhook received"})
