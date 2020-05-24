@@ -1,4 +1,4 @@
-reposconst discord = require('../Services/discord');
+const discord = require('../Services/discord');
 
 function verifyBoard(boardId){
     if (boardId == "5e68d2962d3d5a363a47dbe8" || boardId == "5ec5586bf2afe861f95ac78e"){ //Akta || RodrigoController
