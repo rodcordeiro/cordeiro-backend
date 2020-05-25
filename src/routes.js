@@ -7,6 +7,7 @@ const trelloController = require('./controllers/trelloController');
 
 const discord = require('./Services/discord');
 const unirest = require('unirest');
+
 routes.get('/', function (req, res){
     return res.status(200).json({
         "Name": "CordeiroAPI",
@@ -25,6 +26,8 @@ routes.post('/discord', discord.helloMessage)
 //Github
 routes.post('/github/create',githubController.createRepo);
 routes.delete('/github/delete/:user/:repo',githubController.deleteRepo);
+routes.get("/github/validate",githubController.validateToken)
+routes.get("/github/token",githubController.generateToken)
 
 //Webhooks
 routes.post('/webhooks/habitica', discord.habiticaMessage)
