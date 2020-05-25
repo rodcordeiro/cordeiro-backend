@@ -4,6 +4,9 @@ const generateUniqueId = require('../Services/generateUniqueId');
 
 module.exports={
     async generateToken(req, res){
+      if (process.env.GITHUB_TOKEN){
+        return res.status(200).json({token: process.env.GITHUB_TOKEN})
+      }
       let state = generateUniqueId()
       res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUBAPP_CLIENT_ID}&redirect_uri=http%3A%2F%2Fcordeiro-backend.herokuapp.com%2Fgithub%2FvalidateToken&scope=repo%20user%20delete_repo&state=${state}&allow_signup=false`)
     },
@@ -25,7 +28,6 @@ module.exports={
             process.env.GITHUB_TOKEN=`token ${response.body.access_token}`
             res.redirect('http://cordeiro-backend.herokuapp.com/')
           }
-          console.log(response.body)
         })
     },
     async createRepo(req,res){
