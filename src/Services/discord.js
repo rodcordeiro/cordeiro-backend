@@ -6,6 +6,7 @@ const testes_do_cordeiro = process.env.WH_testes_do_cordeiro
 const taverna_do_vader = process.env.WH_taverna_do_vader;
 const icnt = process.env.WH_ICNT;
 const todo = process.env.WH_TODO;
+
 module.exports ={
   async helloMessage(req,res){
     await unirest.post(discordURL + testes_do_cordeiro)
@@ -31,7 +32,8 @@ module.exports ={
                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
             })
             .then(function (response) {
-                return response.status(response.statusCode).json(response.body)
+                if (response.error) throw new Error(response.error);
+                console.log(response.statusCode)
             });
         return true;
     },

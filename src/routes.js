@@ -4,6 +4,7 @@ const routes = express.Router();
 const projectController = require('./controllers/projectControllers');
 const githubController = require('./controllers/githubController');
 const trelloController = require('./controllers/trelloController');
+const devtoController = require('./controllers/devtoController');
 
 const discord = require('./Services/discord');
 const unirest = require('unirest');
@@ -39,19 +40,7 @@ routes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhoo
 routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook creation request
 
 //Dev.to
-routes.post('/devpost', (req,res)=>{
-  unirest.post("https://dev.to/api/articles")
-   .headers({
-   "content-type": "application/json",
-   "api-key": req.headers.key
-   })
-   .type("json")
-   .send(req.body)
-   .then((response) =>{
-       if (response.statusCode ===201) discord.sendMessage('taverna_do_vader',`Hey guys, new post:\n **${response.body.title}**\n${response.body.description}\n\n${response.body.url}`);
-       return res.status(response.statusCode).json(response.body)
-   });
-})
+routes.post('/devpost', devtoController.createPost)
 
 
 module.exports = routes;
