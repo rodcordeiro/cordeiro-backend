@@ -33,7 +33,7 @@ module.exports={
         .then((response)=>{
           if (!response.body.error){
             process.env.GITHUB_TOKEN=`token ${response.body.access_token}`
-            res.redirect(200,'/')
+            res.redirect(200,'http://cordeiro-backend.herokuapp.com/')
           }
         })
     },
