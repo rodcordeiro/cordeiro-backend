@@ -3,21 +3,11 @@ const discord = require('../Services/discord');
 const generateUniqueId = require('../Services/generateUniqueId');
 
 module.exports={
-    async validateToken(req, res){
-        await unirest
-          .get('https://api.github.com/user/repos?visibility=public')
-          .headers({
-            "authorization": process.env.GITHUB_TOKEN,
-            "user-agent": "rodcordeiro"
-          })
-          .then((response)=>{
-            if (response.status == 401){
-              let state = generateUniqueId()
-              res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUBAPP_CLIENT_ID}&redirect_uri=http%3A%2F%2Fcordeiro-backend.herokuapp.com%2Fgithub%2Ftoken&scope=repo%20user&state=${state}&allow_signup=false`)
-            }
-          })
-    },
     async generateToken(req, res){
+      let state = generateUniqueId()
+      res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUBAPP_CLIENT_ID}&redirect_uri=http%3A%2F%2Fcordeiro-backend.herokuapp.com%2Fgithub%2FvalidateToken&scope=repo%20user%20delete_repo&state=${state}&allow_signup=false`)
+    },
+    async validateToken(req, res){
       const code = req.query.code;
       const state = req.query.state;
 
@@ -28,13 +18,14 @@ module.exports={
           "client_secret": process.env.GITHUBAPP_CLIENT_SECRET,
           "code": code,
           "state":state,
-          "redirect_uri":"http://cordeiro-backend.herokuapp.com/github/token"
+          "redirect_uri":"http://cordeiro-backend.herokuapp.com/github/validateToken"
         })
         .then((response)=>{
           if (!response.body.error){
             process.env.GITHUB_TOKEN=`token ${response.body.access_token}`
-            res.redirect(200,'http://cordeiro-backend.herokuapp.com/')
+            res.redirect('http://cordeiro-backend.herokuapp.com/')
           }
+          console.log(response.body)
         })
     },
     async createRepo(req,res){

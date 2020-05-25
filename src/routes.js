@@ -26,8 +26,8 @@ routes.post('/discord', discord.helloMessage)
 //Github
 routes.post('/github/create',githubController.createRepo);
 routes.delete('/github/delete/:user/:repo',githubController.deleteRepo);
-routes.get("/github/validate",githubController.validateToken)
 routes.get("/github/token",githubController.generateToken)
+routes.get("/github/validateToken",githubController.validateToken)
 
 //Webhooks
 routes.post('/webhooks/habitica', discord.habiticaMessage)
