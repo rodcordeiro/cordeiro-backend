@@ -7,7 +7,7 @@ function verifyBoard(boardId){
     if (boardId == "5e979a60c03d201feb94a375"){ //ICNT
         return "icnt"
     }
-    if (boardId == "5ecad2df3919164850ca5d9d"){ //HeadQuarter
+    if (boardId == "5ee6d3ef4ff13f18e980b150"){ //DeathStar
         return "todo"
     }
     return "testes_do_cordeiro";
