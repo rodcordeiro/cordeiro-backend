@@ -2,6 +2,7 @@ const express = require('express');
 const routes = express.Router();
 
 const projectController = require('./controllers/projectControllers');
+const postController = require('./controllers/postController');
 const githubController = require('./controllers/githubController');
 const trelloController = require('./controllers/trelloController');
 const devtoController = require('./controllers/devtoController');
@@ -21,6 +22,11 @@ routes.get('/', function (req, res){
 routes.get('/projects', projectController.index);
 routes.post('/projects', projectController.addProject);
 routes.delete('/projects', projectController.delProject);
+
+//Posts
+routes.get('/posts', postController.index);
+routes.post('/posts', postController.addPost);
+routes.delete('/posts', postController.delPost);
 
 //Discord
 routes.get('/discord', discord.helloMessage)
