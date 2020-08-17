@@ -35,9 +35,9 @@ module.exports = {
         [id,title,description,link,github,img],
         (error) => {
           if (error) {
-           return res.status(error.statusCode).send(error.message);
+           res.status(error.statusCode).send(error.message);
           }
-          return response.status(201).json({status: 'success', project: {
+          response.status(201).json({status: 'success', project: {
             id:id,
             title:title,
             description: description,
