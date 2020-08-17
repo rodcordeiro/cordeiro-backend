@@ -29,7 +29,7 @@ module.exports = {
            res.status(error.statusCode).send(error.message);
            throw error;
           }
-          return response.status(201).json({status: 'success', project: {
+          return res.status(201).json({status: 'success', project: {
             id:id,
             title:title,
             description: description,
