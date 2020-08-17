@@ -1,36 +1,52 @@
+const connection = require("../Services/connection");
+const generateUniqueId = require("../Services/generateUniqueId");
+
+  const addBook = (request, response) => {
+    const {author, title} = request.body
+  
+    pool.query(
+      'INSERT INTO books (author, title) VALUES ($1, $2)',
+      [author, title],
+      (error) => {
+        if (error) {
+          throw error
+        }
+        response.status(201).json({status: 'success', message: 'Book added.'})
+      },
+    )
+  }
+  
+  
 module.exports = {
     index (req, res) {
-        return res.json([{
-            id:1,
-            title:"Aurebesh Translator",
-            description: "Um transcritor para Aurebesh, um sistema de escrita do universo Star Wars.",
-            link:"https://rodcordeiro.github.io/Aurebesh-Translator/",
-            github:"https://github.com/rodcordeiro/Aurebesh-Translator",
-            img:"https://rodcordeiro.github.io/Aurebesh-Translator/Arquivos/SithEmblemTOR.png"
-        },
-        {
-            id:2,
-            title:"Daedric Translator",
-            description: "Um transcritor para Daedric, o alfabeto de Elder Scroll.",
-            link:"https://rodcordeiro.github.io/Daedric-Translator/",
-            github:"https://github.com/rodcordeiro/Daedric-Translator",
-            img:"https://rodcordeiro.github.io/Daedric-Translator/Arquivos/skyrim-icon-41570.png"
-        },
-        {
-            id:3,
-            title:"Be the hero!",
-            description: "Projeto voltado para ongs que poderão cadastrar casos para quem tiver interesse em ajudar.",
-            link:"http://cordeiro-bethehero-frontend.herokuapp.com/",
-            github:"https://github.com/rodcordeiro/BeTheHero",
-            img:"https://rodcordeiro.github.io/shares/img/heroes.png"
-        },
-        {
-            id:4,
-            title:"Rock & Burger",
-            description: "Site desenvolvido para a hamburgueria e cervejaria Rock & Burguer como projeto de conclusão do curso técnico em comunicação Visual",
-            link:"https://rodcordeiro.github.io/Projects/Rock&Burguer/index.html",
-            github:"https://github.com/rodcordeiro/Projects/Rock&Burguer/",
-            img:"https://rodcordeiro.github.io/Projects/Rock&Burguer/images/logo_oficial-u970.png"
-        }])
+        connection.query('SELECT * FROM projects', (error, results) => {
+            if (error) {
+              res.status(error.statusCode).send(error.message);
+            }
+            res.status(200).json(results.rows)
+          })
+    },
+    addProject (req,res){
+      const id = generateUniqueId();
+      const {title,description,link,github,img} = req.body
+
+      connection.query(
+        'INSERT INTO projects (id,title,description,link,github,img) VALUES ($1,$2,$3,$4,$5,$6)',
+        [id,title,description,link,github,img],
+        (error) => {
+          if (error) {
+           return res.status(error.statusCode).send(error.message);
+          }
+          return response.status(201).json({status: 'success', project: {
+            id:id,
+            title:title,
+            description: description,
+            link:link,
+            github:github,
+            img:img
+            }
+          })
+        }
+      )
     }
 }

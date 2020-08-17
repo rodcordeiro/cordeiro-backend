@@ -19,6 +19,7 @@ routes.get('/', function (req, res){
 
 //Projetos
 routes.get('/projects', projectController.index);
+routes.post('/projects', projectController.addProject);
 
 //Discord
 routes.get('/discord', discord.helloMessage)
