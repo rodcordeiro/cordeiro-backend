@@ -40,5 +40,15 @@ module.exports = {
           })
         }
       )
-    }
+    },
+    delProject (req, res) {
+      const {id} = req.body;
+      connection.query(`DELETE FROM projects WHERE id like ${id}`, (error, results) => {
+          if (error) {
+            return res.status(error.statusCode).send(error.message);
+          }
+          return res.status(204).send()
+        })
+  },
+  
 }
