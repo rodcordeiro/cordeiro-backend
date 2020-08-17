@@ -13,14 +13,7 @@ module.exports = {
     addProject (req,res){
       const id = generateUniqueId();
       const {title,description,link,github,img} = req.body
-      console.log({
-        id:id,
-        title:title,
-        description: description,
-        link:link,
-        github:github,
-        img:img
-        })
+      
       connection.query(
         'INSERT INTO projects (id,title,description,link,github,img) VALUES ($1,$2,$3,$4,$5,$6)',
         [id,title,description,link,github,img],
@@ -44,10 +37,11 @@ module.exports = {
     delProject (req, res) {
       const {id} = req.body;
       connection.query(`DELETE FROM projects WHERE id like ${id}`, (error, results) => {
-          if (error) {
-            return res.status(error.statusCode).send(error.message);
-          }
-          return res.status(204).send()
+        if (error) {
+          res.status(error.statusCode).send(error.message);
+          throw error;
+         }
+         return res.status(204).send()
         })
   },
   
