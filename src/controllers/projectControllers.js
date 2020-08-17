@@ -23,7 +23,7 @@ module.exports = {
             if (error) {
               res.status(error.statusCode).send(error.message);
             }
-            res.status(200).json(results.rows)
+            return res.status(200).json(results.rows)
           })
     },
     addProject (req,res){
@@ -36,8 +36,9 @@ module.exports = {
         (error) => {
           if (error) {
            res.status(error.statusCode).send(error.message);
+           throw error;
           }
-          response.status(201).json({status: 'success', project: {
+          return response.status(201).json({status: 'success', project: {
             id:id,
             title:title,
             description: description,
