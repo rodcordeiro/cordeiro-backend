@@ -51,7 +51,7 @@ routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook 
 routes.post('/devpost', devtoController.createPost)
 
 routes.get('/uni9',(req,res)=>{
-  return res.status(200).send('<style>table,td,tr{border:1px solid; border-collapse:collapse;}</style>\
+  return res.status(200).send('<style>table,td,tr{border:1px solid; border-collapse:collapse;padding: 2px 5px;}</style>\
   <table>\
   <tr><td>Alex Yio Long Lin</td><td>419106053</td><td>Alex.lin@uni9.edu.br</td></tr>\
   <tr><td>Ednaldo Alves Vanderley Junior</td><td>419103769</td><td>nicknamekill.js@uni9.edu.br</td></tr>\
