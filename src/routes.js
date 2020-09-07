@@ -6,6 +6,7 @@ const postController = require('./controllers/postController');
 const githubController = require('./controllers/githubController');
 const trelloController = require('./controllers/trelloController');
 const devtoController = require('./controllers/devtoController');
+const UserController = require('./controllers/UserController');
 
 const discord = require('./Services/discord');
 const unirest = require('unirest');
@@ -17,6 +18,9 @@ routes.get('/', function (req, res){
         "releaseNote":"Update trello Webhook controller"
       });
 })
+
+//Login
+routes.post('/user',UserController.store)
 
 //Projetos
 routes.get('/projects', projectController.index);
