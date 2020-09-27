@@ -3,7 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 const corsOptions = {
-    "origin": "*",
+    "origin": true,
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "optionsSuccessStatus": 204
   }
