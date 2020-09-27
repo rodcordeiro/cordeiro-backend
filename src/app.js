@@ -3,9 +3,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 const corsOptions = {
-    "origin": "http://localhost:3000",
+    "origin": "*",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
     "optionsSuccessStatus": 204
   }
 
