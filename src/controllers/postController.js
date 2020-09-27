@@ -22,7 +22,7 @@ module.exports = {
            res.status(error.statusCode).send(error.message);
            throw error;
           }
-          return res.status(201).headers({'Access-Control-Allow-Origin':"*"}).json({status: 'success', project: {
+          return res.status(201).json({status: 'success', project: {
             id:id,
             title:title,
             body:body,
