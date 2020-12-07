@@ -1,48 +1,57 @@
-const connection = require("../Services/connection");
-const generateUniqueId = require("../Services/generateUniqueId");
+const connection = require("../database/connection");
 
 module.exports = {
-    index (req, res) {
-        connection.query('SELECT * FROM projects', (error, results) => {
-            if (error) {
-              res.status(error.statusCode).send(error.message);
-            }
-            return res.status(200).json(results.rows)
-          })
+    async index (req, res) {
+      await connection('projects')
+        .select('*')
+        .then(response=>{
+          return res.status(200).json(response)
+        })
+        .catch(err=>{
+          return res.status(400).json(err)
+        })
     },
-    addProject (req,res){
-      const id = generateUniqueId();
-      const {title,description,link,github,img} = req.body
-      
-      connection.query(
-        'INSERT INTO projects (id,title,description,link,github,img) VALUES ($1,$2,$3,$4,$5,$6)',
-        [id,title,description,link,github,img],
-        (error) => {
-          if (error) {
-           res.status(error.statusCode).send(error.message);
-           throw error;
-          }
-          return res.status(201).json({status: 'success', project: {
-            id:id,
-            title:title,
-            description: description,
-            link:link,
-            github:github,
-            img:img
-            }
-          })
-        }
-      )
+    async addProject (req,res){
+      const {title,description,url,repository,image,tags} = req.body
+      await connection('projects')
+        .insert({
+          title,
+          description,
+          url,
+          repository,
+          image,
+          tags
+        })
+        .then(response=>{
+          return res.status(201).json()
+        })
+        .catch(err=>{
+          return res.status(400).json(err)
+        })
     },
-    delProject (req, res) {
-      const {id} = req.body;
-      connection.query(`DELETE FROM projects WHERE id like '${id}';`, (error, results) => {
-        if (error) {
-          res.status(error.statusCode).send(error.message);
-          throw error;
-         }
-         return res.status(204).send()
+    async getProject (req, res) {
+      const {id} = req.params;
+      await connection('projects')
+        .select('*')
+        .where("id",id)
+        .then(response=>{
+          return res.status(200).json(response)
+        })
+        .catch(err=>{
+          return res.status(400).json(err)
         })
   },
+  async delProject (req, res) {
+    const {id} = req.params;
+    await connection('projects')
+      .where("id",id)
+      .delete()
+      .then(response=>{
+        return res.status(200).json(response)
+      })
+      .catch(err=>{
+        return res.status(400).json(err)
+      })
+},
   
 }

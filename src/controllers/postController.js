@@ -1,47 +1,54 @@
-const connection = require("../Services/connection");
+const { response } = require("express");
+const connection = require("../database/connection");
 const generateUniqueId = require("../Services/generateUniqueId");
 
 module.exports = {
-    index (req, res) {
-        connection.query('SELECT * FROM posts', (error, results) => {
-            if (error) {
-              res.status(error.statusCode).send(error.message);
-            }
-            return res.status(200).json(results.rows)
+    async index (req, res) {
+        await connection('posts')
+          .select('*')
+          .then(response=>{
+            return res.status(200).json(response);
+          })
+          .catch(err=>{
+            return res.status(404).json(err);
           })
     },
-    addPost (req,res){
-      const id = generateUniqueId();
-      const {title,body,image,tags} = req.body
-      
-      connection.query(
-        'INSERT INTO posts (id,title,body,image,tags) VALUES ($1,$2,$3,$4,$5)',
-        [id,title,body,image,tags],
-        (error) => {
-          if (error) {
-           res.status(error.statusCode).send(error.message);
-           throw error;
-          }
-          return res.status(201).json({status: 'success', project: {
-            id:id,
-            title:title,
-            body:body,
-            image:image,
-            tags:tags
-        }
-          })
-        }
-      )
-    },
-    delPost (req, res) {
-      const {id} = req.body;
-      connection.query(`DELETE FROM posts WHERE id like '${id}';`, (error, results) => {
-        if (error) {
-          res.status(error.statusCode).send(error.message);
-          throw error;
-         }
-         return res.status(204).send()
+    async addPost (req,res){
+      const {title,text,image,tags} = req.body
+      await connection('posts')
+        .insert({title,text,image,tags})
+        .then(response=>{
+          return res.status(201).json({id:response})
         })
+        .catch(err=>{
+          return res.status(401).json(err.message)
+        })          
+    },
+    async getPost (req, res) {
+      const {id} = req.params;
+      await connection('posts')
+        .select('*')
+        .where('id',id)
+        .then(response=>{
+          return res.status(200).json(response)
+        })
+        .catch(err=>{
+          return res.status(500).json(err)
+        })
+      
+  },
+    async delPost (req, res) {
+      const {id} = req.params;
+      await connection('posts')
+        .where('id',id)
+        .delete()
+        .then(response=>{
+          return res.status(200).json()
+        })
+        .catch(err=>{
+          return res.status(500).json(err)
+        })
+      
   },
   
 }

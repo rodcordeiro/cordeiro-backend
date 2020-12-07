@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = express.Router();
+const jwt = require('./Services/jwt');
 
 const projectController = require('./controllers/projectControllers');
 const postController = require('./controllers/postController');
@@ -9,7 +10,6 @@ const devtoController = require('./controllers/devtoController');
 const UserController = require('./controllers/UserController');
 
 const discord = require('./Services/discord');
-const unirest = require('unirest');
 
 routes.get('/', function (req, res){
     return res.status(200).json({
@@ -20,27 +20,31 @@ routes.get('/', function (req, res){
 })
 
 //Login
-routes.post('/user',UserController.store)
+routes.get('/users',UserController.index)
+routes.post('/users/create',jwt.verify,UserController.create)
+routes.post('/users/auth',UserController.login)
 
 //Projetos
 routes.get('/projects', projectController.index);
-routes.post('/projects', projectController.addProject);
-routes.delete('/projects', projectController.delProject);
+routes.post('/projects',jwt.verify,projectController.addProject);
+routes.get('/projects/:id', projectController.getProject);
+routes.delete('/projects/:id',jwt.verify,projectController.delProject);
 
 //Posts
 routes.get('/posts', postController.index);
-routes.post('/posts', postController.addPost);
-routes.delete('/posts', postController.delPost);
+routes.post('/posts',jwt.verify,postController.addPost);
+routes.get('/posts/:id', postController.getPost);
+routes.delete('/posts/:id',jwt.verify,postController.delPost);
 
 //Discord
 routes.get('/discord', discord.helloMessage)
 routes.post('/discord', discord.helloMessage)
 
 //Github
-routes.post('/github/create',githubController.createRepo);
-routes.delete('/github/delete/:user/:repo',githubController.deleteRepo);
-routes.get("/github/token",githubController.generateToken)
-routes.get("/github/validateToken",githubController.validateToken)
+routes.post('/github/create',jwt.verify,githubController.createRepo);
+routes.delete('/github/delete/:user/:repo',jwt.verify,githubController.deleteRepo);
+routes.get("/github/token",jwt.verify,githubController.generateToken)
+routes.get("/github/validateToken",jwt.verify,githubController.validateToken)
 
 //Webhooks
 routes.post('/webhooks/habitica', discord.habiticaMessage)
