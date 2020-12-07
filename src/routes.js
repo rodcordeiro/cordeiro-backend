@@ -22,6 +22,9 @@ routes.get('/', function (req, res){
 //Login
 routes.get('/users',UserController.index)
 routes.post('/users/create',jwt.verify,UserController.create)
+routes.put('/users/update',jwt.verify,UserController.update)
+routes.put('/users/update/:id',jwt.verify,UserController.update)
+routes.delete('/users/delete/:id',jwt.verify,UserController.delete)
 routes.post('/users/auth',UserController.login)
 
 //Projetos
