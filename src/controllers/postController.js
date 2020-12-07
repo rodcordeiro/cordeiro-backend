@@ -18,7 +18,7 @@ module.exports = {
       await connection('posts')
         .insert({title,text,image,tags})
         .then(response=>{
-          return res.status(201).json({id:response})
+          return res.status(201).json()
         })
         .catch(err=>{
           return res.status(401).json(err.message)
