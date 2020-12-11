@@ -1,15 +1,18 @@
 const express = require('express');
 const routes = express.Router();
-const jwt = require('./Services/jwt');
+const jwt = require('../Services/jwt');
 
-const projectController = require('./controllers/projectControllers');
-const postController = require('./controllers/postController');
-const githubController = require('./controllers/githubController');
-const trelloController = require('./controllers/trelloController');
-const devtoController = require('./controllers/devtoController');
-const UserController = require('./controllers/UserController');
+const projectController = require('../controllers/projectControllers');
+const booksController = require('../controllers/booksControllers');
+const postController = require('../controllers/postController');
+const githubController = require('../controllers/githubController');
+const trelloController = require('../controllers/trelloController');
+const devtoController = require('../controllers/devtoController');
+const UserController = require('../controllers/UserController');
 
-const discord = require('./Services/discord');
+const discord = require('../Services/discord');
+
+const webhooks = require('./webhooks')
 
 routes.get('/', function (req, res){
     return res.status(200).json({
@@ -33,6 +36,12 @@ routes.post('/projects',jwt.verify,projectController.addProject);
 routes.get('/projects/:id', projectController.getProject);
 routes.delete('/projects/:id',jwt.verify,projectController.delProject);
 
+//books
+routes.get('/books', booksController.index);
+routes.post('/books',booksController.addBook);
+routes.get('/books/:id', booksController.getBook);
+routes.delete('/books/:id',booksController.delBook);
+
 //Posts
 routes.get('/posts', postController.index);
 routes.post('/posts',jwt.verify,postController.addPost);
@@ -49,14 +58,6 @@ routes.delete('/github/delete/:user/:repo',jwt.verify,githubController.deleteRep
 routes.get("/github/token",jwt.verify,githubController.generateToken)
 routes.get("/github/validateToken",jwt.verify,githubController.validateToken)
 
-//Webhooks
-routes.post('/webhooks/habitica', discord.habiticaMessage)
-routes.post('/webhook/devto', (req, res)=>{
-  discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**')
-  console.log(req.body)
-})
-routes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhooks notifications
-routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook creation request
 
 //Dev.to
 routes.post('/devpost', devtoController.createPost)
@@ -73,5 +74,7 @@ routes.get('/uni9',(req,res)=>{
   <tr><td>Rodrigo de Mendonça Cordeiro</td><td>419108124</td><td>rodrigocordeiro@uni9.edu.br</td></tr>\
   <tr><td>Henrique Pereira da Silva</td><td>420200693</td><td>jobhenrique.silva@uni9.edu.br</td></tr>');
 })
+
+routes.use(webhooks)
 
 module.exports = routes;

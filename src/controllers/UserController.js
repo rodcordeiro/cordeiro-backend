@@ -8,7 +8,7 @@ module.exports = {
     await connection('users')
       .select("*")
       .then(response=>{
-        return res.status(201).json(response)
+        return res.status(200).json(response)
       })
       .catch(err=>{
         return res.status(400).json(err)
@@ -47,4 +47,31 @@ module.exports = {
     let token = jwt.signin(user.id)
     return res.status(200).json({token})
   },
+  async update(req,res){
+    let { username, email, password } = req.body
+    const id = req.params.id ? req.params.id : req.headers.id
+    password = cript(password);
+    await connection('users')
+      .update({ username, email, password })
+      .where("id",id)
+      .then(response=>{
+        return res.status(200).json(response)
+      })
+      .catch(err=>{
+        return res.status(400).json(err)
+      })
+    
+  },
+  async delete(req,res){
+    const { id } = req.params
+    await connection('users')
+      .where("id",id)
+      .delete()
+      .then(response=>{
+        return res.status(204).send()
+      })
+      .catch(err=>{
+        return res.status(400).json(err)
+      })
+  }
 }
