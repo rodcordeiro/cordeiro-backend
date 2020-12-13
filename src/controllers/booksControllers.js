@@ -6,7 +6,7 @@ module.exports = {
         .select('*')
         .orderBy('serie','asc')
         .then(response=>{
-          return res.status(200).json(response)
+          return res.status(200).header('total-books',response.length).json(response)
         })
         .catch(err=>{
           return res.status(400).json(err)
