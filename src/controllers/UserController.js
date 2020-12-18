@@ -43,7 +43,7 @@ module.exports = {
       .catch(err=>{
         return res.status(400).json(err)
       })
-    if(user.username !== username || user.password !== password) return res.status(401).json({error:"Invalid user or password"})
+    if(!user || user.username !== username || user.password !== password) return res.status(401).json({error:"Invalid user or password"})
     let token = jwt.signin(user.id)
     return res.status(200).json({token})
   },
