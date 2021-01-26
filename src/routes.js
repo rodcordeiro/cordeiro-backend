@@ -46,7 +46,7 @@ routes.post('/discord', discord.helloMessage)
 //Github
 routes.post('/github/create',jwt.verify,githubController.createRepo);
 routes.delete('/github/delete/:user/:repo',jwt.verify,githubController.deleteRepo);
-routes.get("/github/token",githubController.generateToken)
+routes.get("/github/token",jwt.verify,githubController.generateToken)
 routes.get("/github/validateToken",githubController.validateToken)
 
 //Webhooks
