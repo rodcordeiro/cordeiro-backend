@@ -61,6 +61,12 @@ routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook 
 //Dev.to
 routes.post('/devpost', devtoController.createPost)
 
+routes.post('/teste', (req,res)=>{
+  const body = req.body
+  console.log(body)
+  return res.status(200).json({body})
+})
+
 routes.get('/uni9',(req,res)=>{
   return res.status(200).send('<style>table,td,tr{border:1px solid; border-collapse:collapse;padding: 2px 5px;}</style>\
   <table>\
