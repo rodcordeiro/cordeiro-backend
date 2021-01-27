@@ -64,8 +64,8 @@ routes.post('/devpost', devtoController.createPost)
 routes.post('/teste', (req,res)=>{
   const request = req
   console.log({request})
-  discord.sendMessage("testes_do_cordeiro",request)
-  return res.status(200).json({request})
+  discord.sendMessage("testes_do_cordeiro",`${request.body.text}`)
+  return res.status(200).json("{request}")
 })
 
 routes.get('/uni9',(req,res)=>{
