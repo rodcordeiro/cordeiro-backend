@@ -61,13 +61,6 @@ routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook 
 //Dev.to
 routes.post('/devpost', devtoController.createPost)
 
-routes.post('/teste', (req,res)=>{
-  const request = req
-  console.log({request})
-  discord.sendMessage("testes_do_cordeiro",`${request.body.text}`)
-  return res.status(200).json("{request}")
-})
-
 routes.get('/uni9',(req,res)=>{
   return res.status(200).send('<style>table,td,tr{border:1px solid; border-collapse:collapse;padding: 2px 5px;}</style>\
   <table>\
