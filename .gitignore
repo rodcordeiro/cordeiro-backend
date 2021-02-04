@@ -1,3 +1,7 @@
 node_modules
 .env
 *.sqlite3
+<<<<<<< HEAD
+=======
+
+>>>>>>> 26bb4bef6701341bdb902ed4f2d468ba186489d6
