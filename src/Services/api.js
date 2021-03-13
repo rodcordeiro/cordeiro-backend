@@ -7,8 +7,13 @@ const devtoApi = axios.create({
         baseURL: 'https://dev.to/api/'
     })
 
+const habiticaApi = axios.create({
+    baseURL: 'https://habitica.com/api/v3'
+})
+
 
 module.exports = {
     discordApi,
-    devtoApi
+    devtoApi,
+    habiticaApi
 };
