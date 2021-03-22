@@ -31,14 +31,13 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: `${process.env.DATABASE_URL}`,
+    connection: `${process.env.DATABASE_URL}?ssl=true`,
     migrations: {
       directory: './src/database/migrations'
     },
     seeds: {
       directory: './src/database/seeds/'
     },
-    ssl: { rejectUnauthorized: false },
     useNullAsDefault: true
   }
 
