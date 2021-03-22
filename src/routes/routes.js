@@ -18,7 +18,7 @@ const webhooks = require('./webhooks')
 routes.get('/', function (req, res){
     return res.status(200).json({
         "Name": "CordeiroAPI",
-        "Version": "1.5.1",
+        "Version": "1.6",
         "releaseNote":"Update trello Webhook controller"
       });
 })
