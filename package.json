@@ -4,12 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "start": "typescript src/server.ts",
-=======
     "start": "node src/server.js",
     "build": "npx tsc --build ./tsconfig.json",
->>>>>>> master
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "repository": {
