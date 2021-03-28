@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "build":"npx tsc --build ./tsconfig.json",
+    "build": "npx tsc --build ./tsconfig.json",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "repository": {
