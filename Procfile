@@ -1,1 +1,1 @@
-web: npx knex migrate:latest && npm run build && npm start
+web: npx knex migrate:latest && npm start
