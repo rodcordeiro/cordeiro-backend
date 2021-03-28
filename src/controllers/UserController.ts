@@ -1,13 +1,15 @@
-const connection = require("../database/connection");
-const generateUniqueId = require("../Services/generateUniqueId");
-const cript = require('../Services/crypto');
-const jwt = require('../Services/jwt');
+import connection from '../database/connection';
+import cript from '../Services/crypto';
+
+import jwt from '../Services/jwt';
+
+import iUser from '../interfaces/User';
 
 module.exports = {
   async index(req,res){
     await connection('users')
       .select("*")
-      .then(response=>{
+      .then((response: Array<iUser>)=>{
         return res.status(200).json(response)
       })
       .catch(err=>{
@@ -15,7 +17,7 @@ module.exports = {
       })
   },
   async create(req,res){
-    let { username, email, password } = req.body
+    let { username, email, password } : iUser = req.body
     password = cript(password);
     await connection('users')
       .insert({
@@ -31,7 +33,7 @@ module.exports = {
       })
   },
   async login(req,res){
-    let { username, password } = req.body
+    let { username, password } : iUser = req.body
     password = cript(password);
     let user = await connection('users')
       .select("*")
@@ -48,7 +50,7 @@ module.exports = {
     return res.status(200).json({token})
   },
   async update(req,res){
-    let { username, email, password } = req.body
+    let { username, email, password } : iUser = req.body
     const id = req.params.id ? req.params.id : req.headers.id
     password = cript(password);
     await connection('users')

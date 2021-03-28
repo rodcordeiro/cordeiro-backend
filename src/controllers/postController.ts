@@ -1,5 +1,5 @@
 const { response } = require("express");
-const connection = require("../database/connection");
+import connection from '../database/connection';
 const generateUniqueId = require("../Services/generateUniqueId");
 
 module.exports = {
