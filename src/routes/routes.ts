@@ -17,16 +17,6 @@ const projectController = require('../controllers/projectControllers');
 const booksController = require('../controllers/booksControllers');
 const postController = require('../controllers/postController');
 
-<<<<<<< HEAD:src/routes/routes.js
-routes.get('/', function (req, res){
-    return res.status(200).json({
-        "Name": "CordeiroAPI",
-        "Version": "1.6",
-        "releaseNote":"Update trello Webhook controller"
-      });
-})
-=======
->>>>>>> develop:src/routes/routes.ts
 
 //Login
 routes.get('/users',UserController.index)
