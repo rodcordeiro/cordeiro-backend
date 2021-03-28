@@ -1,3 +1,4 @@
+import axios from 'axios';
 import discordApi from './api'
 
 //PATHs

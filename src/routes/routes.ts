@@ -5,6 +5,7 @@ const routes = Router();
 const githubController = require('../controllers/githubController');
 const trelloController = require('../controllers/trelloController');
 const devtoController = require('../controllers/devtoController');
+// const habiticaController = require('../controllers/habiticaController');
 const UserController = require('../controllers/UserController');
 
 const discord = require('../Services/discord');
@@ -66,6 +67,10 @@ routes.get("/github/validateToken",githubController.validateToken)
 
 //Dev.to
 routes.post('/devpost', devtoController.createPost)
+
+
+// Habitica
+// routes.get('/getchallenge', habiticaController.createTask)
 
 routes.get('/uni9',(req,res)=>{
   return res.status(200).send('<style>table,td,tr{border:1px solid; border-collapse:collapse;padding: 2px 5px;}</style>\

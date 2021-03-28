@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "typescript src/server.ts",
+=======
+    "start": "node src/server.js",
+    "build": "npx tsc --build ./tsconfig.json",
+>>>>>>> master
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "repository": {
@@ -25,15 +30,14 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.12",
-    "pg": "^8.3.0",
+    "pg": "^8.5.1",
     "sqlite3": "^5.0.0",
     "unirest": "^0.6.0"
   },
   "devDependencies": {
+    "typescript": "^4.2.3",
     "@types/axios": "^0.14.0",
     "@types/express": "^4.17.11",
-    "nodemon": "^2.0.3",
-    "ts-node-dev": "^1.1.6",
-    "typescript": "^4.2.3"
+    "ts-node-dev": "^1.1.6"
   }
 }

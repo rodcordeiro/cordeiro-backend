@@ -17,4 +17,4 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(routes);
 
-module.exports = app;
+export default app;
