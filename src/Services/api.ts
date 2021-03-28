@@ -1,6 +1,8 @@
+import { AxiosResponse } from "axios";
+
 const axios = require('axios');
 
-const discordApi  = axios.create({
+const discordApi: AxiosResponse  = axios.create({
         baseURL: 'https://discordapp.com/api/'
     })
 const devtoApi = axios.create({
