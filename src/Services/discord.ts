@@ -1,5 +1,4 @@
-const api = require('./api').discordApi;
-const unirest = require('unirest');
+import discordApi from './api'
 
 //PATHs
 const testes_do_cordeiro = process.env.WH_testes_do_cordeiro
@@ -7,9 +6,9 @@ const taverna_do_vader = process.env.WH_taverna_do_vader;
 const icnt = process.env.WH_ICNT;
 const todo = process.env.WH_TODO;
 
-module.exports ={
+export default {
   async helloMessage(req,res){
-    await api.post(testes_do_cordeiro,{
+    await discordApi.post(testes_do_cordeiro,{
                 "content": "Heeey,\nHell yeah I'm alive!! Yep, be proud :smiley:.",
                 "username":"Lord Darth Vader",
                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
@@ -24,7 +23,7 @@ module.exports ={
         if (channel == 'icnt') channel = icnt;
         if (channel == 'todo') channel = todo;
 
-        await api.post(channel,{
+        await discordApi.post(channel,{
                 "content": `${template}`,
                 "username":"Lord Darth Vader",
                 "avatar_url": "https://rodcordeiro.github.io/shares/img/vader.png"
@@ -36,7 +35,7 @@ module.exports ={
         return true;
     },
     async habiticaMessage(req,res){
-        await api.post(testes_do_cordeiro,{
+        await discordApi.post(testes_do_cordeiro,{
                 "content": `**Task ${req.body.type}**
                 task: ${req.body.task.text},
                 description: ${req.body.task.notes}\n`,

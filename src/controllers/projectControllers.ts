@@ -1,21 +1,27 @@
-const connection = require("../database/connection");
+import connection from '../database/connection';
 
 module.exports = {
     async index (req, res) {
-      await connection('books')
+      await connection('projects')
         .select('*')
-        .orderBy('serie','asc')
         .then(response=>{
-          return res.status(200).header('total-books',response.length).json(response)
+          return res.status(200).json(response)
         })
         .catch(err=>{
           return res.status(400).json(err)
         })
     },
-    async addBook (req,res){
-      const { title,author,serie } = req.body
-      await connection('books')
-        .insert({ title,author,serie })
+    async addProject (req,res){
+      const {title,description,url,repository,image,tags} = req.body
+      await connection('projects')
+        .insert({
+          title,
+          description,
+          url,
+          repository,
+          image,
+          tags
+        })
         .then(response=>{
           return res.status(201).json()
         })
@@ -23,9 +29,9 @@ module.exports = {
           return res.status(400).json(err)
         })
     },
-    async getBook (req, res) {
+    async getProject (req, res) {
       const {id} = req.params;
-      await connection('books')
+      await connection('projects')
         .select('*')
         .where("id",id)
         .then(response=>{
@@ -35,9 +41,9 @@ module.exports = {
           return res.status(400).json(err)
         })
   },
-  async delBook (req, res) {
+  async delProject (req, res) {
     const {id} = req.params;
-    await connection('books')
+    await connection('projects')
       .where("id",id)
       .delete()
       .then(response=>{

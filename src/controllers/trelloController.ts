@@ -1,4 +1,4 @@
-const discord = require('../Services/discord');
+import discord from '../Services/discord'
 
 function verifyBoard(boardId){
     if (boardId == "5e68d2962d3d5a363a47dbe8" || boardId == "5ec5586bf2afe861f95ac78e"){ //Akta || RodrigoController
@@ -13,7 +13,7 @@ function verifyBoard(boardId){
     return "testes_do_cordeiro";
 }
 
-module.exports = {
+export default {
     async cardWebhook(req,res){
         console.log(req.body)
         if (req.body.action.type && req.body.action.type === "updateCard") return res.status(200).json({"message":"received"});

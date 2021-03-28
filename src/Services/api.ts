@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const discordApi = axios.create({
+const discordApi  = axios.create({
         baseURL: 'https://discordapp.com/api/'
     })
 const devtoApi = axios.create({
@@ -12,7 +12,7 @@ const habiticaApi = axios.create({
 })
 
 
-module.exports = {
+export default {
     discordApi,
     devtoApi,
     habiticaApi

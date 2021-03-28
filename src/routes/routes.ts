@@ -1,10 +1,7 @@
-const express = require('express');
-const routes = express.Router();
-const jwt = require('../Services/jwt');
+import jwt from '../Services/jwt';
+import { Router } from 'express'
+const routes = Router();
 
-const projectController = require('../controllers/projectControllers');
-const booksController = require('../controllers/booksControllers');
-const postController = require('../controllers/postController');
 const githubController = require('../controllers/githubController');
 const trelloController = require('../controllers/trelloController');
 const devtoController = require('../controllers/devtoController');
@@ -13,8 +10,14 @@ const UserController = require('../controllers/UserController');
 
 const discord = require('../Services/discord');
 
-const webhooks = require('./webhooks')
+const api = require('./api')
+import webhooksController from '../controllers/webhooksController'
 
+const projectController = require('../controllers/projectControllers');
+const booksController = require('../controllers/booksControllers');
+const postController = require('../controllers/postController');
+
+<<<<<<< HEAD:src/routes/routes.js
 routes.get('/', function (req, res){
     return res.status(200).json({
         "Name": "CordeiroAPI",
@@ -22,6 +25,8 @@ routes.get('/', function (req, res){
         "releaseNote":"Update trello Webhook controller"
       });
 })
+=======
+>>>>>>> develop:src/routes/routes.ts
 
 //Login
 routes.get('/users',UserController.index)
@@ -49,9 +54,19 @@ routes.post('/posts',jwt.verify,postController.addPost);
 routes.get('/posts/:id', postController.getPost);
 routes.delete('/posts/:id',jwt.verify,postController.delPost);
 
+routes.use(webhooksController)
+
+routes.get('/', function (req, res){
+    return res.status(200).json({
+        "Name": "CordeiroAPI",
+        "Version": "2.0.1",
+        "releaseNote":"Migration to Typescript"
+      });
+})
+
 //Discord
-routes.get('/discord', discord.helloMessage)
-routes.post('/discord', discord.helloMessage)
+// routes.get('/discord', discord.helloMessage)
+// routes.post('/discord', discord.helloMessage)
 
 //Github
 routes.post('/github/create',jwt.verify,githubController.createRepo);
@@ -80,6 +95,6 @@ routes.get('/uni9',(req,res)=>{
   <tr><td>Henrique Pereira da Silva</td><td>420200693</td><td>jobhenrique.silva@uni9.edu.br</td></tr>');
 })
 
-routes.use(webhooks)
+
 
 module.exports = routes;

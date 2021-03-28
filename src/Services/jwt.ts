@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = {
+export default {
     signin(id){
         return jwt.sign({id},process.env.APP_SECRET,{expiresIn:"15 days"});
     },
