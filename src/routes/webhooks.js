@@ -1,17 +1,15 @@
-const express = require('express');
-const routes = express.Router();
-const jwt = require('../Services/jwt');
-const discord = require('../Services/discord');
-
-const trelloController = require('../controllers/trelloController');
-
-//Webhooks
-routes.post('/webhooks/habitica', discord.habiticaMessage)
-routes.post('/webhook/devto', (req, res)=>{
-  discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**')
-  console.log(req.body)
-})
-routes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhooks notifications
-routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook creation request
-
-module.exports = routes;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var routes = express_1.Router();
+var webhooksController_1 = __importDefault(require("../controllers/webhooksController"));
+routes.get('/webhooks', function (req, res) {
+    console.log('teste');
+    return res.status(400).send();
+});
+routes.post('/webhooks', webhooksController_1.default.create);
+routes.get('/webhooks/:origin', webhooksController_1.default.get_webhooks);
+exports.default = routes;
