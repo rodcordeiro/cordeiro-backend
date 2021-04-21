@@ -1,7 +1,4 @@
-// Update with your config settings.
-
-module.exports = {
-
+const configuration = {
   development: {
     client: 'sqlite3',
     connection: {
@@ -12,7 +9,6 @@ module.exports = {
     },
     useNullAsDefault: true
   },
-
   staging: {
     client: 'postgresql',
     connection: {
@@ -28,7 +24,6 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   },
-
   production: {
     client: 'pg',
     connection: `${process.env.DATABASE_URL}?ssl=true`,
@@ -40,5 +35,5 @@ module.exports = {
     },
     useNullAsDefault: true
   }
-
 };
+export default configuration;
