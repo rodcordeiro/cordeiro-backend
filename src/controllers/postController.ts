@@ -1,9 +1,9 @@
-const { response } = require("express");
 import connection from '../database/connection';
+import { Request, Response } from 'express'
 const generateUniqueId = require("../Services/generateUniqueId");
 
-module.exports = {
-    async index (req, res) {
+export default class PostController{
+    async index (req: Request, res: Response){
         await connection('posts')
           .select('*')
           .then(response=>{
@@ -12,8 +12,8 @@ module.exports = {
           .catch(err=>{
             return res.status(404).json(err);
           })
-    },
-    async addPost (req,res){
+    }
+    async addPost (req: Request, res: Response){
       const {title,text,image,tags} = req.body
       await connection('posts')
         .insert({title,text,image,tags})
@@ -23,11 +23,11 @@ module.exports = {
         .catch(err=>{
           return res.status(401).json(err.message)
         })          
-    },
-    async getPost (req, res) {
+    }
+    async getPost (req: Request, res: Response){
       const {id} = req.params;
       await connection('posts')
-        .select('*')
+          .select('*')
         .where('id',id)
         .then(response=>{
           return res.status(200).json(response)
@@ -36,8 +36,8 @@ module.exports = {
           return res.status(500).json(err)
         })
       
-  },
-    async delPost (req, res) {
+  }
+    async delPost (req: Request, res: Response){
       const {id} = req.params;
       await connection('posts')
         .where('id',id)
@@ -49,6 +49,6 @@ module.exports = {
           return res.status(500).json(err)
         })
       
-  },
+  }
   
 }

@@ -1,50 +1,22 @@
 import jwt from '../Services/jwt';
-import { Router } from 'express'
+import DiscordController from '../Services/discord';
+import { Router } from 'express';
+
+import webhookRoutes from './webhooks'
+import apiEndpoints from './api'
+
+
 const routes = Router();
+routes.use(webhookRoutes)
+routes.use(apiEndpoints)
 
 const githubController = require('../controllers/githubController');
 const trelloController = require('../controllers/trelloController');
 const devtoController = require('../controllers/devtoController');
-// const habiticaController = require('../controllers/habiticaController');
-const UserController = require('../controllers/UserController');
-
-const discord = require('../Services/discord');
-
-const api = require('./api')
-import webhooksController from '../controllers/webhooksController'
-
-const projectController = require('../controllers/projectControllers');
-const booksController = require('../controllers/booksControllers');
-const postController = require('../controllers/postController');
+const discord = new DiscordController();
 
 
-//Login
-routes.get('/users',UserController.index)
-routes.post('/users/create',jwt.verify,UserController.create)
-routes.put('/users/update',jwt.verify,UserController.update)
-routes.put('/users/update/:id',jwt.verify,UserController.update)
-routes.delete('/users/delete/:id',jwt.verify,UserController.delete)
-routes.post('/users/auth',UserController.login)
 
-//Projetos
-routes.get('/projects', projectController.index);
-routes.post('/projects',jwt.verify,projectController.addProject);
-routes.get('/projects/:id', projectController.getProject);
-routes.delete('/projects/:id',jwt.verify,projectController.delProject);
-
-//books
-routes.get('/books', booksController.index);
-routes.post('/books',booksController.addBook);
-routes.get('/books/:id', booksController.getBook);
-routes.delete('/books/:id',booksController.delBook);
-
-//Posts
-routes.get('/posts', postController.index);
-routes.post('/posts',jwt.verify,postController.addPost);
-routes.get('/posts/:id', postController.getPost);
-routes.delete('/posts/:id',jwt.verify,postController.delPost);
-
-routes.use(webhooksController)
 
 routes.get('/', function (req, res){
     return res.status(200).json({
@@ -54,9 +26,9 @@ routes.get('/', function (req, res){
       });
 })
 
-//Discord
-// routes.get('/discord', discord.helloMessage)
-// routes.post('/discord', discord.helloMessage)
+// Discord
+routes.get('/discord', discord.helloMessage)
+routes.post('/discord', discord.helloMessage)
 
 //Github
 routes.post('/github/create',jwt.verify,githubController.createRepo);
@@ -87,4 +59,4 @@ routes.get('/uni9',(req,res)=>{
 
 
 
-module.exports = routes;
+export default routes;

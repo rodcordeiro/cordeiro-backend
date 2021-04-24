@@ -1,39 +1,46 @@
 import jwt from '../Services/jwt';
 import { Router } from 'express'
+import UserController from '../controllers/UserController'
+import ProjectsController from '../controllers/projectControllers'
+import BooksController from '../controllers/booksControllers'
+import PostController from "../controllers/postController"
 
-const routes = Router();
+const apiEndpoints = Router();
 
-const projectController = require('../controllers/projectControllers');
-const booksController = require('../controllers/booksControllers');
-const postController = require('../controllers/postController');
-const UserController = require('../controllers/UserController');
+const userController = new UserController()
+const projectController = new ProjectsController()
+const booksController = new BooksController()
+const postController = new PostController()
 
+const githubController = require('../controllers/githubController');
+const trelloController = require('../controllers/trelloController');
+const devtoController = require('../controllers/devtoController');
+// const habiticaController = require('../controllers/habiticaController');
 
 //Login
-routes.get('/users',UserController.index)
-routes.post('/users/create',jwt.verify,UserController.create)
-routes.put('/users/update',jwt.verify,UserController.update)
-routes.put('/users/update/:id',jwt.verify,UserController.update)
-routes.delete('/users/delete/:id',jwt.verify,UserController.delete)
-routes.post('/users/auth',UserController.login)
+apiEndpoints.get('/users',userController.index)
+apiEndpoints.post('/users/create',jwt.verify,userController.create)
+apiEndpoints.put('/users/update',jwt.verify,userController.update)
+apiEndpoints.put('/users/update/:id',jwt.verify,userController.update)
+apiEndpoints.delete('/users/delete/:id',jwt.verify,userController.delete)
+apiEndpoints.post('/users/auth',userController.login)
 
 //Projetos
-routes.get('/projects', projectController.index);
-routes.post('/projects',jwt.verify,projectController.addProject);
-routes.get('/projects/:id', projectController.getProject);
-routes.delete('/projects/:id',jwt.verify,projectController.delProject);
+apiEndpoints.get('/projects', projectController.index);
+apiEndpoints.post('/projects',jwt.verify,projectController.addProject);
+apiEndpoints.get('/projects/:id', projectController.getProject);
+apiEndpoints.delete('/projects/:id',jwt.verify,projectController.delProject);
 
 //books
-routes.get('/books', booksController.index);
-routes.post('/books',booksController.addBook);
-routes.get('/books/:id', booksController.getBook);
-routes.delete('/books/:id',booksController.delBook);
+apiEndpoints.get('/books', booksController.index);
+apiEndpoints.post('/books',booksController.addBook);
+apiEndpoints.get('/books/:id', booksController.getBook);
+apiEndpoints.delete('/books/:id',booksController.delBook);
 
 //Posts
-routes.get('/posts', postController.index);
-routes.post('/posts',jwt.verify,postController.addPost);
-routes.get('/posts/:id', postController.getPost);
-routes.delete('/posts/:id',jwt.verify,postController.delPost);
+apiEndpoints.get('/posts', postController.index);
+apiEndpoints.post('/posts',jwt.verify,postController.addPost);
+apiEndpoints.get('/posts/:id', postController.getPost);
+apiEndpoints.delete('/posts/:id',jwt.verify,postController.delPost);
 
-
-export default routes;
+export default apiEndpoints;

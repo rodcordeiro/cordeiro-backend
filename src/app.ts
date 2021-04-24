@@ -1,6 +1,7 @@
-const express = require("express");
-const cors = require('cors');
-const dotenv = require('dotenv');
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import routes from './routes/routes';
 
 const corsOptions = {
     "origin": true,
@@ -11,7 +12,6 @@ const corsOptions = {
 dotenv.config();
 
 const app = express();
-const routes = require('./routes/routes');
 
 app.use(express.json());
 app.use(cors(corsOptions));

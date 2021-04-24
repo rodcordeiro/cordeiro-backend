@@ -1,12 +1,13 @@
 import connection from '../database/connection';
 import cript from '../Services/crypto';
+import { Request, Response } from 'express'
 
 import jwt from '../Services/jwt';
 
 import iUser from '../interfaces/User';
 
-module.exports = {
-  async index(req,res){
+export default class UserController{
+  async index(req: Request, res: Response){
     await connection('users')
       .select("*")
       .then((response: Array<iUser>)=>{
@@ -15,8 +16,8 @@ module.exports = {
       .catch(err=>{
         return res.status(400).json(err)
       })
-  },
-  async create(req,res){
+  }
+  async create(req: Request, res: Response){
     let { username, email, password } : iUser = req.body
     password = cript(password);
     await connection('users')
@@ -31,8 +32,8 @@ module.exports = {
       .catch(err=>{
         return res.status(400).json(err)
       })
-  },
-  async login(req,res){
+  }
+  async login(req: Request, res: Response){
     let { username, password } : iUser = req.body
     password = cript(password);
     let user = await connection('users')
@@ -48,8 +49,8 @@ module.exports = {
     if(!user || user.username !== username || user.password !== password) return res.status(401).json({error:"Invalid user or password"})
     let token = jwt.signin(user.id)
     return res.status(200).json({token})
-  },
-  async update(req,res){
+  }
+  async update(req: Request, res: Response){
     let { username, email, password } : iUser = req.body
     const id = req.params.id ? req.params.id : req.headers.id
     password = cript(password);
@@ -63,8 +64,8 @@ module.exports = {
         return res.status(400).json(err)
       })
     
-  },
-  async delete(req,res){
+  }
+  async delete(req: Request, res: Response){
     const { id } = req.params
     await connection('users')
       .where("id",id)
@@ -77,3 +78,4 @@ module.exports = {
       })
   }
 }
+

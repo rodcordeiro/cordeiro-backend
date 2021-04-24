@@ -1,6 +1,8 @@
-const unirest = require('unirest');
-const discord = require('../Services/discord');
+import unirest from "unirest";
+import DiscordController from '../Services/discord';
 const generateUniqueId = require('../Services/generateUniqueId');
+
+const discord = new DiscordController();
 
 module.exports={
     async generateToken(req, res){
@@ -46,7 +48,7 @@ module.exports={
         var message = ` **Repository:** ${response.body.name},\n**Description:** ${req.body.description},\n**ssh_url:** ${response.body.ssh_url}\n**clone_url:** ${response.body.clone_url}\n**svn_url:** ${response.body.svn_url}`
 
         if (response.statusCode ==201){
-            discord.sendMessage('testes_do_cordeiro',message)
+            discord.sendMessage('testes_do_cordeiro',message,res)
         }
         return res.status(response.statusCode).json(response.body)
         })
@@ -68,7 +70,7 @@ module.exports={
             var message = `Deleted repository ${repo}`
 
             if (response.statusCode == 204){
-                discord.sendMessage('testes_do_cordeiro',message)
+                discord.sendMessage('testes_do_cordeiro',message,res)
             }
             return res.status(response.statusCode).json(response.body)
             })
