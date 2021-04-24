@@ -1,43 +1,46 @@
 import connection from '../database/connection';
 import discord from '../Services/discord'
 import trelloController from '../controllers/trelloController'
-import { Router } from 'express'
-const routes = Router();
+import { Request, Response } from 'express'
 
-routes.get('/webhooks', async (req,res)=>{
-    await connection('webhooks')
-        .select('*')
-        .then(response => {
-            return res.status(200).json(response)
-        })
+class WebhooksController{
+    async create(req: Request, res: Response){
+        const {name, origin, webhook} = req.body;
+        await connection('webhooks')
+            .insert({name, origin, webhook})
+            .then(response=>{
+                return res.status(201).json(response)
+            })
         .catch(err=>{
+            throw new Error(err);
             return res.status(400).json(err)
         })
-})
-routes.post('/webhooks', async (req,res)=>{
-    const {name, origin, webhook} = req.body;
-    await connection('webhooks')
-     .insert({name, origin, webhook})
-     .then(response=>{
-        return res.status(201).json(response)
-      })
-      .catch(err=>{
-          throw new Error(err);
-        return res.status(400).json(err)
-      })
-})
-routes.get('/webhooks/:origin',     async (req,res)=>{
-    const { origin } = req.params;
-    await connection('webhooks')
-        .select('*')
-        .where('origin',origin)
-        .then(response=>{
-            return res.status(200).json(response)
-        })
-        .catch(err=>{
-            return res.status(400).json(err)
-        })
-})
+    }
+    async get_webhooks(req: Request, res: Response){
+        await connection('webhooks')
+            .select('*')
+            .then(response => {
+                return res.status(200).json(response)
+            })
+            .catch(err=>{
+                return res.status(400).json(err)
+            })    
+    }
+    async get_webhook(req: Request, res: Response){
+        const { origin } = req.params;
+        await connection('webhooks')
+            .select('*')
+            .where('origin',origin)
+            .then(response=>{
+                return res.status(200).json(response)
+            })
+            .catch(err=>{
+                return res.status(400).json(err)
+            })
+    }
+}
+
+
 
 //Webhooks
 routes.post('/webhooks/habitica', discord.habiticaMessage)
@@ -48,4 +51,4 @@ routes.post('/webhook/devto', (req, res)=>{
 routes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhooks notifications
 routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook creation request
 
-export default routes;
+export default WebhooksController;

@@ -1,5 +1,9 @@
 import jwt from '../Services/jwt';
 import { Router } from 'express'
+
+import webhookRoutes from './webhooks'
+
+
 const routes = Router();
 
 const githubController = require('../controllers/githubController');
@@ -11,7 +15,6 @@ const UserController = require('../controllers/UserController');
 const discord = require('../Services/discord');
 
 const api = require('./api')
-import webhooksController from '../controllers/webhooksController'
 
 const projectController = require('../controllers/projectControllers');
 const booksController = require('../controllers/booksControllers');
@@ -44,7 +47,7 @@ routes.post('/posts',jwt.verify,postController.addPost);
 routes.get('/posts/:id', postController.getPost);
 routes.delete('/posts/:id',jwt.verify,postController.delPost);
 
-routes.use(webhooksController)
+routes.use(webhookRoutes)
 
 routes.get('/', function (req, res){
     return res.status(200).json({
@@ -87,4 +90,4 @@ routes.get('/uni9',(req,res)=>{
 
 
 
-module.exports = routes;
+export default routes;

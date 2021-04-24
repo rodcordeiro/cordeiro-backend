@@ -1,18 +1,24 @@
 import jwt from '../Services/jwt';
 import { Router } from 'express'
-const routes = Router();
+const webhookRoutes = Router();
 
 import trelloController from '../controllers/trelloController'
-import webhooksController from '../controllers/webhooksController'
+import WebhooksController from '../controllers/webhooksController'
 
 import discord from '../Services/discord'
 
+const webhooksController = new WebhooksController()
 
-routes.get('/webhooks', (req, res)=>{
-  console.log('teste')
-  return res.status(400).send()
+webhookRoutes.post('/webhooks',jwt.verify, webhooksController.create)
+webhookRoutes.get('/webhooks', webhooksController.get_webhooks)
+webhookRoutes.get('/webhooks/:origin', webhooksController.get_webhook)
+
+webhookRoutes.post('/webhooks/habitica', discord.habiticaMessage)
+webhookRoutes.post('/webhook/devto', (req, res)=>{
+  discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**')
+  console.log(req.body)
 })
-routes.post('/webhooks', webhooksController.create)
-routes.get('/webhooks/:origin', webhooksController.get_webhooks)
+webhookRoutes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhooks notifications
+webhookRoutes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook creation request
 
-export default routes;
+export default webhookRoutes;
