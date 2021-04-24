@@ -1,4 +1,6 @@
-import discord from '../Services/discord'
+import DiscordController from '../Services/discord';
+const discord = new DiscordController();
+
 
 function verifyBoard(boardId){
     if (boardId == "5e68d2962d3d5a363a47dbe8" || boardId == "5ec5586bf2afe861f95ac78e"){ //Akta || RodrigoController
@@ -20,7 +22,7 @@ export default {
 		if (req.body.action.type && req.body.action.type === "createCard"){
             const board = verifyBoard(req.body.action.data.board.id)
             const message = `**New card on Todo:**\n> ${req.body.action.data.card.name}`
-            await discord.sendMessage(board, message);
+            await discord.sendMessage(board, message,res);
         }
         return res.status(200).json({
             "status":"Received",

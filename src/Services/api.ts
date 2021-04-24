@@ -1,10 +1,9 @@
-import axios, { AxiosInstance, AxiosInterceptorManager, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance } from "axios";
 
 
-const config: AxiosRequestConfig = {
+const discordApi: AxiosInstance = axios.create({
     baseURL: 'https://discordapp.com/api/',
-};
-const discordApi: AxiosInstance = axios.create(config);
+});
 
 const devtoApi: AxiosInstance = axios.create({
         baseURL: 'https://dev.to/api/'
@@ -15,7 +14,7 @@ const habiticaApi : AxiosInstance = axios.create({
 })
 
 
-export default {
+export {
     discordApi,
     devtoApi,
     habiticaApi

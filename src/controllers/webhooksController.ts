@@ -1,6 +1,4 @@
 import connection from '../database/connection';
-import discord from '../Services/discord'
-import trelloController from '../controllers/trelloController'
 import { Request, Response } from 'express'
 
 class WebhooksController{
@@ -39,16 +37,5 @@ class WebhooksController{
             })
     }
 }
-
-
-
-//Webhooks
-routes.post('/webhooks/habitica', discord.habiticaMessage)
-routes.post('/webhook/devto', (req, res)=>{
-  discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**')
-  console.log(req.body)
-})
-routes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhooks notifications
-routes.head('/webhooks/trello', trelloController.newWebhook);//Receives webhook creation request
 
 export default WebhooksController;

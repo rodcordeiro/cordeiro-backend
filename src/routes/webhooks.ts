@@ -1,11 +1,13 @@
 import jwt from '../Services/jwt';
 import { Router } from 'express'
-const webhookRoutes = Router();
-
+import DiscordController from '../Services/discord';
 import trelloController from '../controllers/trelloController'
 import WebhooksController from '../controllers/webhooksController'
 
-import discord from '../Services/discord'
+const webhookRoutes = Router();
+const discord = new DiscordController();
+
+
 
 const webhooksController = new WebhooksController()
 
@@ -15,7 +17,7 @@ webhookRoutes.get('/webhooks/:origin', webhooksController.get_webhook)
 
 webhookRoutes.post('/webhooks/habitica', discord.habiticaMessage)
 webhookRoutes.post('/webhook/devto', (req, res)=>{
-  discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**')
+  discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**',res)
   console.log(req.body)
 })
 webhookRoutes.post('/webhooks/trello', trelloController.cardWebhook); //Receives webhooks notifications

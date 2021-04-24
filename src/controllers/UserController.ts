@@ -6,7 +6,7 @@ import jwt from '../Services/jwt';
 
 import iUser from '../interfaces/User';
 
-module.exports = {
+export default class UserController{
   async index(req: Request, res: Response){
     await connection('users')
       .select("*")
@@ -16,7 +16,7 @@ module.exports = {
       .catch(err=>{
         return res.status(400).json(err)
       })
-  },
+  }
   async create(req: Request, res: Response){
     let { username, email, password } : iUser = req.body
     password = cript(password);
@@ -32,7 +32,7 @@ module.exports = {
       .catch(err=>{
         return res.status(400).json(err)
       })
-  },
+  }
   async login(req: Request, res: Response){
     let { username, password } : iUser = req.body
     password = cript(password);
@@ -49,7 +49,7 @@ module.exports = {
     if(!user || user.username !== username || user.password !== password) return res.status(401).json({error:"Invalid user or password"})
     let token = jwt.signin(user.id)
     return res.status(200).json({token})
-  },
+  }
   async update(req: Request, res: Response){
     let { username, email, password } : iUser = req.body
     const id = req.params.id ? req.params.id : req.headers.id
@@ -64,7 +64,7 @@ module.exports = {
         return res.status(400).json(err)
       })
     
-  },
+  }
   async delete(req: Request, res: Response){
     const { id } = req.params
     await connection('users')
@@ -78,3 +78,4 @@ module.exports = {
       })
   }
 }
+

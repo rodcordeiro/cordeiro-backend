@@ -1,18 +1,26 @@
 import connection from '../database/connection';
+import { Request, Response } from 'express'
 
-module.exports = {
-    async index (req, res) {
+interface iBook{
+  id: number
+  title: string
+  author: string
+  serie: string | null;
+}
+export default class BooksController{
+    async index (req: Request, res: Response) {
       await connection('books')
         .select('*')
         .orderBy('serie','asc')
-        .then(response=>{
-          return res.status(200).header('total-books',response.length).json(response)
+        .then(function(response: Array<iBook>){
+          const total =  response.length
+          return res.status(200).header('total-books',total.toString()).json(response)
         })
         .catch(err=>{
           return res.status(400).json(err)
         })
-    },
-    async addBook (req,res){
+    }
+    async addBook (req: Request, res: Response){
       const { title,author,serie } = req.body
       await connection('books')
         .insert({ title,author,serie })
@@ -22,8 +30,8 @@ module.exports = {
         .catch(err=>{
           return res.status(400).json(err)
         })
-    },
-    async getBook (req, res) {
+    }
+    async getBook (req: Request, res: Response) {
       const {id} = req.params;
       await connection('books')
         .select('*')
@@ -34,8 +42,8 @@ module.exports = {
         .catch(err=>{
           return res.status(400).json(err)
         })
-  },
-  async delBook (req, res) {
+  }
+  async delBook (req: Request, res: Response) {
     const {id} = req.params;
     await connection('books')
       .where("id",id)
@@ -46,6 +54,6 @@ module.exports = {
       .catch(err=>{
         return res.status(400).json(err)
       })
-},
+}
   
 }

@@ -1,7 +1,8 @@
 import connection from '../database/connection';
+import { Request, Response } from 'express'
 
-module.exports = {
-    async index (req, res) {
+export default class ProjectsController{
+    async index (req: Request, res: Response){
       await connection('projects')
         .select('*')
         .then(response=>{
@@ -10,8 +11,8 @@ module.exports = {
         .catch(err=>{
           return res.status(400).json(err)
         })
-    },
-    async addProject (req,res){
+    }
+    async addProject (req: Request, res: Response){
       const {title,description,url,repository,image,tags} = req.body
       await connection('projects')
         .insert({
@@ -28,8 +29,8 @@ module.exports = {
         .catch(err=>{
           return res.status(400).json(err)
         })
-    },
-    async getProject (req, res) {
+    }
+    async getProject (req: Request, res: Response){
       const {id} = req.params;
       await connection('projects')
         .select('*')
@@ -40,8 +41,8 @@ module.exports = {
         .catch(err=>{
           return res.status(400).json(err)
         })
-  },
-  async delProject (req, res) {
+  }
+  async delProject (req: Request, res: Response){
     const {id} = req.params;
     await connection('projects')
       .where("id",id)
@@ -52,6 +53,6 @@ module.exports = {
       .catch(err=>{
         return res.status(400).json(err)
       })
-},
+}
   
 }
