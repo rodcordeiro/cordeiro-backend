@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var configuration = {
+module.exports = {
     development: {
         client: 'sqlite3',
         connection: {
@@ -38,4 +36,3 @@ var configuration = {
         useNullAsDefault: true
     }
 };
-exports.default = configuration;
