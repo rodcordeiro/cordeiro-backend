@@ -20,7 +20,7 @@ var devtoController = require('../controllers/devtoController');
 // const habiticaController = require('../controllers/habiticaController');
 //Login
 apiEndpoints.get('/users', userController.index);
-apiEndpoints.post('/users/create', jwt_1.default.verify, userController.create);
+apiEndpoints.post('/users/create', userController.create);
 apiEndpoints.put('/users/update', jwt_1.default.verify, userController.update);
 apiEndpoints.put('/users/update/:id', jwt_1.default.verify, userController.update);
 apiEndpoints.delete('/users/delete/:id', jwt_1.default.verify, userController.delete);

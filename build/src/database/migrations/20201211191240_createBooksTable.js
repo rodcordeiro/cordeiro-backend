@@ -4,6 +4,9 @@ exports.up = function (knex) {
         table.string('title').notNullable();
         table.string('author');
         table.string('serie');
+        table.string('serieOrder');
+        table.timestamp("created_at").defaultTo(knex.fn.now());
+        table.timestamp("updated_at").defaultTo(knex.fn.now());
     });
 };
 exports.down = function (knex) {
