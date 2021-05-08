@@ -19,7 +19,7 @@ const devtoController = require('../controllers/devtoController');
 
 //Login
 apiEndpoints.get('/users',userController.index)
-apiEndpoints.post('/users/create',jwt.verify,userController.create)
+apiEndpoints.post('/users/create',userController.create)
 apiEndpoints.put('/users/update',jwt.verify,userController.update)
 apiEndpoints.put('/users/update/:id',jwt.verify,userController.update)
 apiEndpoints.delete('/users/delete/:id',jwt.verify,userController.delete)

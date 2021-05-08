@@ -4,7 +4,7 @@ exports.up = function(knex) {
       table.increments()
       table.string('title').notNullable();
       table.text('description').notNullable();
-      table.string('tags').notNullable();
+      table.specificType('tags','text[]').notNullable();
       table.text('image').notNullable();
       table.string('url');
       table.string('repository');

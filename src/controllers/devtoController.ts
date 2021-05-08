@@ -1,5 +1,4 @@
 const api = require('../Services/api').devtoApi
-import discord from '../Services/discord'
 import { Request, Response } from 'express'
 
 module.exports = {
