@@ -1,4 +1,4 @@
-const configuration = {
+module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
@@ -36,5 +36,3 @@ const configuration = {
     useNullAsDefault: true
   }
 };
-
-export default configuration;
