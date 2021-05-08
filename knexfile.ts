@@ -36,4 +36,5 @@ const configuration = {
     useNullAsDefault: true
   }
 };
+
 export default configuration;
