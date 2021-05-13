@@ -1,6 +1,6 @@
 import jwt from '../Services/jwt';
 import { Router } from 'express'
-import DiscordController from '../Services/discord';
+import DiscordController from '../controllers/DiscordController';
 import trelloController from '../controllers/trelloController'
 import WebhooksController from '../controllers/webhooksController'
 

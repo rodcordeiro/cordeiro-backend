@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var jwt_1 = __importDefault(require("../Services/jwt"));
 var express_1 = require("express");
-var discord_1 = __importDefault(require("../Services/discord"));
+var DiscordController_1 = __importDefault(require("../controllers/DiscordController"));
 var trelloController_1 = __importDefault(require("../controllers/trelloController"));
 var webhooksController_1 = __importDefault(require("../controllers/webhooksController"));
 var webhookRoutes = express_1.Router();
-var discord = new discord_1.default();
+var discord = new DiscordController_1.default();
 var webhooksController = new webhooksController_1.default();
 webhookRoutes.post('/webhooks', jwt_1.default.verify, webhooksController.create);
 webhookRoutes.get('/webhooks', webhooksController.get_webhooks);

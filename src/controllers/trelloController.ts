@@ -1,4 +1,4 @@
-import DiscordController from '../Services/discord';
+import DiscordController from './DiscordController';
 const discord = new DiscordController();
 
 

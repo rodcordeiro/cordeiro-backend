@@ -7,7 +7,7 @@ class WebhooksController{
         await connection('webhooks')
             .insert({name, origin, webhook})
             .then(response=>{
-                return res.status(201).json(response)
+                return res.status(201).json()
             })
         .catch(err=>{
             throw new Error(err);

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { discordApi } from './api'
+import { discordApi } from '../Services/api'
 
 //PATHs
 const testes_do_cordeiro = process.env.WH_testes_do_cordeiro

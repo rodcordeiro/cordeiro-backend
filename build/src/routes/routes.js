@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var jwt_1 = __importDefault(require("../Services/jwt"));
-var discord_1 = __importDefault(require("../Services/discord"));
+var DiscordController_1 = __importDefault(require("../controllers/DiscordController"));
 var express_1 = require("express");
 var webhooks_1 = __importDefault(require("./webhooks"));
 var api_1 = __importDefault(require("./api"));
@@ -14,7 +14,7 @@ routes.use(api_1.default);
 var githubController = require('../controllers/githubController');
 var trelloController = require('../controllers/trelloController');
 var devtoController = require('../controllers/devtoController');
-var discord = new discord_1.default();
+var discord = new DiscordController_1.default();
 routes.get('/', function (req, res) {
     return res.status(200).json({
         "Name": "CordeiroAPI",

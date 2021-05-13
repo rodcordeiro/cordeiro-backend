@@ -39,8 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var discord_1 = __importDefault(require("../Services/discord"));
-var discord = new discord_1.default();
+var DiscordController_1 = __importDefault(require("./DiscordController"));
+var discord = new DiscordController_1.default();
 function verifyBoard(boardId) {
     if (boardId == "5e68d2962d3d5a363a47dbe8" || boardId == "5ec5586bf2afe861f95ac78e") { //Akta || RodrigoController
         return "testes_do_cordeiro";

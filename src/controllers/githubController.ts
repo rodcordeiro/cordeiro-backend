@@ -1,5 +1,5 @@
 import unirest from "unirest";
-import DiscordController from '../Services/discord';
+import DiscordController from './DiscordController';
 const generateUniqueId = require('../Services/generateUniqueId');
 
 const discord = new DiscordController();

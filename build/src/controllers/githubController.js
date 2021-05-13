@@ -40,9 +40,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var unirest_1 = __importDefault(require("unirest"));
-var discord_1 = __importDefault(require("../Services/discord"));
+var DiscordController_1 = __importDefault(require("./DiscordController"));
 var generateUniqueId = require('../Services/generateUniqueId');
-var discord = new discord_1.default();
+var discord = new DiscordController_1.default();
 module.exports = {
     generateToken: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {

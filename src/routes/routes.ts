@@ -1,5 +1,5 @@
 import jwt from '../Services/jwt';
-import DiscordController from '../Services/discord';
+import DiscordController from '../controllers/DiscordController';
 import { Router } from 'express';
 
 import webhookRoutes from './webhooks'
