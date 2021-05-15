@@ -4,7 +4,6 @@ import routes from './routes/routes';
 import { createServer } from 'http';
 import { Server, Socket } from "socket.io"
 
-
 const corsOptions = {
   "origin": true,
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -26,9 +25,9 @@ const io = new Server(http,{
   }
 }); // Criando o protocolo WS (websocket)
 
-io.on("connection",(socket: Socket)=>{
-  console.log(socket.id)
-})
+// io.on("connection",(socket: Socket)=>{
+//   console.log(socket.id)
+// })
 
 export {
   http, 

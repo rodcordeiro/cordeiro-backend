@@ -28,6 +28,3 @@ var io = new socket_io_1.Server(http, {
     }
 }); // Criando o protocolo WS (websocket)
 exports.io = io;
-io.on("connection", function (socket) {
-    console.log(socket.id);
-});
