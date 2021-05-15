@@ -34,9 +34,23 @@ export default class UserController{
       })
   }
   async login(req: Request, res: Response){
-    let { username, password } : iUser = req.body
+    let { username, email, password } : iUser = req.body
     password = cript(password);
-    let user = await connection('users')
+    let user;
+    if (!username){
+      user = await connection('users')
+      .select("*")
+      .where("email",email)
+      .first()
+      .then(response=>{
+        return response
+      })
+      .catch(err=>{
+        return res.status(400).json(err)
+      })
+      if(!user || user.email !== email || user.password !== password) return res.status(401).json({error:"Invalid email or password"})
+    } else {
+      user = await connection('users')
       .select("*")
       .where("username",username)
       .first()
@@ -46,7 +60,9 @@ export default class UserController{
       .catch(err=>{
         return res.status(400).json(err)
       })
-    if(!user || user.username !== username || user.password !== password) return res.status(401).json({error:"Invalid user or password"})
+      if(!user || user.username !== username || user.password !== password) return res.status(401).json({error:"Invalid user or password"})
+    }
+    
     let token = jwt.signin(user.id)
     return res.status(200).json({token})
   }
