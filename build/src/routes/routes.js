@@ -5,8 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var api_routes_1 = __importDefault(require("./api.routes"));
+var bth_routes_1 = __importDefault(require("./bth.routes"));
 var routes = express_1.Router();
 routes.use(api_routes_1.default);
+routes.use(bth_routes_1.default);
 routes.get('/', function (req, res) {
     return res.status(200).json({
         "Name": "CordeiroAPI",

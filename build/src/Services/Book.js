@@ -39,54 +39,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.BookService = void 0;
 var connection_1 = __importDefault(require("../database/connection"));
 var uuid_1 = require("uuid");
-var crypto_1 = require("../tools/crypto");
-var jwt_1 = __importDefault(require("../tools/jwt"));
-var UserService = /** @class */ (function () {
-    function UserService() {
+var BookService = /** @class */ (function () {
+    function BookService() {
     }
-    UserService.prototype.create_user = function (data) {
-        return __awaiter(this, void 0, void 0, function () {
-            var username, email, password, id, user;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        username = data.username, email = data.email, password = data.password;
-                        password = crypto_1.cript(password);
-                        id = uuid_1.v4();
-                        return [4 /*yield*/, connection_1.default('users')
-                                .insert({
-                                id: id,
-                                username: username,
-                                email: email,
-                                password: password
-                            })
-                                .then(function (response) {
-                                return {
-                                    id: id,
-                                    username: username,
-                                    email: email
-                                };
-                            })
-                                .catch(function (err) {
-                                console.log(err);
-                                return err;
-                            })];
-                    case 1:
-                        user = _a.sent();
-                        return [2 /*return*/, user];
-                }
-            });
-        });
-    };
-    UserService.prototype.list_users = function () {
+    BookService.prototype.list_book = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('users')
-                            .select("*")
+                    case 0: return [4 /*yield*/, connection_1.default('books')
+                            .select('*')
+                            .orderBy('serie', 'asc')
+                            .orderBy('serieOrder', 'asc')
                             .then(function (response) {
                             return {
                                 message: "success",
@@ -104,26 +70,30 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.prototype.update_user = function (data) {
+    BookService.prototype.create_book = function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, username, email, password, updated_at;
+            var id, title, author, serie, serieOrder;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        id = data.id, username = data.username, email = data.email, password = data.password;
-                        if (password)
-                            password = crypto_1.cript(password);
-                        updated_at = new Date();
-                        return [4 /*yield*/, connection_1.default('users')
-                                .update({ username: username, email: email, password: password, updated_at: updated_at })
-                                .where("id", id)
+                        id = uuid_1.v4();
+                        title = data.title, author = data.author, serie = data.serie, serieOrder = data.serieOrder;
+                        return [4 /*yield*/, connection_1.default('books')
+                                .insert({
+                                id: id, title: title, author: author, serie: serie, serieOrder: serieOrder
+                            })
                                 .then(function (response) {
                                 return {
                                     message: "success",
-                                    data: response
+                                    data: {
+                                        id: id,
+                                        title: title,
+                                        author: author
+                                    }
                                 };
                             })
                                 .catch(function (err) {
+                                console.log(err);
                                 return {
                                     message: "failed",
                                     data: err
@@ -134,81 +104,48 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.prototype.login_email = function (email, password) {
+    BookService.prototype.get_book = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, token;
+            var book;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('users')
-                            .select("*")
-                            .where("email", email)
+                    case 0: return [4 /*yield*/, connection_1.default('books')
+                            .select('*')
+                            .where("id", id)
                             .first()
                             .then(function (response) {
                             return response;
-                        })
-                            .catch(function (err) {
-                            return false;
                         })];
                     case 1:
-                        user = _a.sent();
-                        if (!user || user.email !== email || user.password !== password) {
+                        book = _a.sent();
+                        if (book) {
                             return [2 /*return*/, {
-                                    message: "failed",
-                                    error: "Invalid email or password"
+                                    message: "success",
+                                    data: book
                                 }];
                         }
-                        token = jwt_1.default.signin(user.id);
-                        return [2 /*return*/, {
-                                message: "success",
-                                token: token
-                            }];
+                        else {
+                            return [2 /*return*/, {
+                                    message: "failed",
+                                    data: "Book not found"
+                                }];
+                        }
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    UserService.prototype.login_username = function (username, password) {
-        return __awaiter(this, void 0, void 0, function () {
-            var user, token;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('users')
-                            .select("*")
-                            .where("username", username)
-                            .first()
-                            .then(function (response) {
-                            return response;
-                        })
-                            .catch(function (err) {
-                            return false;
-                        })];
-                    case 1:
-                        user = _a.sent();
-                        if (!user || user.username !== username || user.password !== password) {
-                            return [2 /*return*/, {
-                                    message: "failed",
-                                    error: "Invalid username or password"
-                                }];
-                        }
-                        token = jwt_1.default.signin(user.id);
-                        return [2 /*return*/, {
-                                message: "success",
-                                token: token
-                            }];
-                }
-            });
-        });
-    };
-    UserService.prototype.delete_user = function (id) {
+    BookService.prototype.delete = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('users')
+                    case 0: return [4 /*yield*/, connection_1.default('books')
                             .where("id", id)
                             .delete()
                             .then(function (response) {
                             return {
                                 message: "success",
-                                data: response
+                                data: "Book deleted successfully"
                             };
                         })
                             .catch(function (err) {
@@ -222,6 +159,6 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    return UserService;
+    return BookService;
 }());
-exports.UserService = UserService;
+exports.BookService = BookService;

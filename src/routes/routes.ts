@@ -1,10 +1,12 @@
 import jwt from '../tools/jwt';
 import { Router } from 'express';
 import apiEndpoints from './api.routes'
+import bthEndpoints from './bth.routes'
 
 const routes = Router();
 
 routes.use(apiEndpoints);
+routes.use(bthEndpoints);
 
 routes.get('/', function (req, res){
     return res.status(200).json({
