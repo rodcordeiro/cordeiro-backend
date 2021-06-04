@@ -39,7 +39,6 @@ class UserController{
         } else {
             user = await services.login_username(username,password)
         }
-        console.log({user})
         if (user.message == "failed") return res.status(400).json(user)
         return res.status(200).json(user)
     }

@@ -123,7 +123,6 @@ var UserController = /** @class */ (function () {
                         user = _b.sent();
                         _b.label = 4;
                     case 4:
-                        console.log({ user: user });
                         if (user.message == "failed")
                             return [2 /*return*/, res.status(400).json(user)];
                         return [2 /*return*/, res.status(200).json(user)];

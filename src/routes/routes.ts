@@ -2,11 +2,12 @@ import jwt from '../tools/jwt';
 import { Router } from 'express';
 import apiEndpoints from './api.routes'
 import bthEndpoints from './bth.routes'
-
+import esbEndpoints from './esb.routes'
 const routes = Router();
 
 routes.use(apiEndpoints);
 routes.use(bthEndpoints);
+routes.use(esbEndpoints);
 
 routes.get('/', function (req, res){
     return res.status(200).json({
