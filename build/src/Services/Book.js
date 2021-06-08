@@ -42,14 +42,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookService = void 0;
 var connection_1 = __importDefault(require("../database/connection"));
 var uuid_1 = require("uuid");
-var BookService = /** @class */ (function () {
+var BookService = (function () {
     function BookService() {
     }
     BookService.prototype.list_book = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('books')
+                    case 0: return [4, connection_1.default('books')
                             .select('*')
                             .orderBy('serie', 'asc')
                             .orderBy('serieOrder', 'asc')
@@ -65,7 +65,7 @@ var BookService = /** @class */ (function () {
                                 data: err
                             };
                         })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1: return [2, _a.sent()];
                 }
             });
         });
@@ -78,7 +78,7 @@ var BookService = /** @class */ (function () {
                     case 0:
                         id = uuid_1.v4();
                         title = data.title, author = data.author, serie = data.serie, serieOrder = data.serieOrder;
-                        return [4 /*yield*/, connection_1.default('books')
+                        return [4, connection_1.default('books')
                                 .insert({
                                 id: id, title: title, author: author, serie: serie, serieOrder: serieOrder
                             })
@@ -99,7 +99,7 @@ var BookService = /** @class */ (function () {
                                     data: err
                                 };
                             })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1: return [2, _a.sent()];
                 }
             });
         });
@@ -109,7 +109,7 @@ var BookService = /** @class */ (function () {
             var book;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('books')
+                    case 0: return [4, connection_1.default('books')
                             .select('*')
                             .where("id", id)
                             .first()
@@ -119,18 +119,18 @@ var BookService = /** @class */ (function () {
                     case 1:
                         book = _a.sent();
                         if (book) {
-                            return [2 /*return*/, {
+                            return [2, {
                                     message: "success",
                                     data: book
                                 }];
                         }
                         else {
-                            return [2 /*return*/, {
+                            return [2, {
                                     message: "failed",
                                     data: "Book not found"
                                 }];
                         }
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });
@@ -139,7 +139,7 @@ var BookService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('books')
+                    case 0: return [4, connection_1.default('books')
                             .where("id", id)
                             .delete()
                             .then(function (response) {
@@ -154,7 +154,7 @@ var BookService = /** @class */ (function () {
                                 data: err
                             };
                         })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1: return [2, _a.sent()];
                 }
             });
         });

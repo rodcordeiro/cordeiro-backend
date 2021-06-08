@@ -8,7 +8,6 @@ var express_1 = require("express");
 var Chapters_1 = require("../Controllers/ESB/Chapters");
 var esbEndpoints = express_1.Router();
 var esb_chapters = new Chapters_1.esbChapters();
-//Chapters
 esbEndpoints.get('/esb/chapters', esb_chapters.index);
 esbEndpoints.get('/esb/chapters/:id', esb_chapters.search);
 esbEndpoints.post('/esb/chapters/create', jwt_1.default.validate, esb_chapters.create);
