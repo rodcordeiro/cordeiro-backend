@@ -50,6 +50,7 @@ var esbChapters = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, connection_1.default('esb_chapters')
                             .select('*')
+                            .orderBy('created_at', 'asc')
                             .then(function (response) {
                             return res.json(response);
                         })

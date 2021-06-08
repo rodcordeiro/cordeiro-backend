@@ -5,6 +5,7 @@ class esbChapters {
     async index(req: Request, res: Response){
         await connection('esb_chapters')
             .select('*')
+            .orderBy('created_at','asc')
             .then(response=>{
                 return res.json(response)
             })
