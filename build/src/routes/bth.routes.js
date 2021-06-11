@@ -5,4 +5,6 @@ var OngController_1 = require("../Controllers/BTH/OngController");
 var bthEndpoints = express_1.Router();
 var bthOngs = new OngController_1.bthOngController();
 bthEndpoints.get('/bth/ongs', bthOngs.index);
+bthEndpoints.post('/bth/ongs', bthOngs.create);
+bthEndpoints.post('/bth/session', bthOngs.authenticate);
 exports.default = bthEndpoints;

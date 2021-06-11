@@ -35,8 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.bthOngController = void 0;
+var connection_1 = __importDefault(require("../../database/connection"));
+var uuid_1 = require("uuid");
+var crypto_1 = require("../../tools/crypto");
+var User_1 = require("../../Services/User");
 var bthOngController = (function () {
     function bthOngController() {
     }
@@ -44,6 +51,59 @@ var bthOngController = (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2, res.status(200).send()];
+            });
+        });
+    };
+    bthOngController.prototype.create = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var User, _a, name, email, password, number, city, uf, user_id, id, whatsapp, ong;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        User = new User_1.UserService();
+                        _a = req.body, name = _a.name, email = _a.email, password = _a.password, number = _a.number, city = _a.city, uf = _a.uf;
+                        password = crypto_1.cript(password);
+                        return [4, User.create_user({
+                                username: name,
+                                email: email,
+                                password: password
+                            })
+                                .then(function (response) {
+                                return response.id;
+                            })];
+                    case 1:
+                        user_id = _b.sent();
+                        id = uuid_1.v4();
+                        whatsapp = "+55" + number;
+                        return [4, connection_1.default('bth_ongs').insert({
+                                id: id,
+                                name: name,
+                                email: email,
+                                whatsapp: whatsapp,
+                                city: city,
+                                uf: uf,
+                                user_id: user_id
+                            })
+                                .then(function (response) {
+                                return res.status(200).json({ id: id, ong: response });
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
+                    case 2:
+                        ong = _b.sent();
+                        return [2];
+                }
+            });
+        });
+    };
+    bthOngController.prototype.authenticate = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var User, _a, email, password;
+            return __generator(this, function (_b) {
+                User = new User_1.UserService();
+                _a = req.body, email = _a.email, password = _a.password;
+                return [2];
             });
         });
     };
