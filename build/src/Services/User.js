@@ -44,7 +44,7 @@ var connection_1 = __importDefault(require("../database/connection"));
 var uuid_1 = require("uuid");
 var crypto_1 = require("../tools/crypto");
 var jwt_1 = __importDefault(require("../tools/jwt"));
-var UserService = /** @class */ (function () {
+var UserService = (function () {
     function UserService() {
     }
     UserService.prototype.create_user = function (data) {
@@ -56,7 +56,7 @@ var UserService = /** @class */ (function () {
                         username = data.username, email = data.email, password = data.password;
                         password = crypto_1.cript(password);
                         id = uuid_1.v4();
-                        return [4 /*yield*/, connection_1.default('users')
+                        return [4, connection_1.default('users')
                                 .insert({
                                 id: id,
                                 username: username,
@@ -76,7 +76,7 @@ var UserService = /** @class */ (function () {
                             })];
                     case 1:
                         user = _a.sent();
-                        return [2 /*return*/, user];
+                        return [2, user];
                 }
             });
         });
@@ -85,7 +85,7 @@ var UserService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('users')
+                    case 0: return [4, connection_1.default('users')
                             .select("*")
                             .then(function (response) {
                             return {
@@ -99,7 +99,7 @@ var UserService = /** @class */ (function () {
                                 data: err
                             };
                         })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1: return [2, _a.sent()];
                 }
             });
         });
@@ -113,8 +113,8 @@ var UserService = /** @class */ (function () {
                         id = data.id, username = data.username, email = data.email, password = data.password;
                         if (password)
                             password = crypto_1.cript(password);
-                        updated_at = new Date();
-                        return [4 /*yield*/, connection_1.default('users')
+                        updated_at = new Date().toISOString();
+                        return [4, connection_1.default('users')
                                 .update({ username: username, email: email, password: password, updated_at: updated_at })
                                 .where("id", id)
                                 .then(function (response) {
@@ -129,7 +129,7 @@ var UserService = /** @class */ (function () {
                                     data: err
                                 };
                             })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1: return [2, _a.sent()];
                 }
             });
         });
@@ -139,7 +139,7 @@ var UserService = /** @class */ (function () {
             var user, token;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('users')
+                    case 0: return [4, connection_1.default('users')
                             .select("*")
                             .where("email", email)
                             .first()
@@ -152,13 +152,13 @@ var UserService = /** @class */ (function () {
                     case 1:
                         user = _a.sent();
                         if (!user || user.email !== email || user.password !== password) {
-                            return [2 /*return*/, {
+                            return [2, {
                                     message: "failed",
                                     error: "Invalid email or password"
                                 }];
                         }
                         token = jwt_1.default.signin(user.id);
-                        return [2 /*return*/, {
+                        return [2, {
                                 message: "success",
                                 token: token
                             }];
@@ -171,7 +171,7 @@ var UserService = /** @class */ (function () {
             var user, token;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('users')
+                    case 0: return [4, connection_1.default('users')
                             .select("*")
                             .where("username", username)
                             .first()
@@ -184,13 +184,13 @@ var UserService = /** @class */ (function () {
                     case 1:
                         user = _a.sent();
                         if (!user || user.username !== username || user.password !== password) {
-                            return [2 /*return*/, {
+                            return [2, {
                                     message: "failed",
                                     error: "Invalid username or password"
                                 }];
                         }
                         token = jwt_1.default.signin(user.id);
-                        return [2 /*return*/, {
+                        return [2, {
                                 message: "success",
                                 token: token
                             }];
@@ -202,7 +202,7 @@ var UserService = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('users')
+                    case 0: return [4, connection_1.default('users')
                             .where("id", id)
                             .delete()
                             .then(function (response) {
@@ -217,7 +217,7 @@ var UserService = /** @class */ (function () {
                                 data: err
                             };
                         })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1: return [2, _a.sent()];
                 }
             });
         });

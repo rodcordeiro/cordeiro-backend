@@ -18,7 +18,7 @@ var app = express_1.default();
 app.use(express_1.default.json());
 app.use(cors_1.default(corsOptions));
 app.use(routes_1.default);
-var http = http_1.createServer(app); // Criando o protocolo HTTP
+var http = http_1.createServer(app);
 exports.http = http;
 var io = new socket_io_1.Server(http, {
     cors: {
@@ -26,5 +26,5 @@ var io = new socket_io_1.Server(http, {
         "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
         "optionsSuccessStatus": 204
     }
-}); // Criando o protocolo WS (websocket)
+});
 exports.io = io;

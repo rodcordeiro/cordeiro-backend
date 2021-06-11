@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookController = void 0;
 var Book_1 = require("../Services/Book");
-var BookController = /** @class */ (function () {
+var BookController = (function () {
     function BookController() {
     }
     BookController.prototype.index = function (req, res) {
@@ -48,11 +48,11 @@ var BookController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         services = new Book_1.BookService();
-                        return [4 /*yield*/, services.list_book()];
+                        return [4, services.list_book()];
                     case 1:
                         books = _a.sent();
                         total = books.data.length;
-                        return [2 /*return*/, res.status(books.message == "success" ? 200 : 400).header('total-books', total.toString()).json(books)];
+                        return [2, res.status(books.message == "success" ? 200 : 400).header('total-books', total.toString()).json(books)];
                 }
             });
         });
@@ -64,10 +64,10 @@ var BookController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         services = new Book_1.BookService();
-                        return [4 /*yield*/, services.create_book(req.body)];
+                        return [4, services.create_book(req.body)];
                     case 1:
                         books = _a.sent();
-                        return [2 /*return*/, res.status(books.message == "success" ? 200 : 400).json(books)];
+                        return [2, res.status(books.message == "success" ? 200 : 400).json(books)];
                 }
             });
         });
@@ -77,7 +77,7 @@ var BookController = /** @class */ (function () {
             var services;
             return __generator(this, function (_a) {
                 services = new Book_1.BookService();
-                return [2 /*return*/];
+                return [2];
             });
         });
     };
@@ -88,10 +88,10 @@ var BookController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         services = new Book_1.BookService();
-                        return [4 /*yield*/, services.delete(req.params.id)];
+                        return [4, services.delete(req.params.id)];
                     case 1:
                         books = _a.sent();
-                        return [2 /*return*/, res.status(books.message == "success" ? 200 : 400).json(books)];
+                        return [2, res.status(books.message == "success" ? 200 : 400).json(books)];
                 }
             });
         });
@@ -103,10 +103,10 @@ var BookController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         services = new Book_1.BookService();
-                        return [4 /*yield*/, services.get_book(req.params.id)];
+                        return [4, services.get_book(req.params.id)];
                     case 1:
                         books = _a.sent();
-                        return [2 /*return*/, res.status(books.message == "success" ? 200 : 400).json(books)];
+                        return [2, res.status(books.message == "success" ? 200 : 400).json(books)];
                 }
             });
         });

@@ -41,15 +41,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.esbChapters = void 0;
 var connection_1 = __importDefault(require("../../database/connection"));
-var esbChapters = /** @class */ (function () {
+var esbChapters = (function () {
     function esbChapters() {
     }
     esbChapters.prototype.index = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connection_1.default('esb_chapters')
+                    case 0: return [4, connection_1.default('esb_chapters')
                             .select('*')
+                            .orderBy('created_at', 'asc')
                             .then(function (response) {
                             return res.json(response);
                         })
@@ -58,7 +59,7 @@ var esbChapters = /** @class */ (function () {
                         })];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });
@@ -71,29 +72,30 @@ var esbChapters = /** @class */ (function () {
                     case 0:
                         _a = req.body, title = _a.title, text = _a.text;
                         author = req.headers.id;
-                        return [4 /*yield*/, connection_1.default('esb_chapters')
+                        return [4, connection_1.default('esb_chapters')
                                 .insert({ title: title, text: text, author: author })
                                 .then(function (response) {
                                 return res.json({ action: "create", chapter: { title: title } });
                             })];
                     case 1:
                         _b.sent();
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });
     };
     esbChapters.prototype.update = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, _a, title, text, author;
+            var id, _a, title, text, author, updated_at;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         id = req.params.id;
                         _a = req.body, title = _a.title, text = _a.text, author = _a.author;
-                        return [4 /*yield*/, connection_1.default('esb_chapters')
+                        updated_at = new Date().toISOString();
+                        return [4, connection_1.default('esb_chapters')
                                 .where({ id: id })
-                                .update({ title: title, text: text, author: author })
+                                .update({ title: title, text: text, author: author, updated_at: updated_at })
                                 .then(function (response) {
                                 return res.status(200).json({ action: "update", chapter: { id: id, title: title } });
                             })
@@ -102,7 +104,7 @@ var esbChapters = /** @class */ (function () {
                             })];
                     case 1:
                         _b.sent();
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });
@@ -114,7 +116,7 @@ var esbChapters = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         id = req.params.id;
-                        return [4 /*yield*/, connection_1.default('esb_chapters')
+                        return [4, connection_1.default('esb_chapters')
                                 .where({ id: id })
                                 .delete()
                                 .then(function (response) {
@@ -125,7 +127,7 @@ var esbChapters = /** @class */ (function () {
                             })];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });
@@ -137,7 +139,7 @@ var esbChapters = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         id = req.params.id;
-                        return [4 /*yield*/, connection_1.default('esb_chapters')
+                        return [4, connection_1.default('esb_chapters')
                                 .select('*')
                                 .where({ id: id })
                                 .first()
@@ -149,7 +151,7 @@ var esbChapters = /** @class */ (function () {
                             })];
                     case 1:
                         _a.sent();
-                        return [2 /*return*/];
+                        return [2];
                 }
             });
         });

@@ -5,6 +5,7 @@ class esbChapters {
     async index(req: Request, res: Response){
         await connection('esb_chapters')
             .select('*')
+            .orderBy('created_at','asc')
             .then(response=>{
                 return res.json(response)
             })
@@ -24,9 +25,10 @@ class esbChapters {
     async update(req: Request, res: Response){
         const { id } = req.params;
         const { title, text, author} = req.body;
+        const updated_at = new Date().toISOString();
         await connection('esb_chapters')
             .where({id})
-            .update({ title, text, author})
+            .update({ title, text, author, updated_at})
             .then(response=>{
                 return res.status(200).json({action:"update",chapter:{id,title}})
             })

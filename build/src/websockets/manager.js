@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_1 = require("../app");
-console.log("imported");
 app_1.io.on("connect", function (socket) {
     console.log({
         status: "connected",
@@ -46,7 +45,7 @@ app_1.io.on("connect", function (socket) {
     socket.on("client_first_access", function (params) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             console.log(params);
-            return [2 /*return*/];
+            return [2];
         });
     }); });
 });

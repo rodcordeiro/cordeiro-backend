@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 var crypto_1 = require("../tools/crypto");
 var User_1 = require("../Services/User");
-var UserController = /** @class */ (function () {
+var UserController = (function () {
     function UserController() {
     }
     UserController.prototype.index = function (req, res) {
@@ -49,10 +49,10 @@ var UserController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         services = new User_1.UserService();
-                        return [4 /*yield*/, services.list_users()];
+                        return [4, services.list_users()];
                     case 1:
                         users = _a.sent();
-                        return [2 /*return*/, res.status(users.message == "success" ? 200 : 400).json(users)];
+                        return [2, res.status(users.message == "success" ? 200 : 400).json(users)];
                 }
             });
         });
@@ -64,10 +64,10 @@ var UserController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         services = new User_1.UserService();
-                        return [4 /*yield*/, services.create_user(req.body)];
+                        return [4, services.create_user(req.body)];
                     case 1:
                         user = _a.sent();
-                        return [2 /*return*/, res.status(200).json(user)];
+                        return [2, res.status(200).json(user)];
                 }
             });
         });
@@ -81,10 +81,10 @@ var UserController = /** @class */ (function () {
                         services = new User_1.UserService();
                         id = req.params.id ? req.params.id : req.headers.id;
                         _a = req.body, username = _a.username, email = _a.email, password = _a.password;
-                        return [4 /*yield*/, services.update_user({ id: id, username: username, email: email, password: password })];
+                        return [4, services.update_user({ id: id, username: username, email: email, password: password })];
                     case 1:
                         user = _b.sent();
-                        return [2 /*return*/, res.status(200).json(user)];
+                        return [2, res.status(200).json(user)];
                 }
             });
         });
@@ -96,10 +96,10 @@ var UserController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         services = new User_1.UserService();
-                        return [4 /*yield*/, services.delete_user(req.params.id)];
+                        return [4, services.delete_user(req.params.id)];
                     case 1:
                         response = _a.sent();
-                        return [2 /*return*/, res.status(response.message == "success" ? 200 : 400).json(response)];
+                        return [2, res.status(response.message == "success" ? 200 : 400).json(response)];
                 }
             });
         });
@@ -113,19 +113,19 @@ var UserController = /** @class */ (function () {
                         services = new User_1.UserService();
                         _a = req.body, username = _a.username, email = _a.email, password = _a.password;
                         password = crypto_1.cript(password);
-                        if (!!username) return [3 /*break*/, 2];
-                        return [4 /*yield*/, services.login_email(email, password)];
+                        if (!!username) return [3, 2];
+                        return [4, services.login_email(email, password)];
                     case 1:
                         user = _b.sent();
-                        return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, services.login_username(username, password)];
+                        return [3, 4];
+                    case 2: return [4, services.login_username(username, password)];
                     case 3:
                         user = _b.sent();
                         _b.label = 4;
                     case 4:
                         if (user.message == "failed")
-                            return [2 /*return*/, res.status(400).json(user)];
-                        return [2 /*return*/, res.status(200).json(user)];
+                            return [2, res.status(400).json(user)];
+                        return [2, res.status(200).json(user)];
                 }
             });
         });

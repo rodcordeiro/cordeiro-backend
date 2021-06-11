@@ -61,7 +61,7 @@ class UserService {
     async update_user(data: iUser){
         let { id,username, email, password } : iUser = data
         if (password) password = cript(password);
-        const updated_at = new Date()
+        const updated_at = new Date().toISOString();
         return await connection('users')
           .update({ username, email, password,updated_at})
           .where("id",id)

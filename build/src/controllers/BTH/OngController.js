@@ -37,13 +37,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.bthOngController = void 0;
-var bthOngController = /** @class */ (function () {
+var bthOngController = (function () {
     function bthOngController() {
     }
     bthOngController.prototype.index = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, res.status(200).send()];
+                return [2, res.status(200).send()];
             });
         });
     };
