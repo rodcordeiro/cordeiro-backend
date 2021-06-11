@@ -10,6 +10,13 @@ routes.use(bthEndpoints);
 routes.use(esbEndpoints);
 
 routes.get('/', function (req, res){
+  return res.status(200).json({  
+      "version":"2.0",
+      "release note":"Included Escriba endpoints",
+    });
+})
+
+routes.get('/status', function (req, res){
     return res.status(200).json({  
         "schemaVersion": 1,
         "label": "RodCordeiro API",
