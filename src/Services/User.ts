@@ -21,25 +21,34 @@ class UserService {
         let { username, email, password } : iUser = data
         password = cript(password);
         const id = uuid()
-        const user = await connection('users')
-          .insert({
-              id,
-            username,
-            email,
-            password
-          })
-          .then(response=>{
-            return {
-                id,
-                username,
-                email
+        return new Promise(async (resolve,reject)=>{
+            try {
+                const user = await connection('users')
+                    .select("*")
+                    .where("email",email)
+                    .where("username",username)
+                    .first()
+                    .then(response=>{
+                        reject("usuário já cadastrado")
+                    })
+                await connection('users')
+                    .insert({
+                        id,
+                        username,
+                        email,
+                        password
+                    })
+                    .then(response=>{
+                        resolve({
+                            id,
+                            username,
+                            email
+                        })
+                    })
+            } catch (err) {
+                reject(err)
             }
-          })
-          .catch(err=>{
-              console.log(err)
-            return err
-          })
-        return user
+        })
     }
 
     async list_users()  {
