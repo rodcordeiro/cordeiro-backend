@@ -78,7 +78,6 @@ var bthOngController = (function () {
                                 password: password
                             })
                                 .then(function (response) {
-                                console.log({ response: response });
                                 return response.id;
                             })
                                 .catch(function (err) {

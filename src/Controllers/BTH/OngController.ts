@@ -29,7 +29,6 @@ class bthOngController{
             password  
         })
         .then((response : iUser)=>{
-            console.log({response})
             return response.id
         })
         .catch(err=>{

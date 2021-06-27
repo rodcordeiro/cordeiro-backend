@@ -107,6 +107,7 @@ class UserService {
                         return false
                     })
                 if(!user || user.email !== email || user.password !== password) {
+                    console.log({user})
                     reject("Invalid email or password")
                 }
                 let token = jwt.signin(user.id)
