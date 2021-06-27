@@ -44,6 +44,89 @@ var connection_1 = __importDefault(require("../../database/connection"));
 var IncidentServices = (function () {
     function IncidentServices() {
     }
+    IncidentServices.prototype.list_incidents = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('bth_incidents')
+                                        .select('*')
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    IncidentServices.prototype.list_incidents_with_pagination = function (page) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var incidents;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('bth_incidents')
+                                        .join('bth_ongs', 'bth_ongs.id', '=', 'bth_incidents.ong_id')
+                                        .limit(5)
+                                        .offset((page - 1) * 5)
+                                        .select([
+                                        'bth_incidents.*',
+                                        'bth_ongs.name',
+                                        'bth_ongs.email',
+                                        'bth_ongs.whatsapp',
+                                        'bth_ongs.city',
+                                        'bth_ongs.uf'
+                                    ])
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    incidents = _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    IncidentServices.prototype.count_incidents = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('bth_incidents')
+                                        .count()
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
     IncidentServices.prototype.list_profile_incidents = function (ong_id) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;

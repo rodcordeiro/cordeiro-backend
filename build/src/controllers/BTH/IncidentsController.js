@@ -41,6 +41,34 @@ var Incidents_1 = require("../../Services/BTH/Incidents");
 var bthIncidentController = (function () {
     function bthIncidentController() {
     }
+    bthIncidentController.prototype.list_incidents = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var Incidents, _a, page, count, incidents;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        Incidents = new Incidents_1.IncidentServices();
+                        _a = req.query.page, page = _a === void 0 ? 1 : _a;
+                        return [4, Incidents.count_incidents()
+                                .then(function (response) {
+                                return response;
+                            })];
+                    case 1:
+                        count = (_b.sent())[0];
+                        return [4, Incidents.list_incidents_with_pagination(page)
+                                .then(function (response) {
+                                return res.status(200).header('X-TOTAL-COUNT', count['count(*)']).json(response);
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
+                    case 2:
+                        incidents = _b.sent();
+                        return [2];
+                }
+            });
+        });
+    };
     bthIncidentController.prototype.profile_incidents = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var Incidents, ong_id, incidents;

@@ -14,6 +14,7 @@ bthEndpoints.get('/bth/ongs', bthOngs.index);
 bthEndpoints.post('/bth/ongs', bthOngs.create);
 bthEndpoints.post('/bth/session', bthOngs.authenticate);
 bthEndpoints.get('/bth/profile', jwt_1.default.validate, bthIncidents.profile_incidents);
+bthEndpoints.get('/bth/incidents', bthIncidents.list_incidents);
 bthEndpoints.post('/bth/incidents', jwt_1.default.validate, bthIncidents.create_incident);
 bthEndpoints.delete('/bth/incidents/:id', jwt_1.default.validate, bthIncidents.delete_incident);
 exports.default = bthEndpoints;
