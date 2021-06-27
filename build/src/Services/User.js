@@ -53,7 +53,6 @@ var UserService = (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 username = data.username, email = data.email, password = data.password;
-                password = crypto_1.cript(password);
                 id = uuid_1.v4();
                 return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
                         var user, err_1;
@@ -72,7 +71,6 @@ var UserService = (function () {
                                 case 1:
                                     user = _a.sent();
                                     if (user) {
-                                        console.log({ user: user });
                                         reject("usuário já cadastrado");
                                         throw new Error("Invalid user");
                                     }
@@ -181,13 +179,12 @@ var UserService = (function () {
                                 case 1:
                                     user = _a.sent();
                                     if (!user || user.email !== email || user.password !== password) {
-                                        console.log({ user: user });
                                         reject("Invalid email or password");
                                     }
                                     token = jwt_1.default.signin(user.id);
                                     resolve({
                                         id: user.id,
-                                        email: email, token: token
+                                        token: token
                                     });
                                     return [3, 3];
                                 case 2:
@@ -228,6 +225,7 @@ var UserService = (function () {
                                     }
                                     token = jwt_1.default.signin(user.id);
                                     resolve({
+                                        id: user.id,
                                         token: token
                                     });
                                     return [3, 3];

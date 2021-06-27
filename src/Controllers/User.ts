@@ -10,7 +10,10 @@ class UserController{
     }
     async create(req: Request, res: Response){
         const services = new UserService();
-        const user = await services.create_user(req.body)
+        let { username, email, password } = req.body;
+        password = cript(password);
+        
+        const user = await services.create_user({ username, email, password })
             .then(response=>{
                 return res.status(200).json(response)
             })

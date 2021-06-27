@@ -59,12 +59,14 @@ var UserController = (function () {
     };
     UserController.prototype.create = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var services, user;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var services, _a, username, email, password, user;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         services = new User_1.UserService();
-                        return [4, services.create_user(req.body)
+                        _a = req.body, username = _a.username, email = _a.email, password = _a.password;
+                        password = crypto_1.cript(password);
+                        return [4, services.create_user({ username: username, email: email, password: password })
                                 .then(function (response) {
                                 return res.status(200).json(response);
                             })
@@ -72,7 +74,7 @@ var UserController = (function () {
                                 return res.status(400).json(err);
                             })];
                     case 1:
-                        user = _a.sent();
+                        user = _b.sent();
                         return [2];
                 }
             });

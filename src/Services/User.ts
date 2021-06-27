@@ -18,8 +18,7 @@ interface iResponse{
 
 class UserService {
     async create_user(data: iUser){
-        let { username, email, password } : iUser = data
-        password = cript(password);
+        const { username, email, password } : iUser = data
         const id = uuid()
         return new Promise(async (resolve,reject)=>{
             try {
@@ -32,7 +31,6 @@ class UserService {
                         return response;
                     })
                 if (user) {
-                    console.log({user})
                     reject("usuário já cadastrado")
                     throw new Error("Invalid user")
                         
@@ -107,12 +105,11 @@ class UserService {
                         return false
                     })
                 if(!user || user.email !== email || user.password !== password) {
-                    console.log({user})
                     reject("Invalid email or password")
                 }
                 let token = jwt.signin(user.id)
                 resolve({
-                    id: user.id,email,token
+                    id: user.id,token
                 })
             } catch(e){
                 reject(e)
@@ -137,7 +134,7 @@ class UserService {
                 }
                 let token = jwt.signin(user.id)
                 resolve({
-                    token
+                    id: user.id,token
                 })
             } catch(e){
                 reject(e)
