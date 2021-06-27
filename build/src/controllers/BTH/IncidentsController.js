@@ -57,7 +57,7 @@ var bthIncidentController = (function () {
                         count = (_b.sent())[0];
                         return [4, Incidents.list_incidents_with_pagination(page)
                                 .then(function (response) {
-                                return res.status(200).header('X-TOTAL-COUNT', count['count(`id`)']).json(response);
+                                return res.status(200).header('X-TOTAL-COUNT', count['count']).json(response);
                             })
                                 .catch(function (err) {
                                 return res.status(400).json(err);

@@ -113,7 +113,6 @@ var IncidentServices = (function () {
                                 case 0: return [4, connection_1.default('bth_incidents')
                                         .count('id')
                                         .then(function (response) {
-                                        console.log(response);
                                         resolve(response);
                                     })
                                         .catch(function (err) {
