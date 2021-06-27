@@ -15,6 +15,7 @@ bthEndpoints.post('/bth/session',bthOngs.authenticate)
 
 //incidents
 bthEndpoints.get('/bth/profile',jwt.validate,bthIncidents.profile_incidents)
+bthEndpoints.get('/bth/incidents',bthIncidents.list_incidents)
 bthEndpoints.post('/bth/incidents',jwt.validate,bthIncidents.create_incident)
 bthEndpoints.delete('/bth/incidents/:id',jwt.validate,bthIncidents.delete_incident)
 

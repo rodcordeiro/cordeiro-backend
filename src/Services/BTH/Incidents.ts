@@ -10,6 +10,53 @@ interface iIncident{
 }
 
 class IncidentServices{
+    async list_incidents(){
+        return new Promise(async (resolve,reject)=>{
+            await connection('bth_incidents')
+                .select('*')
+                .then(response=>{
+                    resolve(response)
+                })
+                .catch(err=>{
+                    reject(err)
+                })
+        })
+    }
+    async list_incidents_with_pagination(page: any){
+        return new Promise(async (resolve,reject)=>{
+            const incidents = await connection('bth_incidents')
+                .join('bth_ongs', 'bth_ongs.id','=','bth_incidents.ong_id')
+                .limit(5)
+                .offset((page-1)*5)
+                .select([
+                    'bth_incidents.*',
+                    'bth_ongs.name',
+                    'bth_ongs.email',
+                    'bth_ongs.whatsapp',
+                    'bth_ongs.city',
+                    'bth_ongs.uf'
+                ])
+                .then(response=>{
+                    resolve(response)
+                })
+                .catch(err=>{
+                    reject(err)
+                })
+        })
+    }
+    async count_incidents(){
+        return new Promise(async (resolve,reject)=>{
+            await connection('bth_incidents')
+                .count()
+                .then(response=>{
+                    resolve(response)
+                })
+                .catch(err=>{
+                    reject(err)
+                })
+        })
+    }
+
     async list_profile_incidents(ong_id: string){
         return new Promise(async (resolve,reject)=>{
             await connection('bth_incidents')
