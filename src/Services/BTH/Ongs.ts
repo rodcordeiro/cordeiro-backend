@@ -1,5 +1,6 @@
 import connection from "../../database/connection";
 import { v4 as uuid } from "uuid";
+import { response } from "express";
 
 interface iOng{
     id?: string;
@@ -56,6 +57,24 @@ class OngServices{
             }
         })
         
+    }
+    async get_user_ongs(user_id: string){
+        return new Promise(async (resolve,reject)=>{
+            try{
+                const ong = await connection('bth_ongs')
+                .select("*")
+                .where("user_id",user_id)
+                .first()
+                .then(response=>{
+                    resolve(response)
+                })
+                .catch(e=>{
+                    reject(e)
+                })
+            } catch (e){
+                reject(e)
+            }
+        })
     }
 }
 

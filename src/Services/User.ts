@@ -26,11 +26,17 @@ class UserService {
                 const user = await connection('users')
                     .select("*")
                     .where("email",email)
-                    .where("username",username)
+                    .orWhere("username",username)
                     .first()
                     .then(response=>{
-                        reject("usuário já cadastrado")
+                        return response;
                     })
+                if (user) {
+                    console.log({user})
+                    reject("usuário já cadastrado")
+                    throw new Error("Invalid user")
+                        
+                };
                 await connection('users')
                     .insert({
                         id,
@@ -88,68 +94,96 @@ class UserService {
             })
     }
     async login_email(email: string, password: string){
-        const user = await connection('users')
-            .select("*")
-            .where("email",email)
-            .first()
-            .then(response=>{
-                return response
-            })
-            .catch(err=>{
-                return false
-            })
-        if(!user || user.email !== email || user.password !== password) {
-            return {
-                message: "failed",
-                error:"Invalid email or password"
-            }
-        }
-        let token = jwt.signin(user.id)
-        return {
-            message: "success",
-            token
-        }
-    }
-    async login_username(username: string, password: string){
-        const user = await connection('users')
-            .select("*")
-            .where("username",username)
-            .first()
-            .then(response=>{
-                return response
-            })
-            .catch(err=>{
-                return false
-            })
-        if(!user || user.username !== username || user.password !== password) {
-            return {
-                message: "failed",
-                error:"Invalid username or password"
-            }
-        }
-        let token = jwt.signin(user.id)
-        return {
-            message: "success",
-            token
-        }
-    }
-    async delete_user(id: string){
-        return await connection('users')
-        .where("id",id)
-        .delete()
-        .then(response=>{
-            return {
-                message: "success",
-                data: response
+        return new Promise(async (resolve, reject)=>{
+            try{
+                const user = await connection('users')
+                    .select("*")
+                    .where("email",email)
+                    .first()
+                    .then(response=>{
+                        return response
+                    })
+                    .catch(err=>{
+                        return false
+                    })
+                if(!user || user.email !== email || user.password !== password) {
+                    reject("Invalid email or password")
+                }
+                let token = jwt.signin(user.id)
+                resolve({
+                    id: user.id,email,token
+                })
+            } catch(e){
+                reject(e)
             }
         })
-        .catch(err=>{
-            return {
-                message: "failed",
-                data: err
-            }
-        })  
     }
+    async login_username(username: string, password: string){
+        return new Promise(async (resolve, reject)=>{
+            try{
+                const user = await connection('users')
+                    .select("*")
+                    .where("username",username)
+                    .first()
+                    .then(response=>{
+                        return response
+                    })
+                    .catch(err=>{
+                        return false
+                    })
+                if(!user || user.username !== username || user.password !== password) {
+                    reject("Invalid username or password")
+                }
+                let token = jwt.signin(user.id)
+                resolve({
+                    token
+                })
+            } catch(e){
+                reject(e)
+            }
+        })
+    }
+    async delete_user(id: string){
+        return new Promise(async (resolve,reject)=>{
+            try{
+                const user = await connection('users')
+                .where("id",id)
+                .delete()
+                .then(response=>{
+                    resolve(response)
+                })
+                .catch(error=>{
+                    reject({
+                        error
+                    })
+                })
+            } catch (e){
+                reject(e)
+            }
+        })
+    }
+
+    async find_user_by_email(email : string){
+        return new Promise(async (resolve,reject)=>{
+            try {
+                const user = await connection('users')
+                    .select("*")
+                    .where("email",email)
+                    .first()
+                    .then(response=>{
+                        resolve({
+                            id: response.id,email
+                        })
+                    })
+                    .catch(error=>{
+                        reject(error)
+                    })
+            } catch (err) {
+                reject(err)
+            }
+        })
+    }
+
 }
 
 export {

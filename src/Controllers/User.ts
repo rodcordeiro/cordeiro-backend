@@ -11,7 +11,13 @@ class UserController{
     async create(req: Request, res: Response){
         const services = new UserService();
         const user = await services.create_user(req.body)
-        return res.status(200).json(user)
+            .then(response=>{
+                return res.status(200).json(response)
+            })
+            .catch(err=>{
+                return res.status(400).json(err)
+            })
+        
     }
     async update(req: Request, res: Response){
         const services = new UserService();
@@ -24,7 +30,14 @@ class UserController{
     async delete(req: Request, res: Response){
         const services = new UserService();
         const response = await services.delete_user(req.params.id)
-        return res.status(response.message == "success" ? 200 : 400).json(response)
+            .then(response=>{
+                if(response !== 0) return res.status(201).json({response});
+                return res.status(400).json({error:"Usuário não encontrado"})
+            })
+            .catch(error=>{
+                return res.status(400).json({error})
+            })
+        
         
     }
 
@@ -33,14 +46,24 @@ class UserController{
         let { username, email, password } : iUser = req.body
 
         password = cript(password);
-        let user;
+        let user: any;
         if (!username){
             user = await services.login_email(email,password)
+             .then (response=>{
+                return res.status(200).json({response})
+             })
+             .catch(error=>{
+                return res.status(400).json({error})
+             })
         } else {
             user = await services.login_username(username,password)
+            .then (response=>{
+                return res.status(200).json({response})
+             })
+             .catch(error=>{
+                return res.status(400).json({error})
+             })
         }
-        if (user.message == "failed") return res.status(400).json(user)
-        return res.status(200).json(user)
     }
 }
 
