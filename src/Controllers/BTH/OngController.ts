@@ -49,7 +49,9 @@ class bthOngController{
         const Ong = new OngServices();
 
         let { email, password } : iUser = req.body;
+        console.log({ email, password })
         password = cript(password);
+        console.log({ email, password })
         const user : any= await User.login_email( email, password )
          .then((response)=>{
              return response

@@ -109,7 +109,9 @@ var bthOngController = (function () {
                         User = new User_1.UserService();
                         Ong = new Ongs_1.OngServices();
                         _a = req.body, email = _a.email, password = _a.password;
+                        console.log({ email: email, password: password });
                         password = crypto_1.cript(password);
+                        console.log({ email: email, password: password });
                         return [4, User.login_email(email, password)
                                 .then(function (response) {
                                 return response;
