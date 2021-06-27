@@ -179,6 +179,8 @@ var UserService = (function () {
                                 case 1:
                                     user = _a.sent();
                                     if (!user || user.email !== email || user.password !== password) {
+                                        console.log({ email: email, password: password });
+                                        console.log(user.email, user.password);
                                         reject("Invalid email or password");
                                     }
                                     token = jwt_1.default.signin(user.id);

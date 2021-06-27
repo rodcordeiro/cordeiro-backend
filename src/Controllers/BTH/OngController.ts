@@ -54,9 +54,9 @@ class bthOngController{
         const user : any= await User.login_email( email, password )
          .then((response)=>{
              return response
-         })
+            })
          .catch(err=>{
-             res.status(400).json(err)
+            res.status(400).json(err)
              throw new Error("Invalid email or password")
          })
         const ong = await Ong.get_user_ongs(user.id)
