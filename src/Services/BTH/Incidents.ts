@@ -47,7 +47,7 @@ class IncidentServices{
     async count_incidents(){
         return new Promise(async (resolve,reject)=>{
             await connection('bth_incidents')
-                .count()
+                .count('id')
                 .then(response=>{
                     resolve(response)
                 })

@@ -111,7 +111,7 @@ var IncidentServices = (function () {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0: return [4, connection_1.default('bth_incidents')
-                                        .count()
+                                        .count('id')
                                         .then(function (response) {
                                         resolve(response);
                                     })

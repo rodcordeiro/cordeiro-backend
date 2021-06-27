@@ -16,7 +16,7 @@ class bthIncidentController{
             });
         const incidents = await Incidents.list_incidents_with_pagination(page)
             .then(response=>{
-                return res.status(200).header('X-TOTAL-COUNT', count['count(*)']).json(response)
+                return res.status(200).header('X-TOTAL-COUNT', count['count(`id`)']).json(response)
             })
             .catch(err=>{
                 return res.status(400).json(err)
