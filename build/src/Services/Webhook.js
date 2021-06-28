@@ -39,23 +39,47 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookService = void 0;
+exports.WebhookServices = void 0;
 var connection_1 = __importDefault(require("../database/connection"));
-var uuid_1 = require("uuid");
-var BookService = (function () {
-    function BookService() {
+var WebhookServices = (function () {
+    function WebhookServices() {
     }
-    BookService.prototype.list_book = function () {
+    WebhookServices.prototype.create_webhook = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var name, origin, webhook;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    name = data.name, origin = data.origin, webhook = data.webhook;
+                                    return [4, connection_1.default('webhooks')
+                                            .insert({ name: name, origin: origin, webhook: webhook })
+                                            .then(function (response) {
+                                            resolve({ name: name, origin: origin });
+                                        })
+                                            .catch(function (err) {
+                                            reject(err);
+                                        })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    WebhookServices.prototype.list_webhooks = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
-                                case 0: return [4, connection_1.default('books')
+                                case 0: return [4, connection_1.default('webhooks')
                                         .select('*')
-                                        .orderBy('serie', 'asc')
-                                        .orderBy('serieOrder', 'asc')
                                         .then(function (response) {
                                         resolve(response);
                                     })
@@ -71,112 +95,22 @@ var BookService = (function () {
             });
         });
     };
-    BookService.prototype.create_book = function (data) {
+    WebhookServices.prototype.list_by_origin = function (origin) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        var id, title, author, serie, serieOrder;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
-                                case 0:
-                                    id = uuid_1.v4();
-                                    title = data.title, author = data.author, serie = data.serie, serieOrder = data.serieOrder;
-                                    return [4, connection_1.default('books')
-                                            .insert({
-                                            id: id, title: title, author: author, serie: serie, serieOrder: serieOrder
-                                        })
-                                            .then(function (response) {
-                                            resolve({
-                                                id: id,
-                                                title: title,
-                                                author: author
-                                            });
-                                        })
-                                            .catch(function (err) {
-                                            reject(err);
-                                        })];
-                                case 1:
-                                    _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    BookService.prototype.get_book = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        var book;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4, connection_1.default('books')
+                                case 0: return [4, connection_1.default('webhooks')
                                         .select('*')
-                                        .where("id", id)
-                                        .first()
+                                        .where('origin', origin)
                                         .then(function (response) {
-                                        if (response)
-                                            resolve(response);
-                                        reject("Livro não encontrado");
+                                        resolve(response);
                                     })
-                                        .catch(function (err) { return reject(err); })];
-                                case 1:
-                                    book = _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    BookService.prototype.delete = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        var book;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4, connection_1.default('books')
-                                        .where("id", id)
-                                        .first()
-                                        .delete()
-                                        .then(function (response) {
-                                        if (response !== 0)
-                                            resolve("");
-                                        reject("Livro não encontrado");
-                                    })
-                                        .catch(function (err) { return reject(err); })];
-                                case 1:
-                                    book = _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    BookService.prototype.update = function (data) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        var id, title, author, serie, serieOrder, updated_at;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    id = data.id, title = data.title, author = data.author, serie = data.serie, serieOrder = data.serieOrder;
-                                    updated_at = new Date().toISOString();
-                                    return [4, connection_1.default('books')
-                                            .update({ title: title, author: author, serie: serie, serieOrder: serieOrder, updated_at: updated_at })
-                                            .where("id", id)
-                                            .then(function (response) {
-                                            resolve(response);
-                                        })
-                                            .catch(function (err) { return reject(err); })];
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
                                 case 1:
                                     _a.sent();
                                     return [2];
@@ -186,6 +120,32 @@ var BookService = (function () {
             });
         });
     };
-    return BookService;
+    WebhookServices.prototype.get_webhook_by_name = function (name) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('webhooks')
+                                        .select('*')
+                                        .where('name', name)
+                                        .first()
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    return WebhookServices;
 }());
-exports.BookService = BookService;
+exports.WebhookServices = WebhookServices;

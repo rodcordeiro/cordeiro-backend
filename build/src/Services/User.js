@@ -105,24 +105,25 @@ var UserService = (function () {
     };
     UserService.prototype.list_users = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, connection_1.default('users')
-                            .select("*")
-                            .then(function (response) {
-                            return {
-                                message: "success",
-                                data: response
-                            };
-                        })
-                            .catch(function (err) {
-                            return {
-                                message: "failed",
-                                data: err
-                            };
-                        })];
-                    case 1: return [2, _a.sent()];
-                }
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('users')
+                                        .select("*")
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
             });
         });
     };

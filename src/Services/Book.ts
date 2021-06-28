@@ -7,8 +7,8 @@ interface iBook{
     author?: string;
     serie?: string;
     serieOrder?: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at?: Date;
+    updated_at?: Date;
 }
 
 class BookService{
@@ -27,67 +27,65 @@ class BookService{
         })
     }
     async create_book(data : iBook){
-        const id = uuid();
-        const {title,author,serie,serieOrder} = data 
-        return await connection('books')
-          .insert({
-              id,title,author,serie,serieOrder
-          })
-          .then(response=>{
-            return {
-                message: "success",
-                data: {
+        return new Promise( async(resolve,reject)=>{
+            const id = uuid();
+            const {title,author,serie,serieOrder} = data 
+            await connection('books')
+            .insert({
+                id,title,author,serie,serieOrder
+            })
+            .then(response=>{
+                resolve({
                     id,
                     title,
                     author
-                }
-            }
-          })
-          .catch(err=>{
-              console.log(err)
-            return {
-                message: "failed",
-                data: err
-            }
-          })
-            
-    }
-    async get_book(id : string){
-        const book = await connection('books')
-        .select('*')
-        .where("id",id)
-        .first()
-        .then(response=>{
-            return response
-        })
-        if (book){
-            return {
-                message: "success",
-                data: book
-            }
-        }else {
-            return {
-                message: "failed",
-                data: "Book not found"
-            }
-        }
-    }
-    async delete(id: string){
-        return await connection('books')
-            .where("id",id)
-            .delete()
-            .then(response=>{
-                return {
-                    message: "success",
-                    data: "Book deleted successfully"
-                }
+                })
+                
             })
             .catch(err=>{
-                return {
-                    message: "failed",
-                    data: err
-                }
+                reject(err)
             })
+            
+        })    
+    }
+    async get_book(id : string){
+        return new Promise(async (resolve,reject)=>{
+            const book = await connection('books')
+                .select('*')
+                .where("id",id)
+                .first()
+                .then(response=>{
+                    if(response) resolve(response);
+                    reject("Livro não encontrado")
+                })
+                .catch(err=>reject(err))
+        })
+    }
+    async delete(id: string){
+        return new Promise(async (resolve,reject)=>{
+            const book = await connection('books')
+                .where("id",id)
+                .first()
+                .delete()
+                .then(response=>{
+                    if( response !== 0) resolve("");
+                    reject("Livro não encontrado")
+                })
+                .catch(err=>reject(err))
+        })
+    }
+    async update(data: iBook){
+        return new Promise(async (resolve,reject)=>{
+            let { id,title,author,serie,serieOrder} : iBook = data
+            const updated_at = new Date().toISOString();
+            await connection('books')
+            .update({ title,author,serie,serieOrder,updated_at})
+            .where("id",id)
+            .then(response=>{
+                resolve(response)
+            })
+            .catch(err=>reject(err))
+        })
     }
 }
 

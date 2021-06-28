@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 
 
 const discordApi: AxiosInstance = axios.create({
-    baseURL: 'https://discordapp.com/api/',
+    baseURL: 'https://discord.com/api/',
 });
 
 const devtoApi: AxiosInstance = axios.create({

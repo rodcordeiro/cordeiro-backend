@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.habiticaApi = exports.devtoApi = exports.discordApi = void 0;
 var axios_1 = __importDefault(require("axios"));
 var discordApi = axios_1.default.create({
-    baseURL: 'https://discordapp.com/api/',
+    baseURL: 'https://discord.com/api/',
 });
 exports.discordApi = discordApi;
 var devtoApi = axios_1.default.create({
