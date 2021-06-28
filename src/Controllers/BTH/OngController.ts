@@ -46,15 +46,26 @@ class bthOngController{
     }
     async authenticate(req: Request,res: Response){
         const User = new UserService();
-        const { email, password } : iUser = req.body;
-        const user = await User.login_email( email, password )
-        if (user.message == "Failed"){
-            return res.status(400).json({
-                message: false,
-                error:user.error
+        const Ong = new OngServices();
+
+        let { email, password } : iUser = req.body;
+        password = cript(password);
+        
+        const user : any= await User.login_email( email, password )
+         .then((response)=>{
+             return response
             })
-        }
-        return res.json(user)
+         .catch(err=>{
+            res.status(400).json(err)
+             throw new Error("Invalid email or password")
+         })
+        const ong = await Ong.get_user_ongs(user.id)
+         .then(response=>{
+             return res.status(200).json({Ong:response,user})
+         })
+         .catch(err=>{
+             return res.status(400).json({err})
+         })
         
     }
     

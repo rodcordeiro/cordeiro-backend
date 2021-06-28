@@ -49,35 +49,57 @@ var UserService = (function () {
     }
     UserService.prototype.create_user = function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var username, email, password, id, user;
+            var username, email, password, id;
+            var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        username = data.username, email = data.email, password = data.password;
-                        password = crypto_1.cript(password);
-                        id = uuid_1.v4();
-                        return [4, connection_1.default('users')
-                                .insert({
-                                id: id,
-                                username: username,
-                                email: email,
-                                password: password
-                            })
-                                .then(function (response) {
-                                return {
-                                    id: id,
-                                    username: username,
-                                    email: email
-                                };
-                            })
-                                .catch(function (err) {
-                                console.log(err);
-                                return err;
-                            })];
-                    case 1:
-                        user = _a.sent();
-                        return [2, user];
-                }
+                username = data.username, email = data.email, password = data.password;
+                id = uuid_1.v4();
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var user, err_1;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 3, , 4]);
+                                    return [4, connection_1.default('users')
+                                            .select("*")
+                                            .where("email", email)
+                                            .orWhere("username", username)
+                                            .first()
+                                            .then(function (response) {
+                                            return response;
+                                        })];
+                                case 1:
+                                    user = _a.sent();
+                                    if (user) {
+                                        reject("usuário já cadastrado");
+                                        throw new Error("Invalid user");
+                                    }
+                                    ;
+                                    return [4, connection_1.default('users')
+                                            .insert({
+                                            id: id,
+                                            username: username,
+                                            email: email,
+                                            password: password
+                                        })
+                                            .then(function (response) {
+                                            resolve({
+                                                id: id,
+                                                username: username,
+                                                email: email
+                                            });
+                                        })];
+                                case 2:
+                                    _a.sent();
+                                    return [3, 4];
+                                case 3:
+                                    err_1 = _a.sent();
+                                    reject(err_1);
+                                    return [3, 4];
+                                case 4: return [2];
+                            }
+                        });
+                    }); })];
             });
         });
     };
@@ -136,89 +158,159 @@ var UserService = (function () {
     };
     UserService.prototype.login_email = function (email, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, token;
+            var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, connection_1.default('users')
-                            .select("*")
-                            .where("email", email)
-                            .first()
-                            .then(function (response) {
-                            return response;
-                        })
-                            .catch(function (err) {
-                            return false;
-                        })];
-                    case 1:
-                        user = _a.sent();
-                        if (!user || user.email !== email || user.password !== password) {
-                            return [2, {
-                                    message: "failed",
-                                    error: "Invalid email or password"
-                                }];
-                        }
-                        token = jwt_1.default.signin(user.id);
-                        return [2, {
-                                message: "success",
-                                token: token
-                            }];
-                }
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var user, token, e_1;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4, connection_1.default('users')
+                                            .select("*")
+                                            .where("email", email)
+                                            .first()
+                                            .then(function (response) {
+                                            return response;
+                                        })
+                                            .catch(function (err) {
+                                            return false;
+                                        })];
+                                case 1:
+                                    user = _a.sent();
+                                    if (!user || user.email !== email || user.password !== password) {
+                                        console.log({ email: email, password: password });
+                                        console.log(user.email, user.password);
+                                        reject("Invalid email or password");
+                                    }
+                                    token = jwt_1.default.signin(user.id);
+                                    resolve({
+                                        id: user.id,
+                                        token: token
+                                    });
+                                    return [3, 3];
+                                case 2:
+                                    e_1 = _a.sent();
+                                    reject(e_1);
+                                    return [3, 3];
+                                case 3: return [2];
+                            }
+                        });
+                    }); })];
             });
         });
     };
     UserService.prototype.login_username = function (username, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, token;
+            var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, connection_1.default('users')
-                            .select("*")
-                            .where("username", username)
-                            .first()
-                            .then(function (response) {
-                            return response;
-                        })
-                            .catch(function (err) {
-                            return false;
-                        })];
-                    case 1:
-                        user = _a.sent();
-                        if (!user || user.username !== username || user.password !== password) {
-                            return [2, {
-                                    message: "failed",
-                                    error: "Invalid username or password"
-                                }];
-                        }
-                        token = jwt_1.default.signin(user.id);
-                        return [2, {
-                                message: "success",
-                                token: token
-                            }];
-                }
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var user, token, e_2;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4, connection_1.default('users')
+                                            .select("*")
+                                            .where("username", username)
+                                            .first()
+                                            .then(function (response) {
+                                            return response;
+                                        })
+                                            .catch(function (err) {
+                                            return false;
+                                        })];
+                                case 1:
+                                    user = _a.sent();
+                                    if (!user || user.username !== username || user.password !== password) {
+                                        reject("Invalid username or password");
+                                    }
+                                    token = jwt_1.default.signin(user.id);
+                                    resolve({
+                                        id: user.id,
+                                        token: token
+                                    });
+                                    return [3, 3];
+                                case 2:
+                                    e_2 = _a.sent();
+                                    reject(e_2);
+                                    return [3, 3];
+                                case 3: return [2];
+                            }
+                        });
+                    }); })];
             });
         });
     };
     UserService.prototype.delete_user = function (id) {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, connection_1.default('users')
-                            .where("id", id)
-                            .delete()
-                            .then(function (response) {
-                            return {
-                                message: "success",
-                                data: response
-                            };
-                        })
-                            .catch(function (err) {
-                            return {
-                                message: "failed",
-                                data: err
-                            };
-                        })];
-                    case 1: return [2, _a.sent()];
-                }
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var user, e_3;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4, connection_1.default('users')
+                                            .where("id", id)
+                                            .delete()
+                                            .then(function (response) {
+                                            resolve(response);
+                                        })
+                                            .catch(function (error) {
+                                            reject({
+                                                error: error
+                                            });
+                                        })];
+                                case 1:
+                                    user = _a.sent();
+                                    return [3, 3];
+                                case 2:
+                                    e_3 = _a.sent();
+                                    reject(e_3);
+                                    return [3, 3];
+                                case 3: return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    UserService.prototype.find_user_by_email = function (email) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var user, err_2;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4, connection_1.default('users')
+                                            .select("*")
+                                            .where("email", email)
+                                            .first()
+                                            .then(function (response) {
+                                            resolve({
+                                                id: response.id,
+                                                email: email
+                                            });
+                                        })
+                                            .catch(function (error) {
+                                            reject(error);
+                                        })];
+                                case 1:
+                                    user = _a.sent();
+                                    return [3, 3];
+                                case 2:
+                                    err_2 = _a.sent();
+                                    reject(err_2);
+                                    return [3, 3];
+                                case 3: return [2];
+                            }
+                        });
+                    }); })];
             });
         });
     };

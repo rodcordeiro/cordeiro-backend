@@ -36,104 +36,106 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.bthOngController = void 0;
-var crypto_1 = require("../../tools/crypto");
-var User_1 = require("../../Services/User");
-var Ongs_1 = require("../../Services/BTH/Ongs");
-var bthOngController = (function () {
-    function bthOngController() {
+exports.bthIncidentController = void 0;
+var Incidents_1 = require("../../Services/BTH/Incidents");
+var bthIncidentController = (function () {
+    function bthIncidentController() {
     }
-    bthOngController.prototype.index = function (req, res) {
+    bthIncidentController.prototype.list_incidents = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var Ong;
+            var Incidents, _a, page, count, incidents;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        Incidents = new Incidents_1.IncidentServices();
+                        _a = req.query.page, page = _a === void 0 ? 1 : _a;
+                        return [4, Incidents.count_incidents()
+                                .then(function (response) {
+                                return response;
+                            })];
+                    case 1:
+                        count = (_b.sent())[0];
+                        return [4, Incidents.list_incidents_with_pagination(page)
+                                .then(function (response) {
+                                return res.status(200).header('X-TOTAL-COUNT', count['count']).json(response);
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
+                    case 2:
+                        incidents = _b.sent();
+                        return [2];
+                }
+            });
+        });
+    };
+    bthIncidentController.prototype.profile_incidents = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var Incidents, ong_id, incidents;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        Ong = new Ongs_1.OngServices();
-                        return [4, Ong.get_ongs()
+                        Incidents = new Incidents_1.IncidentServices();
+                        ong_id = req.headers.ong_id;
+                        return [4, Incidents.list_profile_incidents(ong_id)
                                 .then(function (response) {
                                 return res.status(200).json(response);
                             })
                                 .catch(function (err) {
                                 return res.status(400).json(err);
                             })];
-                    case 1: return [2, _a.sent()];
+                    case 1:
+                        incidents = _a.sent();
+                        return [2];
                 }
             });
         });
     };
-    bthOngController.prototype.create = function (req, res) {
+    bthIncidentController.prototype.create_incident = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var User, Ong, _a, name, email, password, number, city, uf, user_id, ong;
+            var Incidents, ong_id, _a, title, description, value, incident;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        User = new User_1.UserService();
-                        Ong = new Ongs_1.OngServices();
-                        _a = req.body, name = _a.name, email = _a.email, password = _a.password, number = _a.number, city = _a.city, uf = _a.uf;
-                        password = crypto_1.cript(password);
-                        return [4, User.create_user({
-                                username: name,
-                                email: email,
-                                password: password
-                            })
+                        Incidents = new Incidents_1.IncidentServices();
+                        ong_id = req.headers.ong_id;
+                        _a = req.body, title = _a.title, description = _a.description, value = _a.value;
+                        return [4, Incidents.create_new_incident({ title: title, description: description, value: value, ong_id: ong_id })
                                 .then(function (response) {
-                                return response.id;
-                            })
-                                .catch(function (err) {
-                                res.status(400).json(err);
-                                throw new Error(err);
-                            })];
-                    case 1:
-                        user_id = _b.sent();
-                        return [4, Ong.create_ong({ name: name, email: email, number: number, city: city, uf: uf, user_id: user_id })
-                                .then(function (response) {
-                                return res.status(200).json(response);
+                                return res.status(201).json(response);
                             })
                                 .catch(function (err) {
                                 return res.status(400).json(err);
                             })];
-                    case 2:
-                        ong = _b.sent();
+                    case 1:
+                        incident = _b.sent();
                         return [2];
                 }
             });
         });
     };
-    bthOngController.prototype.authenticate = function (req, res) {
+    bthIncidentController.prototype.delete_incident = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var User, Ong, _a, email, password, user, ong;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var Incidents, ong_id;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        User = new User_1.UserService();
-                        Ong = new Ongs_1.OngServices();
-                        _a = req.body, email = _a.email, password = _a.password;
-                        password = crypto_1.cript(password);
-                        return [4, User.login_email(email, password)
+                        Incidents = new Incidents_1.IncidentServices();
+                        ong_id = req.headers.ong_id;
+                        return [4, Incidents.delete_incident(req.params.id, ong_id)
                                 .then(function (response) {
-                                return response;
+                                return res.status(204).send();
                             })
                                 .catch(function (err) {
-                                res.status(400).json(err);
-                                throw new Error("Invalid email or password");
+                                return res.status(400).json(err);
                             })];
                     case 1:
-                        user = _b.sent();
-                        return [4, Ong.get_user_ongs(user.id)
-                                .then(function (response) {
-                                return res.status(200).json({ Ong: response, user: user });
-                            })
-                                .catch(function (err) {
-                                return res.status(400).json({ err: err });
-                            })];
-                    case 2:
-                        ong = _b.sent();
+                        _a.sent();
                         return [2];
                 }
             });
         });
     };
-    return bthOngController;
+    return bthIncidentController;
 }());
-exports.bthOngController = bthOngController;
+exports.bthIncidentController = bthIncidentController;

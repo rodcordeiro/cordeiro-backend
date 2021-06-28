@@ -59,15 +59,23 @@ var UserController = (function () {
     };
     UserController.prototype.create = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var services, user;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var services, _a, username, email, password, user;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         services = new User_1.UserService();
-                        return [4, services.create_user(req.body)];
+                        _a = req.body, username = _a.username, email = _a.email, password = _a.password;
+                        password = crypto_1.cript(password);
+                        return [4, services.create_user({ username: username, email: email, password: password })
+                                .then(function (response) {
+                                return res.status(200).json(response);
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
                     case 1:
-                        user = _a.sent();
-                        return [2, res.status(200).json(user)];
+                        user = _b.sent();
+                        return [2];
                 }
             });
         });
@@ -96,10 +104,18 @@ var UserController = (function () {
                 switch (_a.label) {
                     case 0:
                         services = new User_1.UserService();
-                        return [4, services.delete_user(req.params.id)];
+                        return [4, services.delete_user(req.params.id)
+                                .then(function (response) {
+                                if (response !== 0)
+                                    return res.status(201).json({ response: response });
+                                return res.status(400).json({ error: "Usuário não encontrado" });
+                            })
+                                .catch(function (error) {
+                                return res.status(400).json({ error: error });
+                            })];
                     case 1:
                         response = _a.sent();
-                        return [2, res.status(response.message == "success" ? 200 : 400).json(response)];
+                        return [2];
                 }
             });
         });
@@ -114,18 +130,27 @@ var UserController = (function () {
                         _a = req.body, username = _a.username, email = _a.email, password = _a.password;
                         password = crypto_1.cript(password);
                         if (!!username) return [3, 2];
-                        return [4, services.login_email(email, password)];
+                        return [4, services.login_email(email, password)
+                                .then(function (response) {
+                                return res.status(200).json({ response: response });
+                            })
+                                .catch(function (error) {
+                                return res.status(400).json({ error: error });
+                            })];
                     case 1:
                         user = _b.sent();
                         return [3, 4];
-                    case 2: return [4, services.login_username(username, password)];
+                    case 2: return [4, services.login_username(username, password)
+                            .then(function (response) {
+                            return res.status(200).json({ response: response });
+                        })
+                            .catch(function (error) {
+                            return res.status(400).json({ error: error });
+                        })];
                     case 3:
                         user = _b.sent();
                         _b.label = 4;
-                    case 4:
-                        if (user.message == "failed")
-                            return [2, res.status(400).json(user)];
-                        return [2, res.status(200).json(user)];
+                    case 4: return [2];
                 }
             });
         });
