@@ -49,6 +49,7 @@ class IncidentServices{
             await connection('bth_incidents')
                 .count('id')
                 .then(response=>{
+                    
                     resolve(response)
                 })
                 .catch(err=>{

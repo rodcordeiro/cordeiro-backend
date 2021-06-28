@@ -5,9 +5,9 @@ import bthEndpoints from './bth.routes'
 import esbEndpoints from './esb.routes'
 const routes = Router();
 
-routes.use(apiEndpoints);
-routes.use(bthEndpoints);
-routes.use(esbEndpoints);
+routes.use(apiEndpoints); // Import my api endpoints
+routes.use(bthEndpoints); // Import Be the Hero endpoints
+routes.use(esbEndpoints); // Import Escriba Endpoints
 
 routes.get('/', function (req, res){
   return res.status(200).json({  

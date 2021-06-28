@@ -6,7 +6,13 @@ class UserController{
     async index(req: Request, res: Response){
         const services = new UserService();
         const users = await services.list_users()
-        return res.status(users.message == "success" ? 200 : 400).json(users)
+            .then(response=>{
+                return res.status(200).json(response)
+            })
+            .catch(err=>{
+                return res.status(400).json(err)
+            })
+        
     }
     async create(req: Request, res: Response){
         const services = new UserService();

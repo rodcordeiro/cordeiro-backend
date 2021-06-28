@@ -56,20 +56,16 @@ class UserService {
     }
 
     async list_users()  {
-        return await connection('users')
+        return new Promise(async (resolve, reject)=>{
+            await connection('users')
             .select("*")
             .then((response: Array<iUser>)=>{
-                return {
-                    message: "success",
-                    data: response
-                }
+                resolve(response)
             })
             .catch(err=>{
-                return {
-                    message: "failed",
-                    data: err
-                }
+                reject(err)
             })
+        })
     }
     async update_user(data: iUser){
         let { id,username, email, password } : iUser = data

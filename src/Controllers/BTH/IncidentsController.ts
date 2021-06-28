@@ -12,6 +12,7 @@ class bthIncidentController{
         const { page = 1} = req.query;
         const [count] : any = await Incidents.count_incidents()
             .then(response=>{
+
                 return response;
             });
                     

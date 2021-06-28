@@ -13,21 +13,17 @@ interface iBook{
 
 class BookService{
     async list_book(){
-        return await connection('books')
-         .select('*')
-         .orderBy('serie','asc')
-         .orderBy('serieOrder','asc')
-         .then((response: Array<iBook>)=>{
-            return {
-                message: "success",
-                data: response
-            }
-        })
-        .catch(err=>{
-            return {
-                message: "failed",
-                data: err
-            }
+        return new Promise (async (resolve,reject)=>{
+            await connection('books')
+                .select('*')
+                .orderBy('serie','asc')
+                .orderBy('serieOrder','asc')
+                .then((response: Array<iBook>)=>{
+                    resolve(response)                    
+                })
+                .catch(err=>{
+                    reject(err)                    
+                })
         })
     }
     async create_book(data : iBook){
