@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var app_1 = require("../app");
-console.log("chat imported ");
 app_1.io.on("connect", function (socket) {
     console.log({
         status: "connected",

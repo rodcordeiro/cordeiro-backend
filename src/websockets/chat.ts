@@ -1,7 +1,6 @@
 import { io } from '../app';
 import { Socket } from "socket.io"
 
-console.log("chat imported ")
 
 io.on("connect",(socket: Socket)=>{
     console.log({
@@ -10,5 +9,5 @@ io.on("connect",(socket: Socket)=>{
     })
     socket.on("registerUser", async (params) => {
         console.log(params)
-      })
+    })
 })

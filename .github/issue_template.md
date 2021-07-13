@@ -3,10 +3,10 @@
  Issue description. Here u must provide some description about the issue
 
 ### Issue type
-[ ] Enhancement
-[ ] Bug
-[ ] Feature
-[ ] Documentation
+- [ ] Enhancement
+- [ ] Bug
+- [ ] Feature
+- [ ] Documentation
 
 ### References
 
