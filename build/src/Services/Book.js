@@ -84,7 +84,11 @@ var BookService = (function () {
                                     title = data.title, author = data.author, serie = data.serie, serieOrder = data.serieOrder;
                                     return [4, connection_1.default('books')
                                             .insert({
-                                            id: id, title: title, author: author, serie: serie, serieOrder: serieOrder
+                                            id: id,
+                                            title: title,
+                                            author: author,
+                                            serie: serie,
+                                            serieOrder: serieOrder
                                         })
                                             .then(function (response) {
                                             resolve({
