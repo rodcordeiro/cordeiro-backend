@@ -1,6 +1,6 @@
 ## Issue Title
 
- Issue description. Here u must provide some description about the issue
+ Issue description. Here you must provide some description about the issue
 
 ### Issue type
 - [ ] Enhancement
