@@ -43,16 +43,21 @@ var BookController = (function () {
     }
     BookController.prototype.index = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var services, books, total;
+            var services, books;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         services = new Book_1.BookService();
-                        return [4, services.list_book()];
+                        return [4, services.list_book()
+                                .then(function (response) {
+                                return res.status(200).header('total-books', response.length.toString()).json(response);
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
                     case 1:
                         books = _a.sent();
-                        total = books.data.length;
-                        return [2, res.status(books.message == "success" ? 200 : 400).header('total-books', total.toString()).json(books)];
+                        return [2];
                 }
             });
         });
@@ -64,20 +69,40 @@ var BookController = (function () {
                 switch (_a.label) {
                     case 0:
                         services = new Book_1.BookService();
-                        return [4, services.create_book(req.body)];
+                        return [4, services.create_book(req.body)
+                                .then(function (response) {
+                                return res.status(200).json(response);
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
                     case 1:
                         books = _a.sent();
-                        return [2, res.status(books.message == "success" ? 200 : 400).json(books)];
+                        return [2];
                 }
             });
         });
     };
     BookController.prototype.update = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var services;
-            return __generator(this, function (_a) {
-                services = new Book_1.BookService();
-                return [2];
+            var services, _a, title, author, serie, serieOrder, id, books;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        services = new Book_1.BookService();
+                        _a = req.body, title = _a.title, author = _a.author, serie = _a.serie, serieOrder = _a.serieOrder;
+                        id = req.params.id;
+                        return [4, services.update({ id: id, title: title, author: author, serie: serie, serieOrder: serieOrder })
+                                .then(function (response) {
+                                return res.status(200).json();
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
+                    case 1:
+                        books = _b.sent();
+                        return [2];
+                }
             });
         });
     };
@@ -88,10 +113,16 @@ var BookController = (function () {
                 switch (_a.label) {
                     case 0:
                         services = new Book_1.BookService();
-                        return [4, services.delete(req.params.id)];
+                        return [4, services.delete(req.params.id)
+                                .then(function (response) {
+                                return res.status(204).json();
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
                     case 1:
                         books = _a.sent();
-                        return [2, res.status(books.message == "success" ? 200 : 400).json(books)];
+                        return [2];
                 }
             });
         });
@@ -103,10 +134,16 @@ var BookController = (function () {
                 switch (_a.label) {
                     case 0:
                         services = new Book_1.BookService();
-                        return [4, services.get_book(req.params.id)];
+                        return [4, services.get_book(req.params.id)
+                                .then(function (response) {
+                                return res.status(200).json(response);
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
                     case 1:
                         books = _a.sent();
-                        return [2, res.status(books.message == "success" ? 200 : 400).json(books)];
+                        return [2];
                 }
             });
         });

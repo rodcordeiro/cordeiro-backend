@@ -49,10 +49,16 @@ var UserController = (function () {
                 switch (_a.label) {
                     case 0:
                         services = new User_1.UserService();
-                        return [4, services.list_users()];
+                        return [4, services.list_users()
+                                .then(function (response) {
+                                return res.status(200).json(response);
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
                     case 1:
                         users = _a.sent();
-                        return [2, res.status(users.message == "success" ? 200 : 400).json(users)];
+                        return [2];
                 }
             });
         });
