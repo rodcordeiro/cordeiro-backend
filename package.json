@@ -30,7 +30,6 @@
     "socket.io": "^4.0.1",
     "socket.io-client": "^4.0.1",
     "sqlite3": "^5.0.0",
-    "unirest": "^0.6.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
