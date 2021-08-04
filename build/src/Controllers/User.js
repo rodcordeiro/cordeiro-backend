@@ -74,8 +74,7 @@ var UserController = (function () {
                         password = crypto_1.cript(password);
                         return [4, services.create_user({ username: username, email: email, password: password })
                                 .then(function (response) {
-                                var id = response.id, token = response.token;
-                                return res.status(200).json({ id: id, token: token });
+                                return res.status(200).json(response);
                             })
                                 .catch(function (err) {
                                 return res.status(400).json(err);
@@ -149,7 +148,7 @@ var UserController = (function () {
                         return [3, 4];
                     case 2: return [4, services.login_username(username, password)
                             .then(function (response) {
-                            return res.status(200).json({ response: response });
+                            return res.status(200).json(response);
                         })
                             .catch(function (error) {
                             return res.status(400).json({ error: error });

@@ -21,8 +21,7 @@ class UserController{
         
         const user = await services.create_user({ username, email, password })
             .then((response: any)=>{
-                const {id, token} = response
-                return res.status(200).json({id, token})
+                return res.status(200).json(response)
             })
             .catch(err=>{
                 return res.status(400).json(err)
@@ -53,8 +52,9 @@ class UserController{
     async login(req: Request, res: Response){
         const services = new UserService();
         let { username, email, password } : iUser = req.body
-
+        
         password = cript(password);
+        
         let user: any;
         if (!username){
             user = await services.login_email(email,password)
@@ -67,7 +67,7 @@ class UserController{
         } else {
             user = await services.login_username(username,password)
             .then (response=>{
-                return res.status(200).json({response})
+                return res.status(200).json(response)
              })
              .catch(error=>{
                 return res.status(400).json({error})
