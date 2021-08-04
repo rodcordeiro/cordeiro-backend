@@ -164,7 +164,10 @@ var IncidentServices = (function () {
                                     title = data.title, description = data.description, value = data.value, ong_id = data.ong_id;
                                     return [4, connection_1.default('bth_incidents')
                                             .insert({
-                                            title: title, description: description, value: value, ong_id: ong_id
+                                            title: title,
+                                            description: description,
+                                            value: value,
+                                            ong_id: ong_id
                                         })
                                             .then(function (response) {
                                             return response;

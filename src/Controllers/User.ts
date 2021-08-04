@@ -20,13 +20,13 @@ class UserController{
         password = cript(password);
         
         const user = await services.create_user({ username, email, password })
-            .then(response=>{
-                return res.status(200).json(response)
+            .then((response: any)=>{
+                const {id, token} = response
+                return res.status(200).json({id, token})
             })
             .catch(err=>{
                 return res.status(400).json(err)
             })
-        
     }
     async update(req: Request, res: Response){
         const services = new UserService();
