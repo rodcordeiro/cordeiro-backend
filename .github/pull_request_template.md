@@ -1,11 +1,16 @@
-# Description
+# pull\_request\_template
 
- What is this pull request for? Add a little description about what was done and why. Add images or gists if needed.
+## Description
 
-# Type of PR
- - [ ] Bugfix
- - [ ] New feature
- - [ ] Documentation
+What is this pull request for? Add a little description about what was done and why. Add images or gists if needed.
 
-# Changes made
- What have you added/removed to the code.
+## Type of PR
+
+* [ ] Bugfix
+* [ ] New feature
+* [ ] Documentation
+
+## Changes made
+
+What have you added/removed to the code.
+
