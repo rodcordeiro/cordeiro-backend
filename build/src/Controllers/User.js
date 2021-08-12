@@ -148,7 +148,7 @@ var UserController = (function () {
                         return [3, 4];
                     case 2: return [4, services.login_username(username, password)
                             .then(function (response) {
-                            return res.status(200).json({ response: response });
+                            return res.status(200).json(response);
                         })
                             .catch(function (error) {
                             return res.status(400).json({ error: error });

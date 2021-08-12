@@ -2,7 +2,12 @@ name: "Scan code and validate build"
 
 on:
   push:
-    branches: [ master ]
+    branches: [
+      "master",
+      "feat/**",
+      "bug/**",
+      "develop"
+    ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ master ]
@@ -52,5 +57,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build --if-present
+    # - run: npm run build --if-present
     - run: npm test --if-present

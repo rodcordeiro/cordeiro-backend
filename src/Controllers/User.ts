@@ -20,13 +20,12 @@ class UserController{
         password = cript(password);
         
         const user = await services.create_user({ username, email, password })
-            .then(response=>{
+            .then((response: any)=>{
                 return res.status(200).json(response)
             })
             .catch(err=>{
                 return res.status(400).json(err)
             })
-        
     }
     async update(req: Request, res: Response){
         const services = new UserService();
@@ -53,8 +52,9 @@ class UserController{
     async login(req: Request, res: Response){
         const services = new UserService();
         let { username, email, password } : iUser = req.body
-
+        
         password = cript(password);
+        
         let user: any;
         if (!username){
             user = await services.login_email(email,password)
@@ -67,7 +67,7 @@ class UserController{
         } else {
             user = await services.login_username(username,password)
             .then (response=>{
-                return res.status(200).json({response})
+                return res.status(200).json(response)
              })
              .catch(error=>{
                 return res.status(400).json({error})

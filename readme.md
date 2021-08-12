@@ -1,1 +1,0 @@
-[![Scan code and validate build](https://github.com/rodcordeiro/cordeiro-backend/actions/workflows/CodeAnalysis.yml/badge.svg)](https://github.com/rodcordeiro/cordeiro-backend/actions/workflows/CodeAnalysis.yml)
