@@ -1,13 +1,17 @@
 import jwt from '../tools/jwt';
 import { Router } from 'express';
-import apiEndpoints from './api.routes'
-import bthEndpoints from './bth.routes'
-import esbEndpoints from './esb.routes'
+
+import apiEndpoints from './api.routes';
+import bthEndpoints from './bth.routes';
+import esbEndpoints from './esb.routes';
+import ghEndpoints from './gh.routes';
+
 const routes = Router();
 
 routes.use(apiEndpoints); // Import my api endpoints
 routes.use(bthEndpoints); // Import Be the Hero endpoints
 routes.use(esbEndpoints); // Import Escriba Endpoints
+routes.use(ghEndpoints); // Import Github endpoints
 
 routes.get('/', function (req, res){
   return res.status(200).json({  

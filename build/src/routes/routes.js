@@ -7,10 +7,12 @@ var express_1 = require("express");
 var api_routes_1 = __importDefault(require("./api.routes"));
 var bth_routes_1 = __importDefault(require("./bth.routes"));
 var esb_routes_1 = __importDefault(require("./esb.routes"));
+var gh_routes_1 = __importDefault(require("./gh.routes"));
 var routes = express_1.Router();
 routes.use(api_routes_1.default);
 routes.use(bth_routes_1.default);
 routes.use(esb_routes_1.default);
+routes.use(gh_routes_1.default);
 routes.get('/', function (req, res) {
     return res.status(200).json({
         "version": "2.0",
