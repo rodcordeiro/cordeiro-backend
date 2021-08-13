@@ -1,10 +1,10 @@
 import {Request, Response} from "express";
 import { GHAuth, GHapi } from "../tools/api";
 
-const redirect_uri = "http://rodcordeiro.herokuapp.com/gh/token"
 
 class GithubAuth {
     async get_token(req : Request, res: Response){
+        const redirect_uri = "http://rodcordeiro.herokuapp.com/gh/token"
         const origin = decodeURIComponent(String(req.query.origin));
         const state = Buffer.from(origin).toString('base64');
         const url =  `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUBAPP_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirect_uri)}&scope=repo%20user%20delete_repo&state=${state}&allow_signup=false`;
@@ -15,6 +15,7 @@ class GithubAuth {
         const code : any = req.query.code;
         const state : any  = req.query.state;
         const origin : any = Buffer.from(state,"base64").toString('ascii');
+        const redirect_uri = "http://rodcordeiro.herokuapp.com/gh/token"
 
         await GHAuth.post("/access_token",{
             "client_id": process.env.GITHUBAPP_CLIENT_ID,
