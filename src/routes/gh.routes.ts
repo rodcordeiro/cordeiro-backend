@@ -1,4 +1,3 @@
-import jwt from '../tools/jwt';
 import { Router } from 'express'
 
 import { GithubAuth, GithubController } from "../Controllers/Github";

@@ -1,7 +1,7 @@
 import connection from "../database/connection";
 import { v4 as uuid } from "uuid";
 import { cript } from '../tools/crypto'
-import jwt from "../tools/jwt"
+import jwt from "../middlewares/jwt"
 
 interface iUser{
     id?: any;

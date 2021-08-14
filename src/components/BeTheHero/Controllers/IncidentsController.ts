@@ -1,9 +1,6 @@
-import connection from "../../database/connection";
-import { v4 as uuid } from "uuid";
-import { Request, response, Response } from "express";
-import { cript } from '../../tools/crypto';
-import { OngServices, iOng } from '../../Services/BTH/Ongs'
-import { IncidentServices, iIncident} from "../../Services/BTH/Incidents"
+import { Request,  Response } from "express";
+
+import { IncidentServices, iIncident} from "../Services/Incidents"
 
 class bthIncidentController{
     async list_incidents(req: Request,res: Response){

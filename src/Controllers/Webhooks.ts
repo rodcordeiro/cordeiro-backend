@@ -2,6 +2,8 @@ import connection from '../database/connection';
 import { Request, Response } from 'express'
 import { iWebhook, WebhookServices } from '../Services/Webhook'
 
+import { HabiticaService } from "../Services/Habitica"
+
 class WebhooksController{
     async create(req: Request, res: Response){
         const Services = new WebhookServices();
@@ -34,6 +36,21 @@ class WebhooksController{
             .catch(err=>{
                 return res.status(400).json(err)
             })    
+    }
+    async run_webhook(req: Request, res: Response){
+        const {origin,webhook} = req.params;
+
+        if(origin == "habitica"){
+            const service = new HabiticaService()
+            await service.webhookHandler(req.body)
+                .then(response=>{
+                    return res.status(204).json()
+                })
+                .catch(err=>{
+                    return res.status(400).json(err)
+                })
+        }
+        return res.status(200).send();
     }
 }
 

@@ -1,9 +1,7 @@
-import connection from "../../database/connection";
-import { v4 as uuid } from "uuid";
 import { Request, Response } from "express";
-import { cript } from '../../tools/crypto';
-import { UserService, iUser} from "../../Services/User"
-import { OngServices,iOng } from "../../Services/BTH/Ongs"
+import { cript } from '../../../tools/crypto';
+import { UserService, iUser} from "../../../Services/User"
+import { OngServices,iOng } from "../Services/Ongs"
 
 class bthOngController{
     async index(req: Request,res: Response){

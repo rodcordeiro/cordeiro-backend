@@ -38,14 +38,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GithubController = exports.GithubAuth = void 0;
 var api_1 = require("../tools/api");
-var redirect_uri = "http://rodcordeiro.herokuapp.com/gh/token";
 var GithubAuth = (function () {
     function GithubAuth() {
     }
     GithubAuth.prototype.get_token = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var origin, state, url;
+            var redirect_uri, origin, state, url;
             return __generator(this, function (_a) {
+                redirect_uri = "http://rodcordeiro.herokuapp.com/gh/token";
                 origin = decodeURIComponent(String(req.query.origin));
                 state = Buffer.from(origin).toString('base64');
                 url = "https://github.com/login/oauth/authorize?client_id=" + process.env.GITHUBAPP_CLIENT_ID + "&redirect_uri=" + encodeURIComponent(redirect_uri) + "&scope=repo%20user%20delete_repo&state=" + state + "&allow_signup=false";
@@ -56,13 +56,14 @@ var GithubAuth = (function () {
     };
     GithubAuth.prototype.validateToken = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var code, state, origin;
+            var code, state, origin, redirect_uri;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         code = req.query.code;
                         state = req.query.state;
                         origin = Buffer.from(state, "base64").toString('ascii');
+                        redirect_uri = "http://rodcordeiro.herokuapp.com/gh/token";
                         return [4, api_1.GHAuth.post("/access_token", {
                                 "client_id": process.env.GITHUBAPP_CLIENT_ID,
                                 "client_secret": process.env.GITHUBAPP_CLIENT_SECRET,

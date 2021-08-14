@@ -1,4 +1,4 @@
-import jwt from '../tools/jwt';
+import jwt from '../middlewares/jwt';
 import { Router } from 'express'
 import { UserController } from '../Controllers/User'
 import { BookController } from '../Controllers/Books'
@@ -41,6 +41,8 @@ apiEndpoints.delete('/projects/:id', jwt.validate, Projects.delete)
 apiEndpoints.post('/webhooks',jwt.validate, webhooks.create)
 apiEndpoints.get('/webhooks', jwt.validate, webhooks.get_webhooks)
 apiEndpoints.get('/webhooks/:origin', jwt.validate, webhooks.get_webhook)
+apiEndpoints.post('/webhooks/:origin', webhooks.run_webhook)
+apiEndpoints.post('/webhooks/:origin/:webhook', webhooks.run_webhook)
 
 // apiEndpoints.post('/webhooks/habitica', discord.habiticaMessage)
 // apiEndpoints.post('/webhook/devto', (req, res)=>{

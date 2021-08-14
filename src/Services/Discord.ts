@@ -9,6 +9,7 @@ interface iDiscordMessage{
 class DiscordService{
     
     async send_message(channel: string, message: string) : Promise<any>{
+        
         return new Promise(async (resolve,reject)=>{
             const wservices = new WebhookServices();      
             let hook : any = await wservices.get_webhook_by_name(channel)
