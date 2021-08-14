@@ -43,7 +43,7 @@ exports.UserService = void 0;
 var connection_1 = __importDefault(require("../database/connection"));
 var uuid_1 = require("uuid");
 var crypto_1 = require("../tools/crypto");
-var jwt_1 = __importDefault(require("../tools/jwt"));
+var jwt_1 = __importDefault(require("../middlewares/jwt"));
 var UserService = (function () {
     function UserService() {
     }

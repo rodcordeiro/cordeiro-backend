@@ -36,35 +36,39 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DiscordController = void 0;
-var Discord_1 = require("../Services/Discord");
-var DiscordController = (function () {
-    function DiscordController() {
+exports.HabiticaService = void 0;
+var Discord_1 = require("./Discord");
+var HabiticaService = (function () {
+    function HabiticaService() {
     }
-    DiscordController.prototype.sendMessage = function (req, res) {
+    HabiticaService.prototype.webhookHandler = function (data) {
         return __awaiter(this, void 0, void 0, function () {
-            var services, _a, message, channel, service;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        services = new Discord_1.DiscordService();
-                        _a = req.body, message = _a.message, channel = _a.channel;
-                        message = message ? message : "I'm alive fools.";
-                        channel = channel ? channel : "testes_do_cordeiro";
-                        return [4, services.send_message(channel, message)
-                                .then(function (response) {
-                                return res.status(204).json();
-                            })
-                                .catch(function (err) {
-                                return res.status(400).json(err);
-                            })];
-                    case 1:
-                        service = _b.sent();
-                        return [2];
-                }
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var discord;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    discord = new Discord_1.DiscordService();
+                                    return [4, discord.send_message('testes_do_cordeiro', "**Task " + data.type + "**\ntask: " + data.task.text + "\ndescription: " + data.task.notes + "\n")
+                                            .then(function (response) {
+                                            console.log(response);
+                                            resolve("");
+                                        })
+                                            .catch(function (err) {
+                                            console.log(err);
+                                            reject(err);
+                                        })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
             });
         });
     };
-    return DiscordController;
+    return HabiticaService;
 }());
-exports.DiscordController = DiscordController;
+exports.HabiticaService = HabiticaService;
