@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var jwt_1 = __importDefault(require("../tools/jwt"));
+var jwt_1 = __importDefault(require("../middlewares/jwt"));
 var express_1 = require("express");
 var User_1 = require("../Controllers/User");
 var Books_1 = require("../Controllers/Books");
@@ -35,5 +35,7 @@ apiEndpoints.delete('/projects/:id', jwt_1.default.validate, Projects.delete);
 apiEndpoints.post('/webhooks', jwt_1.default.validate, webhooks.create);
 apiEndpoints.get('/webhooks', jwt_1.default.validate, webhooks.get_webhooks);
 apiEndpoints.get('/webhooks/:origin', jwt_1.default.validate, webhooks.get_webhook);
+apiEndpoints.post('/webhooks/:origin', webhooks.run_webhook);
+apiEndpoints.post('/webhooks/:origin/:webhook', webhooks.run_webhook);
 apiEndpoints.post("/discord/ping", jwt_1.default.validate, discord.sendMessage);
 exports.default = apiEndpoints;

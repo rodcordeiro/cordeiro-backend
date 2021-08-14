@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WebhooksController = void 0;
 var Webhook_1 = require("../Services/Webhook");
+var Habitica_1 = require("../Services/Habitica");
 var WebhooksController = (function () {
     function WebhooksController() {
     }
@@ -101,6 +102,30 @@ var WebhooksController = (function () {
                     case 1:
                         webhook = _a.sent();
                         return [2];
+                }
+            });
+        });
+    };
+    WebhooksController.prototype.run_webhook = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, origin, webhook, service;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = req.params, origin = _a.origin, webhook = _a.webhook;
+                        if (!(origin == "habitica")) return [3, 2];
+                        service = new Habitica_1.HabiticaService();
+                        return [4, service.webhookHandler(req.body)
+                                .then(function (response) {
+                                return res.status(204).json();
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json(err);
+                            })];
+                    case 1:
+                        _b.sent();
+                        _b.label = 2;
+                    case 2: return [2, res.status(200).send()];
                 }
             });
         });

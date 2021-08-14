@@ -39,116 +39,186 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WebhookServices = void 0;
-var connection_1 = __importDefault(require("../database/connection"));
-var WebhookServices = (function () {
-    function WebhookServices() {
+exports.IncidentServices = void 0;
+var connection_1 = __importDefault(require("../../../database/connection"));
+var IncidentServices = (function () {
+    function IncidentServices() {
     }
-    WebhookServices.prototype.create_webhook = function (data) {
+    IncidentServices.prototype.list_incidents = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        var name, origin, webhook;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('bth_incidents')
+                                        .select('*')
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    IncidentServices.prototype.list_incidents_with_pagination = function (page) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var incidents;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('bth_incidents')
+                                        .join('bth_ongs', 'bth_ongs.id', '=', 'bth_incidents.ong_id')
+                                        .limit(5)
+                                        .offset((page - 1) * 5)
+                                        .select([
+                                        'bth_incidents.*',
+                                        'bth_ongs.name',
+                                        'bth_ongs.email',
+                                        'bth_ongs.whatsapp',
+                                        'bth_ongs.city',
+                                        'bth_ongs.uf'
+                                    ])
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    incidents = _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    IncidentServices.prototype.count_incidents = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('bth_incidents')
+                                        .count('id')
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    IncidentServices.prototype.list_profile_incidents = function (ong_id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4, connection_1.default('bth_incidents')
+                                        .select('*')
+                                        .where('ong_id', ong_id)
+                                        .then(function (response) {
+                                        resolve(response);
+                                    })
+                                        .catch(function (err) {
+                                        reject(err);
+                                    })];
+                                case 1:
+                                    _a.sent();
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    IncidentServices.prototype.create_new_incident = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var title, description, value, ong_id, id;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
-                                    name = data.name, origin = data.origin, webhook = data.webhook;
-                                    if (!origin) {
-                                        origin = webhook;
-                                    }
-                                    return [4, connection_1.default('webhooks')
-                                            .insert({ name: name, origin: origin, webhook: webhook })
+                                    title = data.title, description = data.description, value = data.value, ong_id = data.ong_id;
+                                    return [4, connection_1.default('bth_incidents')
+                                            .insert({
+                                            title: title,
+                                            description: description,
+                                            value: value,
+                                            ong_id: ong_id
+                                        })
                                             .then(function (response) {
-                                            resolve({ name: name, origin: origin });
+                                            return response;
+                                        })
+                                            .catch(function (err) {
+                                            reject(err);
+                                        })];
+                                case 1:
+                                    id = (_a.sent())[0];
+                                    resolve(id);
+                                    return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    IncidentServices.prototype.delete_incident = function (id, ong_id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var err_1;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4, connection_1.default('bth_incidents')
+                                            .where("id", id)
+                                            .andWhere("ong_id", ong_id)
+                                            .delete()
+                                            .then(function (response) {
+                                            resolve(response);
                                         })
                                             .catch(function (err) {
                                             reject(err);
                                         })];
                                 case 1:
                                     _a.sent();
-                                    return [2];
+                                    return [3, 3];
+                                case 2:
+                                    err_1 = _a.sent();
+                                    reject(err_1);
+                                    return [3, 3];
+                                case 3: return [2];
                             }
                         });
                     }); })];
             });
         });
     };
-    WebhookServices.prototype.list_webhooks = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4, connection_1.default('webhooks')
-                                        .select('*')
-                                        .then(function (response) {
-                                        resolve(response);
-                                    })
-                                        .catch(function (err) {
-                                        reject(err);
-                                    })];
-                                case 1:
-                                    _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    WebhookServices.prototype.list_by_origin = function (origin) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4, connection_1.default('webhooks')
-                                        .select('*')
-                                        .where('origin', origin)
-                                        .then(function (response) {
-                                        resolve(response);
-                                    })
-                                        .catch(function (err) {
-                                        reject(err);
-                                    })];
-                                case 1:
-                                    _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    WebhookServices.prototype.get_webhook_by_name = function (name) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4, connection_1.default('webhooks')
-                                        .select('*')
-                                        .where('name', name)
-                                        .first()
-                                        .then(function (response) {
-                                        resolve(response);
-                                    })
-                                        .catch(function (err) {
-                                        reject(err);
-                                    })];
-                                case 1:
-                                    _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    return WebhookServices;
+    return IncidentServices;
 }());
-exports.WebhookServices = WebhookServices;
+exports.IncidentServices = IncidentServices;

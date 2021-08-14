@@ -36,131 +36,104 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
-var crypto_1 = require("../tools/crypto");
-var User_1 = require("../Services/User");
-var UserController = (function () {
-    function UserController() {
+exports.bthOngController = void 0;
+var crypto_1 = require("../../../tools/crypto");
+var User_1 = require("../../../Services/User");
+var Ongs_1 = require("../Services/Ongs");
+var bthOngController = (function () {
+    function bthOngController() {
     }
-    UserController.prototype.index = function (req, res) {
+    bthOngController.prototype.index = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var services, users;
+            var Ong;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        services = new User_1.UserService();
-                        return [4, services.list_users()
+                        Ong = new Ongs_1.OngServices();
+                        return [4, Ong.get_ongs()
                                 .then(function (response) {
                                 return res.status(200).json(response);
                             })
                                 .catch(function (err) {
                                 return res.status(400).json(err);
                             })];
-                    case 1:
-                        users = _a.sent();
-                        return [2];
+                    case 1: return [2, _a.sent()];
                 }
             });
         });
     };
-    UserController.prototype.create = function (req, res) {
+    bthOngController.prototype.create = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var services, _a, username, email, password, user;
+            var User, Ong, _a, name, email, password, number, city, uf, user_id, ong;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        services = new User_1.UserService();
-                        _a = req.body, username = _a.username, email = _a.email, password = _a.password;
+                        User = new User_1.UserService();
+                        Ong = new Ongs_1.OngServices();
+                        _a = req.body, name = _a.name, email = _a.email, password = _a.password, number = _a.number, city = _a.city, uf = _a.uf;
                         password = crypto_1.cript(password);
-                        return [4, services.create_user({ username: username, email: email, password: password })
+                        return [4, User.create_user({
+                                username: name,
+                                email: email,
+                                password: password
+                            })
+                                .then(function (response) {
+                                return response.id;
+                            })
+                                .catch(function (err) {
+                                res.status(400).json(err);
+                                throw new Error(err);
+                            })];
+                    case 1:
+                        user_id = _b.sent();
+                        return [4, Ong.create_ong({ name: name, email: email, number: number, city: city, uf: uf, user_id: user_id })
                                 .then(function (response) {
                                 return res.status(200).json(response);
                             })
                                 .catch(function (err) {
                                 return res.status(400).json(err);
                             })];
-                    case 1:
-                        user = _b.sent();
+                    case 2:
+                        ong = _b.sent();
                         return [2];
                 }
             });
         });
     };
-    UserController.prototype.update = function (req, res) {
+    bthOngController.prototype.authenticate = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var services, id, _a, username, email, password, user;
+            var User, Ong, _a, email, password, user, ong;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        services = new User_1.UserService();
-                        id = req.params.id ? req.params.id : req.headers.id;
-                        _a = req.body, username = _a.username, email = _a.email, password = _a.password;
-                        return [4, services.update_user({ id: id, username: username, email: email, password: password })];
-                    case 1:
-                        user = _b.sent();
-                        return [2, res.status(200).json(user)];
-                }
-            });
-        });
-    };
-    UserController.prototype.delete = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var services, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        services = new User_1.UserService();
-                        return [4, services.delete_user(req.params.id)
-                                .then(function (response) {
-                                if (response !== 0)
-                                    return res.status(201).json({ response: response });
-                                return res.status(400).json({ error: "Usuário não encontrado" });
-                            })
-                                .catch(function (error) {
-                                return res.status(400).json({ error: error });
-                            })];
-                    case 1:
-                        response = _a.sent();
-                        return [2];
-                }
-            });
-        });
-    };
-    UserController.prototype.login = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var services, _a, username, email, password, user;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        services = new User_1.UserService();
-                        _a = req.body, username = _a.username, email = _a.email, password = _a.password;
+                        User = new User_1.UserService();
+                        Ong = new Ongs_1.OngServices();
+                        _a = req.body, email = _a.email, password = _a.password;
                         password = crypto_1.cript(password);
-                        if (!!username) return [3, 2];
-                        return [4, services.login_email(email, password)
+                        return [4, User.login_email(email, password)
                                 .then(function (response) {
-                                return res.status(200).json(response);
+                                return response;
                             })
-                                .catch(function (error) {
-                                return res.status(400).json({ error: error });
+                                .catch(function (err) {
+                                res.status(400).json(err);
+                                throw new Error("Invalid email or password");
                             })];
                     case 1:
                         user = _b.sent();
-                        return [3, 4];
-                    case 2: return [4, services.login_username(username, password)
-                            .then(function (response) {
-                            return res.status(200).json(response);
-                        })
-                            .catch(function (error) {
-                            return res.status(400).json({ error: error });
-                        })];
-                    case 3:
-                        user = _b.sent();
-                        _b.label = 4;
-                    case 4: return [2];
+                        return [4, Ong.get_user_ongs(user.id)
+                                .then(function (response) {
+                                return res.status(200).json({ Ong: response, user: user });
+                            })
+                                .catch(function (err) {
+                                return res.status(400).json({ err: err });
+                            })];
+                    case 2:
+                        ong = _b.sent();
+                        return [2];
                 }
             });
         });
     };
-    return UserController;
+    return bthOngController;
 }());
-exports.UserController = UserController;
+exports.bthOngController = bthOngController;

@@ -7,9 +7,11 @@ class HabiticaService{
 task: ${data.task.text}
 description: ${data.task.notes}\n`,)
                 .then(response=>{
+                    console.log(response)
                     resolve("")
                 })
                 .catch(err=>{
+                    console.log(err)
                     reject(err)
                 })
         })

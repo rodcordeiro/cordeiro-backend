@@ -5,14 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var api_routes_1 = __importDefault(require("./api.routes"));
-var bth_routes_1 = __importDefault(require("./bth.routes"));
 var esb_routes_1 = __importDefault(require("./esb.routes"));
 var gh_routes_1 = __importDefault(require("./gh.routes"));
 var routes = express_1.Router();
 routes.use(api_routes_1.default);
-routes.use(bth_routes_1.default);
+var Fin_1 = require("../components/Fin");
+var BeTheHero_1 = __importDefault(require("../components/BeTheHero"));
+routes.use("/bth", BeTheHero_1.default);
 routes.use(esb_routes_1.default);
 routes.use(gh_routes_1.default);
+routes.use("/fin", Fin_1.routes);
 routes.get('/', function (req, res) {
     return res.status(200).json({
         "version": "2.0",

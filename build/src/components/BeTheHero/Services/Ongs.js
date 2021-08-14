@@ -39,116 +39,115 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WebhookServices = void 0;
-var connection_1 = __importDefault(require("../database/connection"));
-var WebhookServices = (function () {
-    function WebhookServices() {
+exports.OngServices = void 0;
+var connection_1 = __importDefault(require("../../../database/connection"));
+var uuid_1 = require("uuid");
+var OngServices = (function () {
+    function OngServices() {
     }
-    WebhookServices.prototype.create_webhook = function (data) {
+    OngServices.prototype.get_ongs = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        var name, origin, webhook;
+                        var ongs, err_1;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
-                                    name = data.name, origin = data.origin, webhook = data.webhook;
-                                    if (!origin) {
-                                        origin = webhook;
-                                    }
-                                    return [4, connection_1.default('webhooks')
-                                            .insert({ name: name, origin: origin, webhook: webhook })
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4, connection_1.default('bth_ongs')
+                                            .select("*")
                                             .then(function (response) {
-                                            resolve({ name: name, origin: origin });
-                                        })
-                                            .catch(function (err) {
-                                            reject(err);
+                                            resolve(response);
                                         })];
                                 case 1:
-                                    _a.sent();
-                                    return [2];
+                                    ongs = _a.sent();
+                                    return [3, 3];
+                                case 2:
+                                    err_1 = _a.sent();
+                                    reject(err_1);
+                                    return [3, 3];
+                                case 3: return [2];
                             }
                         });
                     }); })];
             });
         });
     };
-    WebhookServices.prototype.list_webhooks = function () {
+    OngServices.prototype.create_ong = function (data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var name, email, number, city, uf, user_id, id, whatsapp;
+            var _this = this;
+            return __generator(this, function (_a) {
+                name = data.name, email = data.email, number = data.number, city = data.city, uf = data.uf, user_id = data.user_id;
+                id = uuid_1.v4();
+                whatsapp = "+55" + number;
+                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var ong, error_1;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4, connection_1.default('bth_ongs').insert({
+                                            id: id,
+                                            name: name,
+                                            email: email,
+                                            whatsapp: whatsapp,
+                                            city: city,
+                                            uf: uf,
+                                            user_id: user_id
+                                        })
+                                            .then(function (response) {
+                                            resolve(response);
+                                        })];
+                                case 1:
+                                    ong = _a.sent();
+                                    return [3, 3];
+                                case 2:
+                                    error_1 = _a.sent();
+                                    reject(error_1);
+                                    return [3, 3];
+                                case 3: return [2];
+                            }
+                        });
+                    }); })];
+            });
+        });
+    };
+    OngServices.prototype.get_user_ongs = function (user_id) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var ong, e_1;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
-                                case 0: return [4, connection_1.default('webhooks')
-                                        .select('*')
-                                        .then(function (response) {
-                                        resolve(response);
-                                    })
-                                        .catch(function (err) {
-                                        reject(err);
-                                    })];
+                                case 0:
+                                    _a.trys.push([0, 2, , 3]);
+                                    return [4, connection_1.default('bth_ongs')
+                                            .select("*")
+                                            .where("user_id", user_id)
+                                            .first()
+                                            .then(function (response) {
+                                            resolve(response);
+                                        })
+                                            .catch(function (e) {
+                                            reject(e);
+                                        })];
                                 case 1:
-                                    _a.sent();
-                                    return [2];
+                                    ong = _a.sent();
+                                    return [3, 3];
+                                case 2:
+                                    e_1 = _a.sent();
+                                    reject(e_1);
+                                    return [3, 3];
+                                case 3: return [2];
                             }
                         });
                     }); })];
             });
         });
     };
-    WebhookServices.prototype.list_by_origin = function (origin) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4, connection_1.default('webhooks')
-                                        .select('*')
-                                        .where('origin', origin)
-                                        .then(function (response) {
-                                        resolve(response);
-                                    })
-                                        .catch(function (err) {
-                                        reject(err);
-                                    })];
-                                case 1:
-                                    _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    WebhookServices.prototype.get_webhook_by_name = function (name) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                return [2, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4, connection_1.default('webhooks')
-                                        .select('*')
-                                        .where('name', name)
-                                        .first()
-                                        .then(function (response) {
-                                        resolve(response);
-                                    })
-                                        .catch(function (err) {
-                                        reject(err);
-                                    })];
-                                case 1:
-                                    _a.sent();
-                                    return [2];
-                            }
-                        });
-                    }); })];
-            });
-        });
-    };
-    return WebhookServices;
+    return OngServices;
 }());
-exports.WebhookServices = WebhookServices;
+exports.OngServices = OngServices;
