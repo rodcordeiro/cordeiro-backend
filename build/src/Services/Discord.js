@@ -42,7 +42,8 @@ var Webhook_1 = require("../Services/Webhook");
 var DiscordService = (function () {
     function DiscordService() {
     }
-    DiscordService.prototype.send_message = function (channel, message) {
+    DiscordService.prototype.send_message = function (channel, message, options) {
+        if (options === void 0) { options = {}; }
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
@@ -61,8 +62,8 @@ var DiscordService = (function () {
                                     hook = _a.sent();
                                     return [4, api_1.discordApi.post(hook, {
                                             "content": message,
-                                            "username": "RodRobo",
-                                            "avatar_url": "https://rodcordeiro.github.io/shares/img/rodrobo.jpg"
+                                            "username": options.username ? options.username : "RodRobo",
+                                            "avatar_url": options.avatar_url ? options.avatar_url : "https://rodcordeiro.github.io/shares/img/rodrobo.jpg"
                                         })
                                             .then(function (response) {
                                             resolve(response);

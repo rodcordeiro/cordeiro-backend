@@ -5,10 +5,14 @@ interface iDiscordMessage{
     channel ?: string
     message :string
 }
-
+interface iDefaultMessage{
+    content?: string,
+    username?: string
+    avatar_url?: string
+}
 class DiscordService{
     
-    async send_message(channel: string, message: string) : Promise<any>{
+    async send_message(channel: string, message: string, options: iDefaultMessage = {}) : Promise<any>{
         
         return new Promise(async (resolve,reject)=>{
             const wservices = new WebhookServices();      
@@ -19,8 +23,8 @@ class DiscordService{
                 .catch((error) => reject(error) )
             await discordApi.post(hook,{
                 "content": message,
-                "username":"RodRobo",
-                "avatar_url": "https://rodcordeiro.github.io/shares/img/rodrobo.jpg"
+                "username":options.username ? options.username : "RodRobo",
+                "avatar_url": options.avatar_url ? options.avatar_url : "https://rodcordeiro.github.io/shares/img/rodrobo.jpg"
             })
             .then(response=>{
                 resolve(response)

@@ -51,13 +51,13 @@ var HabiticaService = (function () {
                             switch (_a.label) {
                                 case 0:
                                     discord = new Discord_1.DiscordService();
-                                    return [4, discord.send_message('testes_do_cordeiro', "**Task " + data.type + "**\ntask: " + data.task.text + "\ndescription: " + data.task.notes + "\n")
+                                    return [4, discord.send_message('habitica_news', "**Task " + data.type + "**\ntask: " + data.task.text + "\ndescription: " + data.task.notes + "\n", {
+                                            avatar_url: "https://habitica.com/static/img/melior@3x.fe3b187f.png"
+                                        })
                                             .then(function (response) {
-                                            console.log(response);
                                             resolve("");
                                         })
                                             .catch(function (err) {
-                                            console.log(err);
                                             reject(err);
                                         })];
                                 case 1:

@@ -44,7 +44,6 @@ apiEndpoints.get('/webhooks/:origin', jwt.validate, webhooks.get_webhook)
 apiEndpoints.post('/webhooks/:origin', webhooks.run_webhook)
 apiEndpoints.post('/webhooks/:origin/:webhook', webhooks.run_webhook)
 
-// apiEndpoints.post('/webhooks/habitica', discord.habiticaMessage)
 // apiEndpoints.post('/webhook/devto', (req, res)=>{
 //   discord.sendMessage('testes_do_cordeiro','**Webhook do DevTo received!**',res)
 //   console.log(req.body)
