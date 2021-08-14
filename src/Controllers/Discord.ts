@@ -8,6 +8,7 @@ class DiscordController{
         const services = new DiscordService(); 
         
         let { message, channel  } : iDiscordMessage = req.body;
+        message = message ? message : "I'm alive fools."
         channel = channel ? channel : "testes_do_cordeiro"
         
         const service = await services.send_message(channel,message)

@@ -1,4 +1,4 @@
-import connection from "../../database/connection";
+import connection from "../../../database/connection";
 import { v4 as uuid } from "uuid";
 import { response } from "express";
 

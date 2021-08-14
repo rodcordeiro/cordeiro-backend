@@ -59,7 +59,7 @@ class UserController{
         if (!username){
             user = await services.login_email(email,password)
              .then (response=>{
-                return res.status(200).json({response})
+                return res.status(200).json(response)
              })
              .catch(error=>{
                 return res.status(400).json({error})

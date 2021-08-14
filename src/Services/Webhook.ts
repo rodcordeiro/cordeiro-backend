@@ -5,7 +5,7 @@ import { cript } from '../tools/crypto'
 interface iWebhook{
     id ?:string
     name: string
-    origin: string
+    origin?: string
     webhook: string
     created_at?: Date
     updated_at?: Date
@@ -14,7 +14,8 @@ interface iWebhook{
 class WebhookServices{
     async create_webhook(data: iWebhook){
         return new Promise( async (resolve,reject)=>{
-            const {name, origin, webhook} = data;
+            let {name, origin, webhook} = data;
+            if(!origin){ origin = webhook}
             await connection('webhooks')
                 .insert({name, origin, webhook})
                 .then(response=>{

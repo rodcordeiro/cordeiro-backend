@@ -1,4 +1,4 @@
-import jwt from '../tools/jwt';
+import jwt from '../middlewares/jwt';
 import { Router } from 'express'
 import { esbChapters } from '../Controllers/ESB/Chapters'
 
