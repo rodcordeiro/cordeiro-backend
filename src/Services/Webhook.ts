@@ -66,6 +66,35 @@ class WebhookServices{
                 })
         })
     }
+    async update(data: iWebhook){
+        return new Promise( async (resolve, reject)=>{
+            let {id, name, origin, webhook} = data;
+            const updated_at = new Date().toISOString();
+            await connection('webhooks')
+               .where({id}) 
+                .update({name, origin, webhook,updated_at})
+                .then((response)=>{
+                    resolve(response)
+                })
+                .catch(err=>{
+                    reject(err)
+                })
+        })
+    }
+    async delete(id: number){
+        return new Promise(async (resolve, reject)=>{
+            await connection('webhooks')
+                .where({id})
+                .first()
+                .delete()
+                .then(response=>{
+                    resolve(response)
+                })
+                .catch(err=>{
+                    reject(err)
+                })
+        })
+    }
 }
 
 export {

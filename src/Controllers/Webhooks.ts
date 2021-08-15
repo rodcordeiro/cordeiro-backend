@@ -16,6 +16,31 @@ class WebhooksController{
             })
 
     }
+    async update(req: Request, res: Response){
+        const Services = new WebhookServices();
+        const {id} = req.params
+        const {name, origin, webhook} = req.body
+        await Services.update({id,origin,webhook,name})
+            .then(response=>{
+                return res.status(204).json()
+            })
+            .catch(err=>{
+                return res.status(400).json(err) 
+            })
+    }
+    
+    async delete(req: Request, res: Response){
+        const Services = new WebhookServices();
+        const {id} : any = req.params
+        await Services.delete(id)
+        .then(response=>{
+            return res.status(204).json()
+        })
+        .catch(err=>{
+            return res.status(400).json(err) 
+        })
+    }
+
     async get_webhooks(req: Request, res: Response){
         const Services = new WebhookServices();
         const webhook = await Services.list_webhooks()
@@ -51,6 +76,9 @@ class WebhooksController{
                 })
         }
         return res.status(200).send();
+    }
+    async validate_webhook(req: Request, res: Response){
+        const {origin,webhook} = req.params;
     }
 }
 

@@ -19,11 +19,15 @@ const GHAuth : AxiosInstance  = axios.create({
 const GHapi : AxiosInstance  = axios.create({
     baseURL: "https://api.github.com",
 })
+const habiAPI : AxiosInstance = axios.create({
+    baseURL: "https://habitica.com/api/v3"
+})
 
 export {
     discordApi,
     devtoApi,
     habiticaApi,
     GHAuth,
-    GHapi
+    GHapi,
+    habiAPI,
 };

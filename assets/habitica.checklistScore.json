@@ -1,0 +1,44 @@
+{
+    "data": {
+        "type": "'checklistScored'",
+        "task": {
+            "repeat": ["Object"],
+            "challenge": {},
+            "group": ["Object"],
+            "frequency": "'daily'",
+            "everyX": 1,
+            "streak": 1,
+            "nextDue": ["Array"],
+            "yesterDaily": true,
+            "history": ["Array"],
+            "completed": false,
+            "collapseChecklist": false,
+            "type": "'daily'",
+            "notes": "'Eu sei que não é tão fácil se manter produtivo, mas um passo após o outro chegaremos lá. Atualize ou cumpra ao menos 3 tarefas que estão pendentes para pontuar!'",
+            "tags": ["Array"],
+            "'value'": 9.374460355583453,
+            "priority": 2,
+            "attribute": "'str'",
+            "byHabitica": false,
+            "startDate": "'2021-01-13T03:00:00.000Z'",
+            "daysOfMonth": [],
+            "weeksOfMonth": [],
+            "checklist": ["Array"],
+            "reminders": [],
+            "createdAt": "'2021-01-13T14:26:21.369Z'",
+            "updatedAt": "'2021-08-15T18:22:45.466Z'",
+            "_id": "'b322a291-87c4-490e-8bf6-2b7087538929'",
+            "text": "'Cumprir ou atualizar 3 tarefas!'",
+            "userId": "'c150cf43-bf4a-4c46-8912-9c04f77d3924'",
+            "isDue": true,
+            "id": "'b322a291-87c4-490e-8bf6-2b7087538929'"
+        },
+        "item": {
+            "completed": true,
+            "text": "'Tarefa 1'",
+            "id": "'b1566d67-df1f-4d9b-ac08-b08744a9f880'"
+        },
+        "webhookType": "'taskActivity'",
+        "user": { "_id": "'c150cf43-bf4a-4c46-8912-9c04f77d3924'"}
+    }
+}
