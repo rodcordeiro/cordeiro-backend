@@ -50,8 +50,9 @@ var HabiticaService = (function () {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
+                                    console.log({ data: data });
                                     discord = new Discord_1.DiscordService();
-                                    return [4, discord.send_message('habitica_news', "**Task " + data.type + "**\ntask: " + data.task.text + "\ndescription: " + data.task.notes + "\n", {
+                                    return [4, discord.send_message('habitica_news', "**Task " + data.type + "**\n            task: " + data, {
                                             avatar_url: "https://habitica.com/static/img/melior@3x.fe3b187f.png"
                                         })
                                             .then(function (response) {
