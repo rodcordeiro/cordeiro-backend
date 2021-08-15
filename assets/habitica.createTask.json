@@ -1,0 +1,30 @@
+{
+    "data": {
+        "type": "created",
+        "task": {
+            "challenge": {},
+            "group": ["Object"],
+            "completed": false,
+            "collapseChecklist": false,
+            "type": "'todo'",
+            "notes": "O envio de notificações do backup do servidor da wekmag não está funcionando.\n O script está funcionando corretamente porém não está enviando os emails.",
+            "tags": ["Array"],
+            "value": 0,
+            "priority": 1.5,
+            "attribute": "'str'",
+            "byHabitica": false,
+            "text": "'Verificar servidor Wekmag'",
+            "_id": "'16f7b042-3f41-46c5-82e2-fc0302e9b499'",
+            "reminders": [],
+            "checklist": [],
+            "createdAt": "'2021-08-15T17:42:52.872Z'",
+            "updatedAt": "'2021-08-15T17:42:52.872Z'",
+            "userId": "'c150cf43-bf4a-4c46-8912-9c04f77d3924'",
+            "id": "'16f7b042-3f41-46c5-82e2-fc0302e9b499'"
+        },
+        "webhookType": "'taskActivity'",
+        "user": { 
+        "_id": "'c150cf43-bf4a-4c46-8912-9c04f77d3924'" 
+        }
+    }
+}

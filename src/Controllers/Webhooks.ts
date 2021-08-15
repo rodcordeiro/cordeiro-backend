@@ -52,6 +52,9 @@ class WebhooksController{
         }
         return res.status(200).send();
     }
+    async validate_webhook(req: Request, res: Response){
+        const {origin,webhook} = req.params;
+    }
 }
 
 export { 
