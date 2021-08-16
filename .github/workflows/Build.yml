@@ -6,11 +6,8 @@ on:
   pull_request:
     branches: "master"
 jobs:
-  if: "${{ github.ref == 'refs/heads/master' }}"
+  if: "${{contains(github.ref,'master')}}"
   analyze:
-    branding:
-      icon: 'package'  
-      color: 'green'
     name: Analyze code for any code vulnerability
     runs-on: ubuntu-latest
     permissions:
