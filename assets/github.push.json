@@ -1,0 +1,519 @@
+{
+    "ref": "refs/heads/develop",
+    "before": "f7df85d0de065007e487f469923b8c4d6b825eb1",
+    "after": "981a9c8b1064585724d5ff9ca7625321830ab0d3",
+    "repository": {
+        "id": 252051773,
+        "node_id": "MDEwOlJlcG9zaXRvcnkyNTIwNTE3NzM=",
+        "name": "cordeiro-backend",
+        "full_name": "rodcordeiro/cordeiro-backend",
+        "private": false,
+        "owner": {
+            "name": "rodcordeiro",
+            "email": "rodrigomendoncca@gmail.com",
+            "login": "rodcordeiro",
+            "id": 33455212,
+            "node_id": "MDQ6VXNlcjMzNDU1MjEy",
+            "avatar_url": "https://avatars.githubusercontent.com/u/33455212?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/rodcordeiro",
+            "html_url": "https://github.com/rodcordeiro",
+            "followers_url": "https://api.github.com/users/rodcordeiro/followers",
+            "following_url": "https://api.github.com/users/rodcordeiro/following{/other_user}",
+            "gists_url": "https://api.github.com/users/rodcordeiro/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/rodcordeiro/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/rodcordeiro/subscriptions",
+            "organizations_url": "https://api.github.com/users/rodcordeiro/orgs",
+            "repos_url": "https://api.github.com/users/rodcordeiro/repos",
+            "events_url": "https://api.github.com/users/rodcordeiro/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/rodcordeiro/received_events",
+            "type": "User",
+            "site_admin": false
+        },
+        "html_url": "https://github.com/rodcordeiro/cordeiro-backend",
+        "description": null,
+        "fork": false,
+        "url": "https://github.com/rodcordeiro/cordeiro-backend",
+        "forks_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/forks",
+        "keys_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/teams",
+        "hooks_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/hooks",
+        "issue_events_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/events",
+        "assignees_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/tags",
+        "blobs_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/languages",
+        "stargazers_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/stargazers",
+        "contributors_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/contributors",
+        "subscribers_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/subscribers",
+        "subscription_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/subscription",
+        "commits_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/merges",
+        "archive_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/downloads",
+        "issues_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/labels{/name}",
+        "releases_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/rodcordeiro/cordeiro-backend/deployments",
+        "created_at": 1585708351,
+        "updated_at": "2021-08-16T13:18:04Z",
+        "pushed_at": 1629121372,
+        "git_url": "git://github.com/rodcordeiro/cordeiro-backend.git",
+        "ssh_url": "git@github.com:rodcordeiro/cordeiro-backend.git",
+        "clone_url": "https://github.com/rodcordeiro/cordeiro-backend.git",
+        "svn_url": "https://github.com/rodcordeiro/cordeiro-backend",
+        "homepage": "https://rodcordeiro.herokuapp.com/",
+        "size": 15465,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": "TypeScript",
+        "has_issues": true,
+        "has_projects": true,
+        "has_downloads": true,
+        "has_wiki": true,
+        "has_pages": false,
+        "forks_count": 0,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 7,
+        "license": null,
+        "forks": 0,
+        "open_issues": 7,
+        "watchers": 0,
+        "default_branch": "master",
+        "stargazers": 0,
+        "master_branch": "master"
+    },
+    "pusher": {
+        "name": "rodcordeiro",
+        "email": "rodrigomendoncca@gmail.com"
+    },
+    "sender": {
+        "login": "rodcordeiro",
+        "id": 33455212,
+        "node_id": "MDQ6VXNlcjMzNDU1MjEy",
+        "avatar_url": "https://avatars.githubusercontent.com/u/33455212?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/rodcordeiro",
+        "html_url": "https://github.com/rodcordeiro",
+        "followers_url": "https://api.github.com/users/rodcordeiro/followers",
+        "following_url": "https://api.github.com/users/rodcordeiro/following{/other_user}",
+        "gists_url": "https://api.github.com/users/rodcordeiro/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/rodcordeiro/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/rodcordeiro/subscriptions",
+        "organizations_url": "https://api.github.com/users/rodcordeiro/orgs",
+        "repos_url": "https://api.github.com/users/rodcordeiro/repos",
+        "events_url": "https://api.github.com/users/rodcordeiro/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/rodcordeiro/received_events",
+        "type": "User",
+        "site_admin": false
+    },
+    "created": false,
+    "deleted": false,
+    "forced": false,
+    "base_ref": null,
+    "compare": "https://github.com/rodcordeiro/cordeiro-backend/compare/f7df85d0de06...981a9c8b1064",
+    "commits": [
+        {
+            "id": "852bdf84a70ec19ce804887e72f0481806e11006",
+            "tree_id": "7c721655c865f4482e8be2e0150d9a77b00fe5fc",
+            "distinct": false,
+            "message": "Merge pull request #23 from rodcordeiro/develop\n\nCreate webhooks integration and habitica automation",
+            "timestamp": "2021-08-15T20:59:57-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/852bdf84a70ec19ce804887e72f0481806e11006",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "GitHub",
+                "email": "noreply@github.com",
+                "username": "web-flow"
+            },
+            "added": [
+                "assets/habitica.checklistScore.json",
+                "assets/habitica.createTask.json"
+            ],
+            "removed": [],
+            "modified": [
+                "package-lock.json",
+                "src/Controllers/Webhooks.ts",
+                "src/Services/Habitica.ts",
+                "src/Services/Webhook.ts",
+                "src/routes/api.routes.ts",
+                "src/tools/api.ts",
+                "tsconfig.json"
+            ]
+        },
+        {
+            "id": "bab683b9f86f170ca8750450da7cf5a5c2d61c8a",
+            "tree_id": "a6aa8b55b1669eaca0d1d42c22f17ecf0f32c83b",
+            "distinct": false,
+            "message": "Bump tar from 4.4.13 to 4.4.17\n\nBumps [tar](https://github.com/npm/node-tar) from 4.4.13 to 4.4.17.\n- [Release notes](https://github.com/npm/node-tar/releases)\n- [Changelog](https://github.com/npm/node-tar/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/npm/node-tar/compare/v4.4.13...v4.4.17)\n\n---\nupdated-dependencies:\n- dependency-name: tar\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>",
+            "timestamp": "2021-08-16T00:00:43Z",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/bab683b9f86f170ca8750450da7cf5a5c2d61c8a",
+            "author": {
+                "name": "dependabot[bot]",
+                "email": "49699333+dependabot[bot]@users.noreply.github.com",
+                "username": "dependabot[bot]"
+            },
+            "committer": {
+                "name": "GitHub",
+                "email": "noreply@github.com",
+                "username": "web-flow"
+            },
+            "added": [],
+            "removed": [],
+            "modified": [
+                "package-lock.json"
+            ]
+        },
+        {
+            "id": "7fa0517cb3dfeec0ebe2a5ebd52b007dcd69a91d",
+            "tree_id": "a6aa8b55b1669eaca0d1d42c22f17ecf0f32c83b",
+            "distinct": false,
+            "message": "Merge pull request #24 from rodcordeiro/dependabot/npm_and_yarn/tar-4.4.17\n\nBump tar from 4.4.13 to 4.4.17",
+            "timestamp": "2021-08-15T21:05:53-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/7fa0517cb3dfeec0ebe2a5ebd52b007dcd69a91d",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "GitHub",
+                "email": "noreply@github.com",
+                "username": "web-flow"
+            },
+            "added": [],
+            "removed": [],
+            "modified": [
+                "package-lock.json"
+            ]
+        },
+        {
+            "id": "3a708ad8f73436443b53e233d3005c813a4898ee",
+            "tree_id": "bc40df6f4b264bf137f1c9ea8c9020a5b1cfda1f",
+            "distinct": false,
+            "message": "Add build",
+            "timestamp": "2021-08-15T22:47:41-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/3a708ad8f73436443b53e233d3005c813a4898ee",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "added": [],
+            "removed": [],
+            "modified": [
+                "build/knexfile.js",
+                "build/src/Controllers/Books.js",
+                "build/src/Controllers/Discord.js",
+                "build/src/Controllers/ESB/Chapters.js",
+                "build/src/Controllers/Github.js",
+                "build/src/Controllers/Projects.js",
+                "build/src/Controllers/User.js",
+                "build/src/Controllers/Webhooks.js",
+                "build/src/Services/Book.js",
+                "build/src/Services/Discord.js",
+                "build/src/Services/Habitica.js",
+                "build/src/Services/User.js",
+                "build/src/Services/Webhook.js",
+                "build/src/app.js",
+                "build/src/components/BeTheHero/Controllers/IncidentsController.js",
+                "build/src/components/BeTheHero/Controllers/OngController.js",
+                "build/src/components/BeTheHero/Services/Incidents.js",
+                "build/src/components/BeTheHero/Services/Ongs.js",
+                "build/src/components/BeTheHero/index.js",
+                "build/src/components/Fin/index.js",
+                "build/src/database/connection.js",
+                "build/src/database/migrations/20201206173656_createPostTable.js",
+                "build/src/database/migrations/20201206195930_createUserTable.js",
+                "build/src/database/migrations/20201206195941_createProjectsTable.js",
+                "build/src/database/migrations/20201211191240_createBooksTable.js",
+                "build/src/database/migrations/20210327224424_create_discord_webhooks_tables.js",
+                "build/src/middlewares/jwt.js",
+                "build/src/routes/api.routes.js",
+                "build/src/routes/esb.routes.js",
+                "build/src/routes/gh.routes.js",
+                "build/src/routes/routes.js",
+                "build/src/server.js",
+                "build/src/tools/api.js",
+                "build/src/tools/crypto.js",
+                "build/src/websockets/chat.js",
+                "build/src/websockets/manager.js",
+                "insomnia.json"
+            ]
+        },
+        {
+            "id": "055424c6bec61ac9343f221089a14b2fc7c11725",
+            "tree_id": "8902f3cedf400fe66b3704265d3ad29282490172",
+            "distinct": false,
+            "message": "Add build",
+            "timestamp": "2021-08-15T22:53:13-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/055424c6bec61ac9343f221089a14b2fc7c11725",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "added": [],
+            "removed": [],
+            "modified": [
+                "build/src/Services/Habitica.js",
+                "src/Services/Habitica.ts"
+            ]
+        },
+        {
+            "id": "0fa3fb6ee13afd4619cebfda5efe45c5f3c84e73",
+            "tree_id": "4f03c1cd815e049ae9f4a0a0b1a664982c2dc889",
+            "distinct": false,
+            "message": "Update habitica webhook handler",
+            "timestamp": "2021-08-15T23:06:09-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/0fa3fb6ee13afd4619cebfda5efe45c5f3c84e73",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "added": [],
+            "removed": [],
+            "modified": [
+                "build/src/Services/Habitica.js",
+                "src/Services/Habitica.ts"
+            ]
+        },
+        {
+            "id": "1092aef35e49c192ea5d0639bc7e3619001ddf9e",
+            "tree_id": "b917c06a35807f4f775a969368f1806cd7bdaac6",
+            "distinct": false,
+            "message": "Add build workflow",
+            "timestamp": "2021-08-15T23:57:15-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/1092aef35e49c192ea5d0639bc7e3619001ddf9e",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "added": [
+                ".github/workflows/Build.yml"
+            ],
+            "removed": [
+                "build/knexfile.js",
+                "build/src/Controllers/BTH/IncidentsController.js",
+                "build/src/Controllers/BTH/OngController.js",
+                "build/src/Controllers/Books.js",
+                "build/src/Controllers/Discord.js",
+                "build/src/Controllers/ESB/Chapters.js",
+                "build/src/Controllers/Github.js",
+                "build/src/Controllers/Projects.js",
+                "build/src/Controllers/User.js",
+                "build/src/Controllers/Webhooks.js",
+                "build/src/Services/BTH/Incidents.js",
+                "build/src/Services/BTH/Ongs.js",
+                "build/src/Services/Book.js",
+                "build/src/Services/Discord.js",
+                "build/src/Services/Habitica.js",
+                "build/src/Services/User.js",
+                "build/src/Services/Webhook.js",
+                "build/src/app.js",
+                "build/src/components/BeTheHero/Controllers/IncidentsController.js",
+                "build/src/components/BeTheHero/Controllers/OngController.js",
+                "build/src/components/BeTheHero/Services/Incidents.js",
+                "build/src/components/BeTheHero/Services/Ongs.js",
+                "build/src/components/BeTheHero/index.js",
+                "build/src/components/Fin/index.js",
+                "build/src/database/connection.js",
+                "build/src/database/migrations/20201206173656_createPostTable.js",
+                "build/src/database/migrations/20201206195930_createUserTable.js",
+                "build/src/database/migrations/20201206195941_createProjectsTable.js",
+                "build/src/database/migrations/20201211191240_createBooksTable.js",
+                "build/src/database/migrations/20210327224424_create_discord_webhooks_tables.js",
+                "build/src/database/migrations/20210515170118_create_bth_ongs.js",
+                "build/src/database/migrations/20210515170215_create_bth_incidents.js",
+                "build/src/database/migrations/20210604155814_create_ESB_Chapters_table.js",
+                "build/src/database/seeds/create_default_user.js",
+                "build/src/database/seeds/populate_ESB_Chapters.js",
+                "build/src/middlewares/jwt.js",
+                "build/src/routes/api.routes.js",
+                "build/src/routes/bth.routes.js",
+                "build/src/routes/esb.routes.js",
+                "build/src/routes/gh.routes.js",
+                "build/src/routes/routes.js",
+                "build/src/server.js",
+                "build/src/tools/api.js",
+                "build/src/tools/crypto.js",
+                "build/src/tools/jwt.js",
+                "build/src/websockets/chat.js",
+                "build/src/websockets/manager.js"
+            ],
+            "modified": [
+                ".github/workflows/CodeAnalysis.yml",
+                ".gitignore"
+            ]
+        },
+        {
+            "id": "96b53ef658397991f7ee0c01b91b79a25fdd23dc",
+            "tree_id": "e3c28b1798f11e53ed713b32b289e66c779e15c6",
+            "distinct": false,
+            "message": "Fix workflow issues",
+            "timestamp": "2021-08-16T00:07:43-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/96b53ef658397991f7ee0c01b91b79a25fdd23dc",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "added": [],
+            "removed": [],
+            "modified": [
+                ".github/workflows/Build.yml"
+            ]
+        },
+        {
+            "id": "fe85d981a12c5c557a0e1240ec26ba626e0f563f",
+            "tree_id": "c27aff2e172eaf681f737a008359f46290f9e5c9",
+            "distinct": false,
+            "message": "Fix stupid failures",
+            "timestamp": "2021-08-16T00:12:55-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/fe85d981a12c5c557a0e1240ec26ba626e0f563f",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "added": [],
+            "removed": [],
+            "modified": [
+                ".github/workflows/Build.yml"
+            ]
+        },
+        {
+            "id": "981a9c8b1064585724d5ff9ca7625321830ab0d3",
+            "tree_id": "6658ffaab75345a9a8a88c1f92229145e69c8410",
+            "distinct": true,
+            "message": "Update discord notifications",
+            "timestamp": "2021-08-16T10:42:39-03:00",
+            "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/981a9c8b1064585724d5ff9ca7625321830ab0d3",
+            "author": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "committer": {
+                "name": "Rodrigo Cordeiro",
+                "email": "rodrigomendoncca@gmail.com",
+                "username": "rodcordeiro"
+            },
+            "added": [
+                "assets/github.action.check.completed.json",
+                "assets/github.action.checksuite.completed.json",
+                "assets/github.action.created.json",
+                "assets/github.action.queued.json",
+                "assets/github.action.started.json",
+                "assets/github.action.workflow.completed.json",
+                "assets/github.action.workflowrun.json",
+                "assets/github.branch.delete.json",
+                "assets/github.connectwebhook.json",
+                "assets/github.issue.assign.json",
+                "assets/github.issue.closed.json",
+                "assets/github.issue.comment.create.json",
+                "assets/github.issue.edited.json",
+                "assets/github.issue.label.json",
+                "assets/github.issue.opened.json",
+                "assets/github.pr.merge.json"
+            ],
+            "removed": [],
+            "modified": [
+                "src/Services/Habitica.ts"
+            ]
+        }
+    ],
+    "head_commit": {
+        "id": "981a9c8b1064585724d5ff9ca7625321830ab0d3",
+        "tree_id": "6658ffaab75345a9a8a88c1f92229145e69c8410",
+        "distinct": true,
+        "message": "Update discord notifications",
+        "timestamp": "2021-08-16T10:42:39-03:00",
+        "url": "https://github.com/rodcordeiro/cordeiro-backend/commit/981a9c8b1064585724d5ff9ca7625321830ab0d3",
+        "author": {
+            "name": "Rodrigo Cordeiro",
+            "email": "rodrigomendoncca@gmail.com",
+            "username": "rodcordeiro"
+        },
+        "committer": {
+            "name": "Rodrigo Cordeiro",
+            "email": "rodrigomendoncca@gmail.com",
+            "username": "rodcordeiro"
+        },
+        "added": [
+            "assets/github.action.check.completed.json",
+            "assets/github.action.checksuite.completed.json",
+            "assets/github.action.created.json",
+            "assets/github.action.queued.json",
+            "assets/github.action.started.json",
+            "assets/github.action.workflow.completed.json",
+            "assets/github.action.workflowrun.json",
+            "assets/github.branch.delete.json",
+            "assets/github.connectwebhook.json",
+            "assets/github.issue.assign.json",
+            "assets/github.issue.closed.json",
+            "assets/github.issue.comment.create.json",
+            "assets/github.issue.edited.json",
+            "assets/github.issue.label.json",
+            "assets/github.issue.opened.json",
+            "assets/github.pr.merge.json"
+        ],
+        "removed": [],
+        "modified": [
+            "src/Services/Habitica.ts"
+        ]
+    }
+}
