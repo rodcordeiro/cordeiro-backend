@@ -9,7 +9,7 @@ branding:
   icon: 'package'  
   color: 'green'
 jobs:
-  if: ${{ github.ref == 'refs/heads/master' }}
+  if: "${{ github.ref == 'refs/heads/master' }}"
   analyze:
     name: Analyze code for any code vulnerability
     runs-on: ubuntu-latest
