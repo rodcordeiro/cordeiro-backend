@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: "master"
 jobs:
-  if: contains("${{github.ref}}",'master')
+  if: "contains(${{github.ref}},'master')"
   analyze:
     name: Analyze code for any code vulnerability
     runs-on: ubuntu-latest
