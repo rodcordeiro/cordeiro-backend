@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var Github_1 = require("../Controllers/Github");
-var ghEndpoints = express_1.Router();
-var auth = new Github_1.GithubAuth;
-var github = new Github_1.GithubController;
+const express_1 = require("express");
+const Github_1 = require("../Controllers/Github");
+const ghEndpoints = express_1.Router();
+const auth = new Github_1.GithubAuth;
+const github = new Github_1.GithubController;
 ghEndpoints.get("/gh/auth", auth.get_token);
 ghEndpoints.get("/gh/token", auth.validateToken);
 ghEndpoints.post("/gh/repos", github.getRepos);

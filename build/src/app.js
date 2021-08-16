@@ -4,23 +4,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.io = exports.http = void 0;
-var express_1 = __importDefault(require("express"));
-var cors_1 = __importDefault(require("cors"));
-var routes_1 = __importDefault(require("./routes/routes"));
-var http_1 = require("http");
-var socket_io_1 = require("socket.io");
-var corsOptions = {
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const routes_1 = __importDefault(require("./routes/routes"));
+const http_1 = require("http");
+const socket_io_1 = require("socket.io");
+const corsOptions = {
     "origin": true,
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "optionsSuccessStatus": 204
 };
-var app = express_1.default();
+const app = express_1.default();
 app.use(express_1.default.json());
 app.use(cors_1.default(corsOptions));
 app.use(routes_1.default);
-var http = http_1.createServer(app);
+const http = http_1.createServer(app);
 exports.http = http;
-var io = new socket_io_1.Server(http, {
+const io = new socket_io_1.Server(http, {
     cors: {
         "origin": true,
         "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",

@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-    return knex.schema.createTable('webhooks', function (table) {
+    return knex.schema.createTable('webhooks', table => {
         table.increments();
         table.string('name');
         table.string('origin');
