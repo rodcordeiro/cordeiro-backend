@@ -4,6 +4,8 @@ import { habiAPI } from '../tools/api'
 class HabiticaService{
     async webhookHandler(data: any){
         return new Promise(async(resolve,reject)=>{
+            const discord = new DiscordService();
+            
             if(data.type == "scored" || data.type == "updated" || data.type == "checklistScored"){
                 if(data.task.id != "b322a291-87c4-490e-8bf6-2b7087538929"){
                     const task = await habiAPI.get('/tasks/b322a291-87c4-490e-8bf6-2b7087538929',{
@@ -30,7 +32,20 @@ class HabiticaService{
                                 'x-api-key': '3a00e702-525c-41f2-a69a-d10b741b0c5c',
                                 'x-client': 'c150cf43-bf4a-4c46-8912-9c04f77d3924-cordeiroAPI'
                               }
-                        }).catch(err=>{
+                        })
+                        .then(async (response)=>{
+                            await discord.send_message('habitica_news',`**Task ${task.checklist[completed].text} completed!!**`,{
+                                username: "Grifo",
+                                avatar_url: "https://habitica.com/static/img/melior@3x.fe3b187f.png"
+                            })
+                                .then(response=>{
+                                    resolve("")
+                                })
+                                .catch(err=>{
+                                    reject(err)
+                                })
+                        })
+                        .catch(err=>{
                             console.log({err})
                         })
                     } else {
@@ -40,27 +55,26 @@ class HabiticaService{
                                 'x-api-key': '3a00e702-525c-41f2-a69a-d10b741b0c5c',
                                 'x-client': 'c150cf43-bf4a-4c46-8912-9c04f77d3924-cordeiroAPI'
                               }
-                            }).catch(err=>{
+                            })
+                            .then(async (response)=>{
+                                await discord.send_message('habitica_news',`**Hooo yeah boy!!** :tada: :tada:\n Greate bro, you've made a strike! yoou completed 3 tasks today and fulfilled the day's goal! **YOU ROCK!**:punch:`,{
+                                    username: "Grifo",
+                                    avatar_url: "https://habitica.com/static/img/melior@3x.fe3b187f.png"
+                                })
+                                    .then(response=>{
+                                        resolve("")
+                                    })
+                                    .catch(err=>{
+                                        reject(err)
+                                    })
+                            })
+                            .catch(err=>{
                                 console.log({err})
                             })
                     }                    
                 }
             }
-
-
-            const discord = new DiscordService();
-            await discord.send_message('habitica_news',`**Task ${data.type}**
-            task: ${data.task.text}
-            description: ${data.task.notes}\n`,{
-                username: "Grifo",
-    avatar_url: "https://habitica.com/static/img/melior@3x.fe3b187f.png"
-})
-                .then(response=>{
-                    resolve("")
-                })
-                .catch(err=>{
-                    reject(err)
-                })
+            resolve("")
         })
     }
 }
