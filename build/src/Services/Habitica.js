@@ -29,12 +29,12 @@ class HabiticaService {
                         });
                         const checklistItems = task.checklist.length;
                         let completed = 0;
-                        let check = false;
                         task.checklist.map((item, index) => __awaiter(this, void 0, void 0, function* () {
                             if (item.completed) {
                                 completed++;
                             }
                             else {
+                                console.log({ item, completed });
                                 yield api_1.habiAPI.post(`/tasks/b322a291-87c4-490e-8bf6-2b7087538929/checklist/${task.checklist[completed].id}/score`, {}, {
                                     headers: {
                                         'x-api-user': 'c150cf43-bf4a-4c46-8912-9c04f77d3924',
