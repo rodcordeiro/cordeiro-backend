@@ -33,30 +33,29 @@ class HabiticaService {
                             if (item.completed) {
                                 completed++;
                             }
-                            else {
-                                console.log({ item, completed });
-                                yield api_1.habiAPI.post(`/tasks/b322a291-87c4-490e-8bf6-2b7087538929/checklist/${task.checklist[completed].id}/score`, {}, {
-                                    headers: {
-                                        'x-api-user': 'c150cf43-bf4a-4c46-8912-9c04f77d3924',
-                                        'x-api-key': '3a00e702-525c-41f2-a69a-d10b741b0c5c',
-                                        'x-client': 'c150cf43-bf4a-4c46-8912-9c04f77d3924-cordeiroAPI'
-                                    }
-                                }).catch(err => {
-                                    console.log({ err });
-                                });
-                                if (completed == checklistItems - 1) {
-                                    yield api_1.habiAPI.post("/tasks/b322a291-87c4-490e-8bf6-2b7087538929/score/up", {}, {
-                                        headers: {
-                                            'x-api-user': 'c150cf43-bf4a-4c46-8912-9c04f77d3924',
-                                            'x-api-key': '3a00e702-525c-41f2-a69a-d10b741b0c5c',
-                                            'x-client': 'c150cf43-bf4a-4c46-8912-9c04f77d3924-cordeiroAPI'
-                                        }
-                                    }).catch(err => {
-                                        console.log({ err });
-                                    });
-                                }
-                            }
                         }));
+                        if (completed < checklistItems - 1) {
+                            yield api_1.habiAPI.post(`/tasks/b322a291-87c4-490e-8bf6-2b7087538929/checklist/${task.checklist[completed].id}/score`, {}, {
+                                headers: {
+                                    'x-api-user': 'c150cf43-bf4a-4c46-8912-9c04f77d3924',
+                                    'x-api-key': '3a00e702-525c-41f2-a69a-d10b741b0c5c',
+                                    'x-client': 'c150cf43-bf4a-4c46-8912-9c04f77d3924-cordeiroAPI'
+                                }
+                            }).catch(err => {
+                                console.log({ err });
+                            });
+                        }
+                        else {
+                            yield api_1.habiAPI.post("/tasks/b322a291-87c4-490e-8bf6-2b7087538929/score/up", {}, {
+                                headers: {
+                                    'x-api-user': 'c150cf43-bf4a-4c46-8912-9c04f77d3924',
+                                    'x-api-key': '3a00e702-525c-41f2-a69a-d10b741b0c5c',
+                                    'x-client': 'c150cf43-bf4a-4c46-8912-9c04f77d3924-cordeiroAPI'
+                                }
+                            }).catch(err => {
+                                console.log({ err });
+                            });
+                        }
                     }
                 }
                 const discord = new Discord_1.DiscordService();
