@@ -25,7 +25,7 @@ class HabiticaService{
                             completed++;
                         }
                     }) 
-                    if(completed<checklistItems -1){
+                    if(completed<checklistItems){
                         await habiAPI.post(`/tasks/b322a291-87c4-490e-8bf6-2b7087538929/checklist/${task.checklist[completed].id}/score`,{},{
                             headers: {
                                 'x-api-user': 'c150cf43-bf4a-4c46-8912-9c04f77d3924',
@@ -67,7 +67,7 @@ class HabiticaService{
                               }
                             })
                             .then(async (response)=>{
-                                await discord.send_message('habitica_news',`**Hooo yeah boy!!** :tada: :tada:\n Greate bro, you've made a strike! yoou completed 3 tasks today and fulfilled the day's goal! **YOU ROCK!**:punch:`,{
+                                await discord.send_message('habitica_news',`**Hooo yeah boy!!** :tada: :tada:\n Greate bro, you've made a strike! yoou completed ${completed} tasks today and fulfilled the day's goal! **YOU ROCK!**:punch:`,{
                                     username: "Grifo",
                                     avatar_url: "https://habitica.com/static/img/melior@3x.fe3b187f.png"
                                 })
