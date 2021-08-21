@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { cript } from '../../../tools/crypto';
+import { Encrypt } from '../../../tools/crypto';
 import { UserService, iUser} from "../../../Services/User"
 import { OngServices,iOng } from "../Services/Ongs"
 
@@ -17,9 +17,11 @@ class bthOngController{
     async create(req: Request, res: Response){
         const User = new UserService();        
         const Ong = new OngServices();
-
+        const cript = new Encrypt();
+        
         let {name, email, password, number, city, uf} = req.body;
-        password = cript(password);
+        password = await cript.cript(password)
+            .then(response=>response)
         
         const user_id = await User.create_user({
             username: name,
@@ -45,9 +47,11 @@ class bthOngController{
     async authenticate(req: Request,res: Response){
         const User = new UserService();
         const Ong = new OngServices();
-
+        const cript = new Encrypt();
+        
         let { email, password } : iUser = req.body;
-        password = cript(password);
+        password = await cript.cript(password)
+            .then(response=>response)
         
         const user : any= await User.login_email( email, password )
          .then((response)=>{
