@@ -1,6 +1,6 @@
 import connection from "../database/connection";
 import { v4 as uuid } from "uuid";
-import { cript, Encrypt } from '../tools/crypto'
+import { Encrypt } from '../tools/crypto'
 import jwt from "../middlewares/jwt"
 
 interface iUser{
