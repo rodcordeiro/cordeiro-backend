@@ -1,27 +1,40 @@
 import crypto from 'crypto';
-
+import bcrypt from 'bcryptjs';
 
 class Encrypt{
-    private encrypt : any;
-    private decrypt : any;
-    
+    private saltRounds: number;
     constructor(){
-        const iv = "xxxxxxx";
-        console.log({iv})
-        this.encrypt = crypto.createCipheriv('des-ede3-cbc', process.env.APP_SECRET,iv);
-        this.decrypt = crypto.createDecipheriv('des-ede3-cbc', process.env.APP_SECRET, iv);
+        this.saltRounds = 10;
     }
-    cript(data: string){
-        const cipher : any = this.encrypt
-        let encripted = cipher.update(data, 'utf8', 'hex');
-        encripted += cipher.final('hex');
-        return encripted;
+    async cript(pwd: string) : Promise<string>{
+        return new Promise(async(resolve,reject)=>{
+            await bcrypt.hash(pwd, this.saltRounds)
+            .then((hash: string)=>{
+                resolve(hash)
+            })
+            .catch((err: Error)=>{
+                reject(err)
+            })
+
+        })
+        
     }
-    decript(data: string){
-        const cipher : any = this.decrypt
-        let decripted = cipher.update(data, 'hex', 'utf8');
-        decripted += cipher.final('utf8');
-        return decripted;
+    async compare(pwd: string,hash: string){
+        return new Promise(async(resolve,reject)=>{
+            await bcrypt.compare(pwd, hash)
+            .then((valid: boolean)=>{
+                resolve(valid)
+            })
+            .catch((err: Error)=>{
+                reject(err)
+            })
+
+        })
+    }
+    async hash(data: string){
+        return crypto.createHmac('sha256', process.env.APP_SECRET)
+        .update(data)
+        .digest('hex');
     }
 }
 function cript(data: string){
@@ -30,12 +43,8 @@ function cript(data: string){
     .digest('hex');
 }
 
-function decript(data: string){
-    return crypto.createDecipheriv;
-}
 
 export {
     cript,
-    decript,
     Encrypt
 }

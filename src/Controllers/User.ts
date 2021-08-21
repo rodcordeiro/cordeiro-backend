@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { cript } from '../tools/crypto'
+import { Encrypt } from '../tools/crypto'
 import { UserService, iUser} from "../Services/User"
 
 class UserController{
@@ -16,8 +16,11 @@ class UserController{
     }
     async create(req: Request, res: Response){
         const services = new UserService();
-        let { username, email, password } = req.body;
-        password = cript(password);
+        const cript = new Encrypt();
+        const { username, email, password: pwd } : iUser = req.body
+        
+        const password : string = await cript.cript(pwd)
+            .then(response=>response)
         
         const user = await services.create_user({ username, email, password })
             .then((response: any)=>{
@@ -51,9 +54,12 @@ class UserController{
 
     async login(req: Request, res: Response){
         const services = new UserService();
-        let { username, email, password } : iUser = req.body
+        const cript = new Encrypt();
         
-        password = cript(password);
+        const { username, email, password: pwd } : iUser = req.body
+        
+        const password : string = await cript.cript(pwd)
+            .then(response=>response)
         
         let user: any;
         if (!username){
