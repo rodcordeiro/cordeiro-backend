@@ -20,7 +20,7 @@ routes.use(ghEndpoints); // Import Github endpoints
 routes.use("/fin",Fin)
 routes.get('/', function (req, res){
   return res.status(200).json({  
-      "version":"2.0",
+      "version":"2.2",
       "release note":"Included Escriba endpoints",
     });
 })

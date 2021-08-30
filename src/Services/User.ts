@@ -1,6 +1,6 @@
 import connection from "../database/connection";
 import { v4 as uuid } from "uuid";
-import { cript } from '../tools/crypto'
+import { Encrypt } from '../tools/crypto'
 import jwt from "../middlewares/jwt"
 
 interface iUser{
@@ -68,8 +68,12 @@ class UserService {
         })
     }
     async update_user(data: iUser){
+        const cript = new Encrypt();
+        
         let { id,username, email, password } : iUser = data
-        if (password) password = cript(password);
+        if (password) password = await cript.cript(password)
+            .then(response=>response)
+        
         const updated_at = new Date().toISOString();
         return await connection('users')
           .update({ username, email, password,updated_at})
@@ -89,6 +93,7 @@ class UserService {
     }
     async login_email(email: string, password: string){
         return new Promise(async (resolve, reject)=>{
+            const { compare } = new Encrypt()
             try{
                 const user = await connection('users')
                     .select("*")
@@ -100,7 +105,7 @@ class UserService {
                     .catch(err=>{
                         return false
                     })
-                if(!user || user.email !== email || user.password !== password) {
+                if(!user || user.email !== email || !compare(password,user.password)) {
                     reject("Invalid email or password")
                 }
                 let token = jwt.signin(user.id)
@@ -114,6 +119,7 @@ class UserService {
     }
     async login_username(username: string, password: string){
         return new Promise(async (resolve, reject)=>{
+            const { compare } = new Encrypt()
             try{
                 const user = await connection('users')
                     .select("*")
@@ -125,7 +131,7 @@ class UserService {
                     .catch(err=>{
                         return false
                     })
-                if(!user || user.username !== username || user.password !== password) {
+                if(!user || user.username !== username || !compare(password,user.password)) {
                     reject("Invalid username or password")
                 }
                 let token = jwt.signin(user.id)
