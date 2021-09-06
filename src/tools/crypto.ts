@@ -19,7 +19,7 @@ class Encrypt{
         })
         
     }
-    async compare(pwd: string,hash: string){
+    async compare(pwd: string,hash: string) : Promise<boolean>{
         return new Promise(async(resolve,reject)=>{
             await bcrypt.compare(pwd, hash)
             .then((valid: boolean)=>{
