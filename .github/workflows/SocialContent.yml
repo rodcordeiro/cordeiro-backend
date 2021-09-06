@@ -1,4 +1,4 @@
-name: "Build Code"
+name: "Social media integrations"
 
 on:
   push:
@@ -23,3 +23,11 @@ jobs:
 
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v2
+  Resk:
+    name: Create code gists for example
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resk
+        uses: maticzav/resk@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
