@@ -59,7 +59,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./cordeiro-backend/__tests/coverage/reports/
+          directory: ./cordeiro-backend/__tests/coverage/Icov-report/
           fail_ci_if_error: true
           files: ./__tests/clover.xml
           name: codecov-rodcordeiro
