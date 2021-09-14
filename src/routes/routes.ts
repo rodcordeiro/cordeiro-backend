@@ -4,11 +4,13 @@ import apiEndpoints from './api.routes';
 
 import esbEndpoints from './esb.routes';
 import ghEndpoints from './gh.routes';
-
+import { readFileSync } from 'fs';
+import { resolve } from 'path'
 const routes = Router();
 
 routes.use(apiEndpoints); // Import my api endpoints
 
+const pkg = JSON.parse(readFileSync(resolve(__dirname,'../../package.json'),'utf8'))
 
 // Components
 import { routes as Fin } from '../components/Fin'
@@ -20,7 +22,7 @@ routes.use(ghEndpoints); // Import Github endpoints
 routes.use("/fin",Fin)
 routes.get('/', function (req, res){
   return res.status(200).json({  
-      "version":"2.2",
+      "version":pkg.version,
       "release note":"Included Escriba endpoints",
     });
 })

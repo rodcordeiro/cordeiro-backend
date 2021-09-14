@@ -17,7 +17,7 @@ const discord = new DiscordController()
 
 //User
 apiEndpoints.get('/users',users.index)
-apiEndpoints.post('/users/create',users.create)
+apiEndpoints.post('/users/create',jwt.validate,users.create)
 apiEndpoints.put('/users/update',jwt.validate,users.update)
 apiEndpoints.put('/users/update/:id',jwt.validate,users.update)
 apiEndpoints.delete('/users/delete/:id',jwt.validate,users.delete)

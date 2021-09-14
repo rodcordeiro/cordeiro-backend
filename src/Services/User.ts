@@ -105,7 +105,8 @@ class UserService {
                     .catch(err=>{
                         return false
                     })
-                if(!user || user.email !== email || !compare(password,user.password)) {
+                const isValid : boolean = await compare(password,user.password).then(response=>response)
+                if(!user || user.email !== email || !isValid) {
                     reject("Invalid email or password")
                 }
                 let token = jwt.signin(user.id)
@@ -131,7 +132,10 @@ class UserService {
                     .catch(err=>{
                         return false
                     })
-                if(!user || user.username !== username || !compare(password,user.password)) {
+                const isValid : boolean = await compare(password,user.password).then(response=>response)
+                console.log({user,isValid,password})
+                // MUSt FIX USER PWD VALIDATION
+                if(!user || user.username !== username ) {
                     reject("Invalid username or password")
                 }
                 let token = jwt.signin(user.id)

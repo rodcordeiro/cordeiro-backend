@@ -3,6 +3,9 @@ import cors from "cors";
 import routes from './routes/routes';
 import { createServer } from 'http';
 import { Server, Socket } from "socket.io"
+import  morgan  from 'morgan';
+import dotenv from "dotenv";
+dotenv.config();
 
 const corsOptions = {
   "origin": true,
@@ -13,6 +16,11 @@ const corsOptions = {
 const app = express();
 
 app.use(express.json());
+
+if(process.env.NODE_ENV =="development"){
+  app.use(morgan('dev'))
+}
+  
 app.use(cors(corsOptions));
 app.use(routes);
 
