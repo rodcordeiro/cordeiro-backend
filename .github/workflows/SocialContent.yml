@@ -7,8 +7,9 @@ jobs:
   CreateImage:
     name: Create repo img for social media
     runs-on: ubuntu-latest
-    shell: bash
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Open Graph social cards
         uses: Jasmin2895/open-graph-image@v1.1
         with:
