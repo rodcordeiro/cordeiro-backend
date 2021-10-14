@@ -42,6 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Resk
+        shell: bash
         uses: maticzav/resk@v2
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
