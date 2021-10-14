@@ -1,8 +1,8 @@
-name: "Social media integrations"
+name: 'Social media integrations'
 
 on:
   push:
-    branches: "master"
+    branches: ['master', 'develop']
 jobs:
   CreateImage:
     name: Create repo img for social media
@@ -11,9 +11,11 @@ jobs:
       - name: Open Graph social cards
         uses: Jasmin2895/open-graph-image@v1.1
         with:
-          bold-text: "RodCordeiro API"
-          plain-text: "for personal assistance and project managements"
-          theme: "dark"
+          bold-text: 'RodCordeiro API'
+          plain-text: 'for personal assistance and project managements'
+          theme: 'dark'
+      - name: List files
+        run: ls
       - name: Send image to discord channel
         uses: sinshutu/upload-to-discord@v2.0.0
         env:
