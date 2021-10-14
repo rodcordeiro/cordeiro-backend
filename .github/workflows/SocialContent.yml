@@ -17,8 +17,10 @@ jobs:
           plain-text: 'for personal assistance and project managements'
           theme: 'dark'
       - name: List files
+        shell: bash
         run: |
-          ls
+          files=$(ls)
+          echo ${files[@]}
       - name: Send image to discord channel
         uses: sinshutu/upload-to-discord@v2.0.0
         env:
