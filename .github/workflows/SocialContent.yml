@@ -16,6 +16,15 @@ jobs:
           bold-text: 'RodCordeiro API'
           plain-text: 'for personal assistance and project managements'
           theme: 'dark'
+      - name: Archive open graph image
+        uses: actions/upload-artifact@v2
+        with:
+          name: open-graph-image
+          path: og-image.now.sh.png
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+      
       - name: List files
         shell: bash
         run: |
@@ -27,14 +36,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           args: og-image.now.sh.png
-      - name: Archive open graph image
-        uses: actions/upload-artifact@v2
-        with:
-          name: open-graph-image
-          path: og-image.now.sh.png
-
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v2
+      
   Resk:
     name: Create code gists for example
     runs-on: ubuntu-latest
