@@ -17,8 +17,8 @@ jobs:
       - name: List files
         shell: bash
         run: |
-          ls
-          echo "Executado o LS"
+          files=$(ls)
+          echo ${files[@]}
       - name: Send image to discord channel
         uses: sinshutu/upload-to-discord@v2.0.0
         env:
