@@ -44,6 +44,8 @@ apiEndpoints.get('/webhooks/:origin', jwt.validate, webhooks.get_webhook)
 apiEndpoints.put('/webhooks/:id', jwt.validate, webhooks.update)
 apiEndpoints.delete('/webhooks/:id', jwt.validate, webhooks.delete)
 apiEndpoints.post('/webhooks/:origin', webhooks.run_webhook)
+apiEndpoints.head('/webhooks/:origin', webhooks.validate_webhook)
+apiEndpoints.head('/webhooks/:origin/:webhook', webhooks.validate_webhook)
 apiEndpoints.post('/webhooks/:origin/:webhook', webhooks.run_webhook)
 
 // apiEndpoints.post('/webhook/devto', (req, res)=>{
