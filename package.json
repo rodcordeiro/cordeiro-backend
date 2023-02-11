@@ -49,7 +49,7 @@
     "jest": "27.5.1",
     "morgan": "1.10.0",
     "ts-node-dev": "1.1.8",
-    "typescript": "4.6.4"
+    "typescript": "4.9.5"
   },
   "jest": {
     "clearMocks": true,
