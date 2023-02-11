@@ -1,95 +1,94 @@
-import connection from "../database/connection";
-import { v4 as uuid } from "uuid";
+import connection from '../database/connection';
+import { v4 as uuid } from 'uuid';
 
-interface iBook{
-    id: string;
-    title: string;
-    author?: string;
-    serie?: string;
-    serieOrder?: string;
-    created_at?: Date;
-    updated_at?: Date;
+interface iBook {
+  id: string;
+  title: string;
+  author?: string;
+  serie?: string;
+  serieOrder?: string;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
-class BookService{
-    async list_book(){
-        return new Promise (async (resolve,reject)=>{
-            await connection('books')
-                .select('*')
-                .orderBy('serie','asc')
-                .orderBy('serieOrder','asc')
-                .then((response: Array<iBook>)=>{
-                    resolve(response)                    
-                })
-                .catch(err=>{
-                    reject(err)                    
-                })
+class BookService {
+  async list_book() {
+    return new Promise(async (resolve, reject) => {
+      await connection('books')
+        .select('*')
+        .orderBy('serie', 'asc')
+        .orderBy('serieOrder', 'asc')
+        .then((response: Array<iBook>) => {
+          resolve(response);
         })
-    }
-    async create_book(data : iBook){
-        return new Promise( async(resolve,reject)=>{
-            const id = uuid();
-            const {title,author,serie,serieOrder} = data 
-            await connection('books')
-            .insert({
-                id,title,author,serie,serieOrder
-            })
-            .then(response=>{
-                resolve({
-                    id,
-                    title,
-                    author
-                })
-                
-            })
-            .catch(err=>{
-                reject(err)
-            })
-            
-        })    
-    }
-    async get_book(id : string){
-        return new Promise(async (resolve,reject)=>{
-            const book = await connection('books')
-                .select('*')
-                .where("id",id)
-                .first()
-                .then(response=>{
-                    if(response) resolve(response);
-                    reject("Livro não encontrado")
-                })
-                .catch(err=>reject(err))
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+  async create_book(data: iBook) {
+    return new Promise(async (resolve, reject) => {
+      const id = uuid();
+      const { title, author, serie, serieOrder } = data;
+      await connection('books')
+        .insert({
+          id,
+          title,
+          author,
+          serie,
+          serieOrder,
         })
-    }
-    async delete(id: string){
-        return new Promise(async (resolve,reject)=>{
-            const book = await connection('books')
-                .where("id",id)
-                .first()
-                .delete()
-                .then(response=>{
-                    if( response !== 0) resolve("");
-                    reject("Livro não encontrado")
-                })
-                .catch(err=>reject(err))
+        .then((response) => {
+          resolve({
+            id,
+            title,
+            author,
+          });
         })
-    }
-    async update(data: iBook){
-        return new Promise(async (resolve,reject)=>{
-            let { id,title,author,serie,serieOrder} : iBook = data
-            const updated_at = new Date().toISOString();
-            await connection('books')
-            .update({ title,author,serie,serieOrder,updated_at})
-            .where("id",id)
-            .then(response=>{
-                resolve(response)
-            })
-            .catch(err=>reject(err))
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+  async get_book(id: string) {
+    return new Promise(async (resolve, reject) => {
+      const book = await connection('books')
+        .select('*')
+        .where('id', id)
+        .first()
+        .then((response) => {
+          if (response) resolve(response);
+          reject('Livro não encontrado');
         })
-    }
+        .catch((err) => reject(err));
+    });
+  }
+  async delete(id: string) {
+    return new Promise(async (resolve, reject) => {
+      const book = await connection('books')
+        .where('id', id)
+        .first()
+        .delete()
+        .then((response) => {
+          if (response !== 0) resolve('');
+          reject('Livro não encontrado');
+        })
+        .catch((err) => reject(err));
+    });
+  }
+  async update(data: iBook) {
+    return new Promise(async (resolve, reject) => {
+      let { id, title, author, serie, serieOrder }: iBook = data;
+      const updated_at = new Date().toISOString();
+      await connection('books')
+        .update({ title, author, serie, serieOrder, updated_at })
+        .where('id', id)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((err) => reject(err));
+    });
+  }
 }
 
-export {
-    BookService,
-    iBook
-}
+export { BookService, iBook };

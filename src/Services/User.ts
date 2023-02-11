@@ -1,7 +1,7 @@
-import connection from "../database/connection";
-import { v4 as uuid } from "uuid";
-import { Encrypt } from "../tools/crypto";
-import jwt from "../middlewares/jwt";
+import connection from '../database/connection';
+import { v4 as uuid } from 'uuid';
+import { Encrypt } from '../tools/crypto';
+import jwt from '../middlewares/jwt';
 
 interface iUser {
   id?: any;
@@ -22,19 +22,19 @@ class UserService {
     const id = uuid();
     return new Promise(async (resolve, reject) => {
       try {
-        const user = await connection("users")
-          .select("*")
-          .where("email", email)
-          .orWhere("username", username)
+        const user = await connection('users')
+          .select('*')
+          .where('email', email)
+          .orWhere('username', username)
           .first()
           .then((response) => {
             return response;
           });
         if (user) {
-          reject("usuário já cadastrado");
-          throw new Error("Invalid user");
+          reject('usuário já cadastrado');
+          throw new Error('Invalid user');
         }
-        await connection("users")
+        await connection('users')
           .insert({
             id,
             username,
@@ -56,8 +56,8 @@ class UserService {
 
   async list_users() {
     return new Promise(async (resolve, reject) => {
-      await connection("users")
-        .select("*")
+      await connection('users')
+        .select('*')
         .then((response: Array<iUser>) => {
           resolve(response);
         })
@@ -74,18 +74,18 @@ class UserService {
       password = await cript.cript(password).then((response) => response);
 
     const updated_at = new Date().toISOString();
-    return await connection("users")
+    return await connection('users')
       .update({ username, email, password, updated_at })
-      .where("id", id)
+      .where('id', id)
       .then((response) => {
         return {
-          message: "success",
+          message: 'success',
           data: response,
         };
       })
       .catch((err) => {
         return {
-          message: "failed",
+          message: 'failed',
           data: err,
         };
       });
@@ -94,9 +94,9 @@ class UserService {
     return new Promise(async (resolve, reject) => {
       const { compare } = new Encrypt();
       try {
-        const user = await connection("users")
-          .select("*")
-          .where("email", email)
+        const user = await connection('users')
+          .select('*')
+          .where('email', email)
           .first()
           .then((response) => {
             return response;
@@ -105,10 +105,10 @@ class UserService {
             return false;
           });
         const isValid: boolean = await compare(password, user.password).then(
-          (response) => response
+          (response) => response,
         );
         if (!user || user.email !== email || !isValid) {
-          reject("Invalid email or password");
+          reject('Invalid email or password');
         }
         let token = jwt.signin(user.id);
         resolve({
@@ -124,9 +124,9 @@ class UserService {
     return new Promise(async (resolve, reject) => {
       const { compare } = new Encrypt();
       try {
-        const user = await connection("users")
-          .select("*")
-          .where("username", username)
+        const user = await connection('users')
+          .select('*')
+          .where('username', username)
           .first()
           .then((response) => {
             return response;
@@ -135,11 +135,11 @@ class UserService {
             return false;
           });
         const isValid: boolean = await compare(password, user.password).then(
-          (response) => response
+          (response) => response,
         );
         console.log({ user, isValid, password });
         if (!user || user.username !== username || !isValid) {
-          reject("Invalid username or password");
+          reject('Invalid username or password');
         }
         let token = jwt.signin(user.id);
         resolve({
@@ -154,8 +154,8 @@ class UserService {
   async delete_user(id: string) {
     return new Promise(async (resolve, reject) => {
       try {
-        const user = await connection("users")
-          .where("id", id)
+        const user = await connection('users')
+          .where('id', id)
           .delete()
           .then((response) => {
             resolve(response);
@@ -174,9 +174,9 @@ class UserService {
   async find_user_by_email(email: string) {
     return new Promise(async (resolve, reject) => {
       try {
-        const user = await connection("users")
-          .select("*")
-          .where("email", email)
+        const user = await connection('users')
+          .select('*')
+          .where('email', email)
           .first()
           .then((response) => {
             resolve({

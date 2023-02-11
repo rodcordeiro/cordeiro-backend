@@ -5,32 +5,34 @@ import esbEndpoints from './esb.routes';
 import ghEndpoints from './gh.routes';
 
 import { readFileSync } from 'fs';
-import { resolve } from 'path'
+import { resolve } from 'path';
 
 const routes = Router();
 
 routes.use(apiEndpoints); // Import my api endpoints
 
-const pkg = JSON.parse(readFileSync(resolve(__dirname,'../../package.json'),'utf8'))
+const pkg = JSON.parse(
+  readFileSync(resolve(__dirname, '../../package.json'), 'utf8'),
+);
 
 // Components
-import { routes as Fin } from '../components/Fin'
-import bthEndpoints from '../components/BeTheHero'
+import { routes as Fin } from '../components/Fin';
+import bthEndpoints from '../components/BeTheHero';
 
-routes.use("/bth",bthEndpoints); // Import Be the Hero endpoints
+routes.use('/bth', bthEndpoints); // Import Be the Hero endpoints
 routes.use(esbEndpoints); // Import Escriba Endpoints
 routes.use(ghEndpoints); // Import Github endpoints
-routes.use("/fin",Fin)
-routes.get('/', function (req, res){
-  return res.status(200).json({  
-      "version":pkg.version,
-      "release note":"Included Escriba endpoints",
-    });
-})
+routes.use('/fin', Fin);
+routes.get('/', function (req, res) {
+  return res.status(200).json({
+    version: pkg.version,
+    'release note': 'Included Escriba endpoints',
+  });
+});
 
-
-routes.get('/uni9',(req,res)=>{
-    return res.status(200).send('<style>table,td,tr{border:1px solid; border-collapse:collapse;padding: 2px 5px;}</style>\
+routes.get('/uni9', (req, res) => {
+  return res.status(200).send(
+    '<style>table,td,tr{border:1px solid; border-collapse:collapse;padding: 2px 5px;}</style>\
     <table>\
     <tr><td>Alex Yio Long Lin</td><td>419106053</td><td>Alex.lin@uni9.edu.br</td></tr>\
     <tr><td>Ednaldo Alves Vanderley Junior</td><td>419103769</td><td>nicknamekill.js@uni9.edu.br</td></tr>\
@@ -41,7 +43,8 @@ routes.get('/uni9',(req,res)=>{
     <tr><td>Marcos Gabriel Ribeiro Silva</td><td>419112367</td><td>Gabriel.marcos@uni9.edu.br</td></tr>\
     <tr><td>Marlon de Lira Felix</td><td>419117109</td><td>marlon.lira@uni9.Edu.br</td></tr>\
     <tr><td>Rodrigo de Mendonça Cordeiro</td><td>419108124</td><td>rodrigocordeiro@uni9.edu.br</td></tr>\
-    ');
-  })
-  
+    ',
+  );
+});
+
 export default routes;

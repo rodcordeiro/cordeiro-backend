@@ -2,51 +2,51 @@ import jwt from '../Services/jwt';
 import DiscordController from '../controllers/DiscordController';
 import { Router } from 'express';
 
-import webhookRoutes from './webhooks'
-import apiEndpoints from './api'
-import bth_routes from './bethehero'
+import webhookRoutes from './webhooks';
+import apiEndpoints from './api';
+import bth_routes from './bethehero';
 
 const routes = Router();
-routes.use(webhookRoutes)
-routes.use(apiEndpoints)
-routes.use(bth_routes)
+routes.use(webhookRoutes);
+routes.use(apiEndpoints);
+routes.use(bth_routes);
 
 const githubController = require('../controllers/githubController');
 const trelloController = require('../controllers/trelloController');
 const devtoController = require('../controllers/devtoController');
 const discord = new DiscordController();
 
-
-
-
-routes.get('/', function (req, res){
-    return res.status(200).json({
-        "Name": "CordeiroAPI",
-        "Version": "2.0.1",
-        "releaseNote":"Migration to Typescript"
-      });
-})
+routes.get('/', function (req, res) {
+  return res.status(200).json({
+    Name: 'CordeiroAPI',
+    Version: '2.0.1',
+    releaseNote: 'Migration to Typescript',
+  });
+});
 
 // Discord
-routes.get('/discord', discord.helloMessage)
-routes.post('/discord', discord.helloMessage)
+routes.get('/discord', discord.helloMessage);
+routes.post('/discord', discord.helloMessage);
 
 //Github
-routes.post('/github/create',jwt.verify,githubController.createRepo);
-routes.delete('/github/delete/:user/:repo',jwt.verify,githubController.deleteRepo);
-routes.get("/github/token",jwt.verify,githubController.generateToken)
-routes.get("/github/validateToken",githubController.validateToken)
-
+routes.post('/github/create', jwt.verify, githubController.createRepo);
+routes.delete(
+  '/github/delete/:user/:repo',
+  jwt.verify,
+  githubController.deleteRepo,
+);
+routes.get('/github/token', jwt.verify, githubController.generateToken);
+routes.get('/github/validateToken', githubController.validateToken);
 
 //Dev.to
-routes.post('/devpost', devtoController.createPost)
-
+routes.post('/devpost', devtoController.createPost);
 
 // Habitica
 // routes.get('/getchallenge', habiticaController.createTask)
 
-routes.get('/uni9',(req,res)=>{
-  return res.status(200).send('<style>table,td,tr{border:1px solid; border-collapse:collapse;padding: 2px 5px;}</style>\
+routes.get('/uni9', (req, res) => {
+  return res.status(200).send(
+    '<style>table,td,tr{border:1px solid; border-collapse:collapse;padding: 2px 5px;}</style>\
   <table>\
   <tr><td>Alex Yio Long Lin</td><td>419106053</td><td>Alex.lin@uni9.edu.br</td></tr>\
   <tr><td>Ednaldo Alves Vanderley Junior</td><td>419103769</td><td>nicknamekill.js@uni9.edu.br</td></tr>\
@@ -57,9 +57,8 @@ routes.get('/uni9',(req,res)=>{
   <tr><td>Marcos Gabriel Ribeiro Silva</td><td>419112367</td><td>Gabriel.marcos@uni9.edu.br</td></tr>\
   <tr><td>Marlon de Lira Felix</td><td>419117109</td><td>marlon.lira@uni9.Edu.br</td></tr>\
   <tr><td>Rodrigo de Mendonça Cordeiro</td><td>419108124</td><td>rodrigocordeiro@uni9.edu.br</td></tr>\
-  ');
-})
-
-
+  ',
+  );
+});
 
 export default routes;

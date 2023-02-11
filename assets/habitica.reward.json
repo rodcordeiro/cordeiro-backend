@@ -1,70 +1,70 @@
 {
-    "type": "scored",
-    "direction": "down",
-    "delta": -0.608399164346487,
-    "task": {
-        "challenge": {},
-        "group": {
-            "approval": {
-                "required": false,
-                "approved": false,
-                "requested": false
-            },
-            "assignedUsers": [],
-            "sharedCompletion": "singleCompletion"
-        },
-        "type": "reward",
-        "notes": "Você pode ir a taverna pausar as missões por um dia para descansar",
-        "tags": [],
-        "value": 20,
-        "priority": 1,
-        "attribute": "str",
-        "byHabitica": false,
-        "reminders": [],
-        "createdAt": "2020-03-28T18:05:01.407Z",
-        "updatedAt": "2021-08-19T12:36:53.790Z",
-        "_id": "4239c5ca-490e-4b99-b8ad-46857f6ba80b",
-        "text": "Descanso merecido",
-        "userId": "c150cf43-bf4a-4c46-8912-9c04f77d3924",
-        "id": "4239c5ca-490e-4b99-b8ad-46857f6ba80b"
+  "type": "scored",
+  "direction": "down",
+  "delta": -0.608399164346487,
+  "task": {
+    "challenge": {},
+    "group": {
+      "approval": {
+        "required": false,
+        "approved": false,
+        "requested": false
+      },
+      "assignedUsers": [],
+      "sharedCompletion": "singleCompletion"
     },
-    "user": {
-        "_tmp": {},
-        "stats": {
-            "buffs": {
-                "str": 0,
-                "int": 0,
-                "per": 0,
-                "con": 0,
-                "stealth": 0,
-                "streaks": false,
-                "snowball": false,
-                "spookySparkles": false,
-                "shinySeed": false,
-                "seafoam": false
-            },
-            "training": {
-                "int": 0,
-                "per": 0,
-                "str": 0,
-                "con": 0
-            },
-            "hp": 50,
-            "mp": 41.813903239271106,
-            "exp": 0.014482603989904419,
-            "gp": 11.317149136284911,
-            "lvl": 17,
-            "class": "wizard",
-            "points": 1,
-            "str": 1,
-            "con": 3,
-            "int": 3,
-            "per": 9,
-            "toNextLevel": 380,
-            "maxHealth": 50,
-            "maxMP": 70
-        },
-        "_id": "c150cf43-bf4a-4c46-8912-9c04f77d3924"
+    "type": "reward",
+    "notes": "Você pode ir a taverna pausar as missões por um dia para descansar",
+    "tags": [],
+    "value": 20,
+    "priority": 1,
+    "attribute": "str",
+    "byHabitica": false,
+    "reminders": [],
+    "createdAt": "2020-03-28T18:05:01.407Z",
+    "updatedAt": "2021-08-19T12:36:53.790Z",
+    "_id": "4239c5ca-490e-4b99-b8ad-46857f6ba80b",
+    "text": "Descanso merecido",
+    "userId": "c150cf43-bf4a-4c46-8912-9c04f77d3924",
+    "id": "4239c5ca-490e-4b99-b8ad-46857f6ba80b"
+  },
+  "user": {
+    "_tmp": {},
+    "stats": {
+      "buffs": {
+        "str": 0,
+        "int": 0,
+        "per": 0,
+        "con": 0,
+        "stealth": 0,
+        "streaks": false,
+        "snowball": false,
+        "spookySparkles": false,
+        "shinySeed": false,
+        "seafoam": false
+      },
+      "training": {
+        "int": 0,
+        "per": 0,
+        "str": 0,
+        "con": 0
+      },
+      "hp": 50,
+      "mp": 41.813903239271106,
+      "exp": 0.014482603989904419,
+      "gp": 11.317149136284911,
+      "lvl": 17,
+      "class": "wizard",
+      "points": 1,
+      "str": 1,
+      "con": 3,
+      "int": 3,
+      "per": 9,
+      "toNextLevel": 380,
+      "maxHealth": 50,
+      "maxMP": 70
     },
-    "webhookType": "taskActivity"
+    "_id": "c150cf43-bf4a-4c46-8912-9c04f77d3924"
+  },
+  "webhookType": "taskActivity"
 }

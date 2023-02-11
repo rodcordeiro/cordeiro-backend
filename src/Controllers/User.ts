@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { Encrypt } from "../tools/crypto";
-import { UserService, iUser } from "../Services/User";
+import { Request, Response } from 'express';
+import { Encrypt } from '../tools/crypto';
+import { UserService, iUser } from '../Services/User';
 
 class UserController {
   async index(req: Request, res: Response) {
@@ -46,7 +46,7 @@ class UserController {
       .delete_user(req.params.id)
       .then((response) => {
         if (response !== 0) return res.status(201).json({ response });
-        return res.status(400).json({ error: "Usuário não encontrado" });
+        return res.status(400).json({ error: 'Usuário não encontrado' });
       })
       .catch((error) => {
         return res.status(400).json({ error });

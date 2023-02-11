@@ -2,37 +2,22 @@
   "branchPrefix": "updates/",
   "packageRules": [
     {
-      "updateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
+      "updateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
     },
     {
-      "updateTypes": [
-        "major"
-      ],
+      "updateTypes": ["major"],
       "automerge": false
     }
   ],
   "assignAutomerge": true,
-  "assignees": [
-    "@rodcordeiro"
-  ],
-  "labels": [
-    "dependencies"
-  ],
+  "assignees": ["@rodcordeiro"],
+  "labels": ["dependencies"],
   "recreateClosed": true,
   "rebaseWhen": "conflicted",
   "vulnerabilityAlerts": {
-    "labels": [
-      "security"
-    ],
-    "assignees": [
-      "@rodcordeiro"
-    ]
+    "labels": ["security"],
+    "assignees": ["@rodcordeiro"]
   },
   "extends": [
     "config:base",

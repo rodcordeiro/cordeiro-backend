@@ -1,12 +1,9 @@
-import { Router } from 'express'
+import { Router } from 'express';
 
 const routes = Router();
 
-routes.get('/',(req,res)=>{
-    return res.status(200).send("ok")
-})
+routes.get('/', (req, res) => {
+  return res.status(200).send('ok');
+});
 
-
-export {
-    routes
-};
+export { routes };

@@ -1,11 +1,11 @@
 import { io } from '../app';
-import { Socket } from "socket.io"
+import { Socket } from 'socket.io';
 
-import './chat'
+import './chat';
 
-io.on("connect",(socket: Socket)=>{
-    console.log({
-        status: "connected",
-        id:socket.id
-    })
-})
+io.on('connect', (socket: Socket) => {
+  console.log({
+    status: 'connected',
+    id: socket.id,
+  });
+});

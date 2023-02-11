@@ -24,7 +24,7 @@ jobs:
 
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v2
-      
+
       - name: List files
         shell: bash
         run: |
@@ -36,7 +36,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         with:
           args: og-image.now.sh.png
-      
+
   Resk:
     name: Create code gists for example
     runs-on: ubuntu-latest
