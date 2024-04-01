@@ -925,10 +925,10 @@
     "@types/mime" "^1"
     "@types/node" "*"
 
-"@types/socket.io@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@types/socket.io/-/socket.io-3.0.1.tgz#0bd0e367787f288e05a6e7153cf7be15ddd1a030"
-  integrity sha512-XSma2FhVD78ymvoxYV4xGXrIH/0EKQ93rR+YR0Y+Kw1xbPzLDCip/UWSejZ08FpxYeYNci/PZPQS9anrvJRqMA==
+"@types/socket.io@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/socket.io/-/socket.io-3.0.2.tgz#606c9639e3f93bb8454cba8f5f0a283d47917759"
+  integrity sha512-pu0sN9m5VjCxBZVK8hW37ZcMe8rjn4HHggBN5CbaRTvFwv5jOmuIRZEuddsBPa9Th0ts0SIo3Niukq+95cMBbQ==
   dependencies:
     socket.io "*"
 
