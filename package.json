@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/rodcordeiro/cordeiro-backend#readme",
   "dependencies": {
-    "axios": "^0.28.0",
+    "axios": "^0.30.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -35,7 +35,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/axios": "0.14.0",
+    "@types/axios": "0.14.4",
     "@types/bcryptjs": "2.4.6",
     "@types/cors": "2.8.16",
     "@types/express": "4.17.19",
